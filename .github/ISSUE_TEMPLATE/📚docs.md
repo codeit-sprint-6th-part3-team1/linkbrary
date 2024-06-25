@@ -2,7 +2,7 @@
 name: "\U0001F4DADocs"
 about: 문서를 작성해요
 title: "\U0001F4DADocs"
-labels: ''
+labels: "\U0001F4DA Docs"
 assignees: ''
 
 ---

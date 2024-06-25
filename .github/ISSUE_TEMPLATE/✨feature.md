@@ -2,7 +2,7 @@
 name: "✨Feature"
 about: 새로운 기능을 만들어요
 title: "✨Feat : "
-labels: "\U0001F41B bug"
+labels: "✨ Feat"
 assignees: ''
 
 ---

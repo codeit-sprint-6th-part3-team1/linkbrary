@@ -2,7 +2,7 @@
 name: "\U0001F528Refactor"
 about: 과거의 나.. 왜 이렇게 작성한거지..
 title: "\U0001F528Refactor : "
-labels: ''
+labels: "\U0001F528 Refactor"
 assignees: ''
 
 ---

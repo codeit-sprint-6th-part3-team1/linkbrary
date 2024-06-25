@@ -2,7 +2,7 @@
 name: "\U0001F41BBug Fix"
 about: 벌레를 잡아요
 title: "\U0001F41BBug : "
-labels: ''
+labels: "\U0001F41B Bug"
 assignees: ''
 
 ---
