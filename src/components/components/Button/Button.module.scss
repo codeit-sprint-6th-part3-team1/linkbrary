@@ -1,4 +1,4 @@
-@import '../../styles/color.scss';
+@import '@/styles/color.scss';
 
 .btn {
   cursor: pointer;
@@ -39,7 +39,7 @@
     opacity: 0px;
     border-radius: 50%;
     border: none;
-    background-image: url('../../assets/ShareIcon.png');
+    background-image: url('../Button/assets/ShareIcon.png');
     background-repeat: no-repeat;
     background-position: center;
   }

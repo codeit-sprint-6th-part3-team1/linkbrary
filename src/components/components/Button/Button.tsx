@@ -7,7 +7,7 @@ type ButtonStyleProps = {
 };
 
 interface ButtonProps extends ButtonStyleProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onClick?: () => void;
 }
 
