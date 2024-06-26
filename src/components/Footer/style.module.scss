@@ -1,0 +1,80 @@
+@import '@/styles';
+
+$copyRightColor: #676767;
+$contractColor: #cfcfcf;
+
+$fontSize: 16px;
+$fontWeight: 400;
+$lineHeight: 18.4px;
+
+$footerHeight: 160px;
+$footerPadding: 32px;
+
+$snsWrapperMaxWidth: 116px;
+
+$mediaMaxWidth: 800px;
+
+.footer {
+  display: flex;
+  background-color: $black;
+  padding: $footerPadding;
+  height: calc($footerHeight - ($footerPadding * 2));
+
+  @media screen and (max-width: $mediaMaxWidth) {
+    paading: 0 $footerPadding;
+  }
+}
+.container {
+  $innerMargin: 104px;
+
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0 calc($innerMargin - $footerPadding);
+
+  @media screen and (max-width: $mediaMaxWidth) {
+    margin: 0;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: flex-end;
+  }
+}
+
+.test {
+  display: flex;
+  width: 100%;
+  @media screen and (max-width: $mediaMaxWidth) {
+    width: auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+  }
+}
+.copyright {
+  @include font-base($copyRightColor, $fontWeight, $fontSize, $lineHeight);
+
+  padding: 0 37% 0 0;
+  @media screen and (max-width: 1030px) {
+    padding: 0 30% 0 0;
+  }
+  @media screen and (max-width: $mediaMaxWidth) {
+    padding: 40px 0 0 0;
+  }
+}
+.contract_wrapper {
+  display: flex;
+  white-space: nowrap;
+  justify-content: center;
+}
+.contract {
+  text-decoration: none;
+  @include font-base($contractColor, $fontWeight, $fontSize, $lineHeight);
+}
+.sns_wrapper {
+  max-width: $snsWrapperMaxWidth;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

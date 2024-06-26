@@ -1,0 +1,53 @@
+@import '@/styles';
+
+$gnbHeight: 93px;
+$gnbMobileHeight: 63px;
+
+$gnbPadding: 20px;
+$gnbMobilePadding: 13px;
+
+$gnbContainerMaxWidth: 1520px;
+$gnbBgColor: #f0f6ff;
+
+$mediaMaxWidth: 800px;
+
+.gnb {
+  height: calc($gnbHeight - ($gnbPadding * 2));
+  padding: $gnbPadding;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: $gnbBgColor;
+
+  @media screen and (max-width: $mediaMaxWidth) {
+    height: calc($gnbMobileHeight - ($gnbMobilePadding * 2));
+  }
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: $gnbContainerMaxWidth;
+  width: 100%;
+}
+
+.logo {
+  @media screen and (max-width: $mediaMaxWidth) {
+    width: 16px;
+  }
+}
+.btn {
+  display: flex;
+  align-items: center;
+
+  > .email {
+    margin-left: 6px;
+    @include font-base($gray-500, 400, 14px, 16.71px);
+
+    @media screen and (max-width: $mediaMaxWidth) {
+      display: none;
+    }
+  }
+}
