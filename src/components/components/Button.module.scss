@@ -1,0 +1,92 @@
+@import '../../styles/color.scss';
+
+.btn {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  /* 크기별 스타일 */
+  &.add-link-large {
+    width: 350px;
+    height: 53px;
+    padding: 16px 20px;
+    gap: 10px;
+    border-radius: 8px;
+    border: none;
+  }
+
+  &.add-link-small {
+    width: 300px;
+    height: 37px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    opacity: 0px;
+    border: none;
+  }
+
+  &.add-folder {
+    width: 127 px;
+    height: 35px;
+    padding: 8px 24px 8px 24px;
+    border-radius: 20px;
+    opacity: 0px;
+    border: none;
+  }
+
+  &.share {
+    width: 60px;
+    height: 60px;
+    opacity: 0px;
+    border-radius: 50%;
+    border: none;
+    background-image: url('../../assets/ShareIcon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &.all-large {
+    width: 57px;
+    height: 40px;
+    padding: 8px 12px 8px 12px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    border: 2px solid $primary;
+    font-weight: 400px;
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  &.all-small {
+    width: 52px;
+    height: 33px;
+    padding: 8px 12px 8px 12px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    border: 2px solid $primary;
+    font-weight: 400px;
+    font-size: 14px;
+  }
+
+  /* 색상별 스타일 */
+  &.primary {
+    background-color: $primary;
+    color: white;
+  }
+
+  &.white {
+    background-color: $white;
+    color: $black;
+  }
+
+  &.gray-200 {
+    background-color: $gray-200;
+    color: $black;
+  }
+
+  &.primary-gradient {
+    background: linear-gradient(90.99deg, $primary 0.12%, $skyblue 101.84%);
+    color: white;
+  }
+}
