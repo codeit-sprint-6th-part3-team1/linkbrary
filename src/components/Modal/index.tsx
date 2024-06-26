@@ -1,26 +1,32 @@
-import { ReactElement, useState, useEffect } from 'react';
-import OrderModal from '@/components/Modal/ModalWrap/index';
-import styles from '@/components/Modal/styles.module.scss';
+import React from 'react';
+import styles from './styles.module.scss';
 
-const OrderList = (): ReactElement => {
-  const [isModal, setIsModal] = useState<boolean>(false);
+interface ModalProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+  title?: string;
+  children?: React.ReactNode;
+}
 
-  function openModal() {
-    setIsModal(true);
-  }
-
-  function closeModal() {
-    setIsModal(false);
-  }
-
+const Modal = ({ isOpen = true, onClose, title = '제목을 입력해 주세요', children = null }: ModalProps) => {
   return (
-    <div>
-      <button className={styles.modal_btn} onClick={openModal}>
-        모달창 보기
-      </button>
-      {isModal && <OrderModal open={isModal} close={closeModal} />}
+    <div className={styles.modalFrame}>
+      {isOpen && <div className={styles.bg} onClick={onClose} />}
+      <div className={styles.modal}>
+        <div className={styles.btnArea}>
+          <button className={styles.button} onClick={onClose}>
+            <div className="close"></div>
+          </button>
+        </div>
+        <div className={styles.titleArea}>
+          <p className={styles.title}>{title}</p>
+        </div>
+        <div className={styles.content}>
+          <div>{children}</div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default OrderList;
+export default Modal;
