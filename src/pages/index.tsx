@@ -1,8 +1,14 @@
+import React from 'react';
+import AddLink from '@/components/component(example)/AddLink';
+import SearchBar from '@/components/component(example)/SearchBar';
+import InputBox from '@/components/component(example)/InputBox';
+
 export default function Home() {
   return (
     <>
-      <h1>Hello, world!</h1>
-      <p>This is a Next.js app with TypeScript, ESLint, Prettier, and SCSS.</p>
+      <AddLink />
+      <SearchBar />
+      <InputBox />
     </>
   );
 }
