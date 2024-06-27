@@ -3,7 +3,6 @@
 $width-pc: 1920px;
 $width-tablet: 744px;
 $width-mobile: 375px;
-$modal-width : 360px;
 
 @mixin mobile {
   @media (min-width: #{$width-mobile}) {
