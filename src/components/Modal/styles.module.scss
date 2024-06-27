@@ -1,5 +1,28 @@
 @import '@/styles';
 
+$width-pc: 1920px;
+$width-tablet: 744px;
+$width-mobile: 375px;
+$modal-width : 360px;
+
+@mixin mobile {
+  @media (min-width: #{$width-mobile}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$width-tablet}) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media (min-width: #{$width-pc}) {
+    @content;
+  }
+}
+
 .modalFrame {
   position: fixed;
   display: flex;
@@ -17,13 +40,16 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
 
+  padding-bottom: 30px;
   border: 1px;
   border-style: solid;
   border-radius: 15px;
-  width: 360px;
-  height: 239px;
+  min-height: 209px;
+  width: $modal-width;
+  height: auto;
+  max-width: 400px;
+  max-height: 400px;
   border-color: $gray-300;
 
   position: absolute;
@@ -31,6 +57,10 @@
   align-items: center;
 
   background-color: $white;
+
+  @include mobile{
+    
+  }
 }
 
 .bg {
@@ -49,7 +79,6 @@
 .btnArea {
   display: block;
   width: 100%;
-  text-align: right;
   position: static;
 }
 
@@ -85,4 +114,15 @@
   text-align: center;
   display: block;
   float: left;
+}
+
+.subTitle {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: $gray-400;
+  font-family: Pretendard;
+  margin: 0;
+  padding-top: 30px;
 }
