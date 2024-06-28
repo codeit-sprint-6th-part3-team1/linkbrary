@@ -3,11 +3,11 @@ import * as React from 'react';
 interface MainIconProps {
   width?: number;
   height?: number;
-  props?: React.SVGProps<SVGSVGElement>;
+  rest?: React.SVGProps<SVGSVGElement>;
 }
 
-const MainIcon = ({ width = 20, height = 20, props }: MainIconProps) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" {...props}>
+const MainIcon = ({ width = 28, height = 28, ...rest }: MainIconProps) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="none" {...rest}>
     <circle cx={14} cy={14} r={14} fill="#6D6AFE" />
     <path
       fill="#fff"

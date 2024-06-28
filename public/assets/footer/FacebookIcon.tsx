@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-interface FacebookIconProps {
+interface FacebookIconProps extends React.SVGProps<SVGSVGElement> {
   width?: number;
   height?: number;
-  props?: React.SVGProps<SVGSVGElement>;
+  rest?: React.SVGProps<SVGSVGElement>;
 }
 
-const FacebookIcon = ({ width = 20, height = 20, props }: FacebookIconProps) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="none" {...props}>
+const FacebookIcon = ({ width = 20, height = 20, ...rest }: FacebookIconProps) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="none" {...rest}>
     <path
       fill="#fff"
       fillRule="evenodd"

@@ -1,46 +1,42 @@
 import Link from 'next/link';
 import s from './style.module.scss';
 import IconBtn from './components/IconBtn';
-import FacebookIcon from './assets/FacebookIcon';
-import TwitterIcon from './assets/TwitterIcon';
-import YoutubeIcon from './assets/YoutubeIcon';
-import InstagramIcon from './assets/InstagramIcon';
-
-const iconSize = 20;
+import FacebookIcon from '../../../public/assets/footer/FacebookIcon';
+import TwitterIcon from '../../../public/assets/footer/TwitterIcon';
+import YoutubeIcon from '../../../public/assets/footer/YoutubeIcon';
+import InstagramIcon from '../../../public/assets/footer/InstagramIcon';
 
 export default function Footer() {
   return (
-    <div className={s.footer}>
+    <footer className={s.footer}>
       <div className={s.container}>
-        {/* TODO : Have to change the className... */}
-        <div className={s.test}>
-          <div className={s.copyright}>©codeit - 2023</div>
-          <div className={s.contract_wrapper}>
-            <Link href={''} className={s.contract}>
-              Privacy Policy
-            </Link>
-            <div style={{ width: '30px' }}></div>
-            <Link href={''} className={s.contract}>
-              FAQ
-            </Link>
-          </div>
+        <div className={s.copyright}>©codeit - 2023</div>
+        <div className={s.contractList}>
+          {/* TODO : 링크 연결 */}
+          <Link href={''} className={s.contract}>
+            Privacy Policy
+          </Link>
+          {/* TODO : 링크 연결 */}
+          <Link href={''} className={s.contract}>
+            FAQ
+          </Link>
         </div>
-
-        <div className={s.sns_wrapper}>
-          <IconBtn href={'https://www.facebook.com/'} alt={''}>
-            <FacebookIcon width={iconSize} height={iconSize} />
+        {/* TODO : SNS 링크 연결 */}
+        <div className={s.snsList}>
+          <IconBtn href={'https://www.facebook.com/'} alt={'facebook icon'}>
+            <FacebookIcon />
           </IconBtn>
-          <IconBtn href={'https://www.facebook.com/'} alt={''}>
-            <TwitterIcon width={iconSize} height={iconSize} />
+          <IconBtn href={'https://www.twitter.com/'} alt={'x icon'}>
+            <TwitterIcon />
           </IconBtn>
-          <IconBtn href={'https://www.facebook.com/'} alt={''}>
-            <YoutubeIcon width={iconSize} height={iconSize} />
+          <IconBtn href={'https://www.youtube.com/'} alt={'youtube icon'}>
+            <YoutubeIcon />
           </IconBtn>
-          <IconBtn href={'https://www.facebook.com/'} alt={''}>
-            <InstagramIcon width={iconSize} height={iconSize} />
+          <IconBtn href={'https://www.instagram.com/'} alt={'instagram icon'}>
+            <InstagramIcon />
           </IconBtn>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

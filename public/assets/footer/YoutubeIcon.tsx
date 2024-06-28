@@ -3,11 +3,11 @@ import * as React from 'react';
 interface YoutubeIconProps {
   width?: number;
   height?: number;
-  props?: React.SVGProps<SVGSVGElement>;
+  rest?: React.SVGProps<SVGSVGElement>;
 }
 
-const YoutubeIcon = ({ width = 20, height = 20, props }: YoutubeIconProps) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="none" {...props}>
+const YoutubeIcon = ({ width = 20, height = 20, ...rest }: YoutubeIconProps) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="none" {...rest}>
     <g clipPath="url(#a)">
       <path
         fill="#fff"
