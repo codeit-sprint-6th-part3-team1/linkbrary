@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Button from '../../components/components/Button/Button';
-import styles from '../components/components/Button/Button.module.scss';
+import styles from '@/components/components/Button/Button';
 
 const Home: React.FC = () => {
   const router = useRouter();
@@ -32,8 +32,7 @@ const Home: React.FC = () => {
   return (
     <div className={styles.container}>
       <h1>버튼 테스트 페이지</h1>
-      <Button variant="add-link-large" colorType="primary-gradient" text="링크 추가하기" onClick={handleAddLink} />
-      <Button variant="add-link-small" colorType="primary-gradient" text="링크 추가하기" onClick={handleAddLink} />
+      <Button variant="add-link" colorType="gradient" text="링크 추가하기" onClick={handleAddLink} />
       <Button variant="add-folder" colorType="primary" onClick={handleAddFolder}>
         폴더 추가 +
       </Button>
@@ -59,3 +58,5 @@ const Home: React.FC = () => {
     </div>
   );
 };
+
+export default Home;
