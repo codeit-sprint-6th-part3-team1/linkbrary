@@ -20,23 +20,9 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.inputContainer}>
-        <Image 
-          src={Logo}
-          width={20}
-          height={20}
-          alt="Search icon"
-          className={styles.icon}
-        />
-        <input
-          type="text"
-          value={url}
-          onChange={handleInputChange}
-          placeholder="링크를 검색해 보세요."
-          className={styles.input}
-        />
-      </div>
+    <div className={styles.searchBar}>
+      <Image src={Logo} width={20} height={20} alt="Search icon" className={styles.icon} />
+      <input type="text" value={url} onChange={handleInputChange} placeholder="링크를 검색해 보세요." className={styles.input} />
     </div>
   );
 };

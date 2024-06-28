@@ -1,0 +1,33 @@
+@import '@/styles/';
+
+// TODO 변수 처리!!!!!!!!!!!!!!
+.linkInput {
+  max-width: 800px;
+  width: 100%;
+  height: calc(69px - (16px * 2));
+  padding: 16px 20px;
+  border: 1px solid #6d6afe;
+  border-radius: 15px;
+
+  @media screen and (max-width: 390px) {
+    height: calc(53px - (10px * 2));
+    padding: 10px;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.input {
+  $TEXT_COLOR: #9fa6b2;
+
+  width: 100%;
+  padding: 0 0 0 12px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  @include font-base($TEXT_COLOR, 400, 16px, 24px);
+}
