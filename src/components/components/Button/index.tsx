@@ -6,6 +6,11 @@ const TestPage: React.FC = () => {
     alert('click!');
   };
 
+  const handleAddLink = () => {
+    console.log('링크 추가 기능');
+    // 링크 추가 로직 구현
+  };
+
   return (
     <div>
       <h1>Test Page</h1>
