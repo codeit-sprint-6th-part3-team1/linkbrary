@@ -1,9 +1,12 @@
 @import '@/styles/color.scss';
+@import '@/styles/font.scss';
 
 .btn {
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  font-family: $font-family;
+  font-style: $font-style;
 
   /* 크기별 스타일 */
   &.add-link-large {
