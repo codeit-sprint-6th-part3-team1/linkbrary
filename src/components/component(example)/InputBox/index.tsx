@@ -32,31 +32,10 @@ const InputBox: React.FC = () => {
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <div className={styles.inputcontainer}>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="내용 입력"
-          required
-          className={styles.inputemail}
-        />
+        <input type="email" id="email" value={email} onChange={handleEmailChange} placeholder="내용 입력" required className={styles.inputemail} />
 
-        <Image 
-          src={Logo}
-          width={20}
-          height={20}
-          alt="password logo"
-          className={styles.logo}
-        />
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-          className={styles.inputpw}
-        />
+        <Image src={Logo} width={20} height={20} alt="password logo" className={styles.logo} />
+        <input type="password" id="password" value={password} onChange={handlePasswordChange} required className={styles.inputpw} />
         {status === 'submitted' && <p className={styles.message}>내용 작성했음</p>}
         {status === 'submitted' && <p className={styles.error}>내용을 다시 작성해주세요</p>}
       </div>

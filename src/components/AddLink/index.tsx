@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import styles from '@/components/component(example)/LinkInput/style.module.scss';
+import styles from './style.module.scss';
 import Logo from '@public/addlink.svg';
 import Image from 'next/image';
+import useApiReq from '@/hooks/useApiReq';
 
 export default function LinkInput() {
   const [url, setUrl] = useState<string>('');
+  const { loading, sendRequest } = useApiReq();
 
   //FIXME URL 유효성 검사 안됨;;
   const isValidUrl = (url: string) => {
@@ -24,6 +26,7 @@ export default function LinkInput() {
     setUrl(event.target.value);
   };
 
+  // NOTE accessToken 매우 필요. 로그인 기능이 필요함. 테스트를 위해서라도.. test 정보 하나라도 넣어주면 좋을 듯.
   const handleAddLink = async () => {
     if (!url) {
       alert('URL을 입력해주세요.');
@@ -34,41 +37,32 @@ export default function LinkInput() {
       return;
     }
 
-    try {
-      // WARNING api post 시 로그인 필요하다는 응답이 돌아옴.
-      const response = await fetch('https://linkbrary-api.vercel.app/6-1/links', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url, folderId: '1' }),
-      });
+    const apiUrl = endpoints.links;
+    const token = 'accessToken';
 
-      if (!response.ok) {
-        throw new Error('Failed to add link');
-      }
+    const { success, data, error } = await sendRequest(apiUrl, 'POST', { url }, token);
 
-      const result = await response.json();
-      console.log('Link added:', result);
-
+    if (success) {
+      console.log('Link added:', data);
       setUrl('');
-    } catch (error) {
+      alert('링크가 성공적으로 추가되었습니다.');
+    } else {
+      console.error('링크 추가에 실패했습니다:', error);
       alert('링크 추가에 실패했습니다.');
-      console.error(error);
     }
   };
 
   return (
-    <div className={styles.linkInput}>
-      <div className={styles.container}>
+    <div className={styles.addLink}>
+      <form className={styles.container} action="" method="post">
         {/* TODO 이미지 SVG component로 교체 후 반응형 대응 */}
         <Image src={Logo} width={20} height={20} alt="AddLink logo" className={styles.linkIcon} />
-        <input type="text" value={url} onChange={handleInputChange} placeholder="링크를 추가해 보세요" className={styles.input} />
+        <input type="url" value={url} onChange={handleInputChange} placeholder="링크를 추가해 보세요" className={styles.input} />
         {/* FIXME 버튼 교체 */}
         <button onClick={handleAddLink} style={{ whiteSpace: 'nowrap' }}>
           추가하기
         </button>
-      </div>
+      </form>
     </div>
   );
 }
