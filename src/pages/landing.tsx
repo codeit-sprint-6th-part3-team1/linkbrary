@@ -2,8 +2,8 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import s from '@/styles/landing.module.scss';
 import Button from '../components/component(example)/Button/Button';
-//import Navbar from '@/components/Navbar';
-//import Footer from '@/components/Footer';
+import Gnb from '@/components/Gnb';
+import Footer from '@/components/Footer';
 
 const Home: React.FC = () => {
   const router = useRouter();
@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <main className={s.main}>
-        <header className={s.header}></header>
+        <Gnb isLogin={isLoggedIn} />
         <div className={s.title}>
           <h1 className={s.maintext}>
             <span className={s.gradientmain}>세상의 모든 정보</span>를<br /> 쉽게 저장하고 관리해 보세요
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        <footer className={s.footer}></footer>
+        <Footer />
       </main>
     </div>
   );

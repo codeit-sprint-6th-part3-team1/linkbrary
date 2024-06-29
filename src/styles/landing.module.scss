@@ -23,19 +23,18 @@
   height: 700px;
   text-align: center;
   padding: 50px 20px;
-  background-color: $gray-100;
+  background-color: $GRAY-100;
 
-  /* 백그라운드 이미지 설정 */
   &::after {
     content: '';
     position: absolute;
-    bottom: 20px; /* "링크 추가하기" 버튼 아래 20px 간격 */
+    bottom: 20px;
     left: 50%;
-    transform: translateX(-50%) translateY(+5%);
-    width: 1300px; /* 이미지 너비 조정 */
-    height: 400px; /* 이미지 높이 조정 */
+    transform: translateX(-50%) translateY(5%);
+    width: 1300px;
+    height: 400px;
     background: url('https://github.com/codeit-sprint-6th-part3-team1/linkbrary/assets/128791227/d230acb1-280a-4045-843f-a9e7848ce90f') no-repeat center center;
-    background-size: contain; /* 이미지 크기 조정 */
+    background-size: contain;
   }
 }
 
@@ -44,7 +43,7 @@
 }
 
 .gradientmain {
-  background: linear-gradient(91.26deg, $primary 17.28%, $main-gradient-end 74.98%);
+  background: linear-gradient(91.26deg, $PRIMARY 17.28%, $main-gradient-end 74.98%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -149,12 +148,12 @@
 
   .section {
     flex-direction: column;
-    height: auto; /* 모바일 화면에서 섹션 높이 자동 조정 */
+    height: auto;
   }
 
   .text,
   .image {
-    flex: 1; /* 세로로 쌓이도록 비율 재조정 */
+    flex: 1;
     width: 100%;
   }
 }

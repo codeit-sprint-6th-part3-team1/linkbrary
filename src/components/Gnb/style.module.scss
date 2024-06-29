@@ -1,0 +1,61 @@
+@import '@/styles';
+
+$BG_COLOR: #f0f6ff;
+
+.gnb {
+  $HEIGHT: 102px;
+  $PADDING_X: 200px;
+  $PADDING_Y: 32px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: calc($HEIGHT - ($PADDING_Y * 2));
+  padding: $PADDING_Y $PADDING_X;
+  background-color: $BG_COLOR;
+
+  .userSection {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  // NOTE : 해당 max-width는 임의로 설정하였습니다.
+  // 해당 width부터는 기존의 레이아웃이 어울리지 않는다 생각하였습니다.
+  @media screen and (max-width: 950px) {
+    padding: $PADDING_Y;
+  }
+
+  @media screen and (max-width: $MOBILE_WIDTH) {
+    $HEIGHT: 65px;
+    $M_PADDING_X: 32px;
+    $M_PADDING_Y: 18px;
+
+    height: calc($HEIGHT - ($M_PADDING_Y * 2));
+    padding: $M_PADDING_Y $M_PADDING_X;
+
+    .userSection {
+      gap: 16px;
+    }
+  }
+}
+
+/////////////////////////
+.UserProfile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  $EMAIL_COLOR: #3e3e43;
+  .email {
+    @include font-base($EMAIL_COLOR, 400, 14px, 16.71px);
+  }
+
+  @media screen and (max-width: $TABLET_WIDTH) {
+    .email {
+      display: none;
+    }
+  }
+}
