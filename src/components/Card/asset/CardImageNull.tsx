@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
-import styles from './style.module.scss';
+import styles from '../style.module.scss';
 
 const CardImageNull = (props: SVGProps<SVGSVGElement>) => (
   <svg className={styles.cardImageNull} xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
