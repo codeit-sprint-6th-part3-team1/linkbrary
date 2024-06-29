@@ -1,0 +1,160 @@
+@import '@/styles/color.scss';
+@import '@/styles/font.scss';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1440px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.title {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  text-align: center;
+  padding: 50px 20px;
+  background-color: $gray-100;
+
+  /* 백그라운드 이미지 설정 */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 20px; /* "링크 추가하기" 버튼 아래 20px 간격 */
+    left: 50%;
+    transform: translateX(-50%) translateY(+5%);
+    width: 1300px; /* 이미지 너비 조정 */
+    height: 400px; /* 이미지 높이 조정 */
+    background: url('https://github.com/codeit-sprint-6th-part3-team1/linkbrary/assets/128791227/d230acb1-280a-4045-843f-a9e7848ce90f') no-repeat center center;
+    background-size: contain; /* 이미지 크기 조정 */
+  }
+}
+
+.maintext {
+  font-size: 64px;
+}
+
+.gradientmain {
+  background: linear-gradient(91.26deg, $primary 17.28%, $main-gradient-end 74.98%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient1 {
+  background: linear-gradient(95.63deg, $gradient-wish-link-start 1.72%, $gradient-wish-link-end 74.97%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient2 {
+  background: linear-gradient(277.01deg, $gradient-management-start 59.22%, $gradient-management-end 93.66%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient3 {
+  background: linear-gradient(99.5deg, $gradient-share-start 19.76%, $gradient-share-end 52.69%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient4 {
+  background: linear-gradient(271.36deg, $gradient-search-start -9.84%, $gradient-search-end 107.18%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.h2 {
+  font-size: 70px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.section {
+  width: 1000px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+.text {
+  flex: 4;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 40px;
+}
+
+.text h2 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.text p {
+  font-size: 16px;
+  color: #6b6b6b;
+}
+
+.image {
+  flex: 6;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 1440px) {
+  .main {
+    max-width: 1440px;
+  }
+}
+
+@media (max-width: 769px) {
+  .main {
+    max-width: 769px;
+  }
+}
+
+@media (max-width: 390px) {
+  .main {
+    max-width: 390px;
+  }
+
+  .section {
+    flex-direction: column;
+    height: auto; /* 모바일 화면에서 섹션 높이 자동 조정 */
+  }
+
+  .text,
+  .image {
+    flex: 1; /* 세로로 쌓이도록 비율 재조정 */
+    width: 100%;
+  }
+}
