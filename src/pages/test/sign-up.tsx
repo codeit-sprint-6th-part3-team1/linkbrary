@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // 이 친구는 왜 ok시 accessToken을 보내주는가 왜지 모르겠다
 

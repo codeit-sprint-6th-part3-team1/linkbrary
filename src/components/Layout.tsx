@@ -1,8 +1,6 @@
 import { ReactNode } from 'react';
 
 import RecoilRootWrapper from './RecoilWrapper';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,11 +9,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
-      <RecoilRootWrapper>
-        <Header />
-        {children}
-        <Footer />
-      </RecoilRootWrapper>
+      <RecoilRootWrapper>{children}</RecoilRootWrapper>
     </div>
   );
 };
