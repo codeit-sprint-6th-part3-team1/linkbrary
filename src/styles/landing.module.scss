@@ -6,12 +6,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 32px 0px;
   margin: 0 auto;
-  max-width: 1440px;
-  width: 100%;
 }
-
 .header {
   text-align: center;
   margin-top: 20px;
@@ -25,21 +22,56 @@
   padding: 50px 20px;
   background-color: $GRAY-100;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(5%);
-    width: 1300px;
+  @media (max-width: 1440px) {
+    height: 600px;
+    padding: 40px 20px;
+  }
+
+  @media (max-width: 769px) {
+    height: 500px;
+    padding: 30px 20px;
+  }
+
+  @media (max-width: 390px) {
     height: 400px;
-    background: url('https://github.com/codeit-sprint-6th-part3-team1/linkbrary/assets/128791227/d230acb1-280a-4045-843f-a9e7848ce90f') no-repeat center center;
-    background-size: contain;
+    padding: 20px 10px;
+  }
+}
+
+.titleimage {
+  margin-top: 30px;
+  width: 100%;
+  height: 400px;
+  background: url('https://github.com/codeit-sprint-6th-part3-team1/linkbrary/assets/128791227/d230acb1-280a-4045-843f-a9e7848ce90f') no-repeat center center;
+  background-size: contain;
+
+  @media (max-width: 1440px) {
+    height: 350px;
+  }
+
+  @media (max-width: 769px) {
+    height: 300px;
+  }
+
+  @media (max-width: 390px) {
+    height: 250px;
   }
 }
 
 .maintext {
   font-size: 64px;
+
+  @media (max-width: 1440px) {
+    font-size: 56px;
+  }
+
+  @media (max-width: 769px) {
+    font-size: 30px;
+  }
+
+  @media (max-width: 390px) {
+    font-size: 25px;
+  }
 }
 
 .gradientmain {
@@ -74,6 +106,18 @@
 
 .h2 {
   font-size: 70px;
+
+  @media (max-width: 1440px) {
+    font-size: 60px;
+  }
+
+  @media (max-width: 769px) {
+    font-size: 50px;
+  }
+
+  @media (max-width: 390px) {
+    font-size: 40px;
+  }
 }
 
 .body {
@@ -84,7 +128,6 @@
 }
 
 .section {
-  width: 1000px;
   height: 450px;
   display: flex;
   justify-content: center;
@@ -93,6 +136,24 @@
 
   &:nth-child(even) {
     flex-direction: row-reverse;
+
+    @media (max-width: 769px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  @media (max-width: 1440px) {
+    height: 400px;
+  }
+
+  @media (max-width: 769px) {
+    height: auto;
+    flex-direction: column;
+  }
+
+  @media (max-width: 390px) {
+    height: auto;
+    margin: 20px 0;
   }
 }
 
@@ -104,16 +165,48 @@
   justify-content: center;
   align-items: flex-start;
   margin-left: 40px;
-}
 
-.text h2 {
-  font-size: 50px;
-  margin-bottom: 10px;
-}
+  h2 {
+    font-size: 50px;
+    margin-bottom: 10px;
 
-.text p {
-  font-size: 16px;
-  color: #6b6b6b;
+    @media (max-width: 1440px) {
+      font-size: 45px;
+    }
+
+    @media (max-width: 769px) {
+      font-size: 40px;
+      text-align: center;
+    }
+
+    @media (max-width: 390px) {
+      font-size: 35px;
+    }
+  }
+
+  p {
+    font-size: 16px;
+    color: #6b6b6b;
+
+    @media (max-width: 1440px) {
+      font-size: 14px;
+    }
+
+    @media (max-width: 769px) {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 390px) {
+      font-size: 10px;
+    }
+  }
+
+  @media (max-width: 769px) {
+    margin-left: 0;
+    align-items: center;
+    text-align: center;
+  }
 }
 
 .image {
@@ -122,38 +215,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 .footer {
   text-align: center;
   margin-top: 20px;
-}
-
-@media (max-width: 1440px) {
-  .main {
-    max-width: 1440px;
-  }
-}
-
-@media (max-width: 769px) {
-  .main {
-    max-width: 769px;
-  }
-}
-
-@media (max-width: 390px) {
-  .main {
-    max-width: 390px;
-  }
-
-  .section {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .text,
-  .image {
-    flex: 1;
-    width: 100%;
-  }
 }

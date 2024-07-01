@@ -26,6 +26,7 @@ const Home: React.FC = () => {
             <span className={s.gradientmain}>세상의 모든 정보</span>를<br /> 쉽게 저장하고 관리해 보세요
           </h1>
           <Button variant="add-link" colorType="gradient" text="링크 추가하기" onClick={handleLinkClick} />
+          <div className={s.titleimage} />
         </div>
         <div className={s.body}>
           <div className={s.section}>

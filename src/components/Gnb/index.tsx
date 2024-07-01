@@ -21,7 +21,7 @@ export default function Gnb({ isLogin = false, userIcon = '', userEmail = 'test@
   const UserProfile = ({ isLogin }: { isLogin: boolean }) => {
     if (!isLogin) {
       //FIXME : 로그인 버튼 교환 필요
-      return <Button variant="add-link" colorType="gradient" text="로그인" width="120px" />;
+      return <Button variant="add-link" colorType="gradient" text="로그인" width="120px"></Button>;
     }
     return (
       <div className={s.userSection}>

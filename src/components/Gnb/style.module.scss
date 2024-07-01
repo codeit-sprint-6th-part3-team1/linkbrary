@@ -10,8 +10,9 @@ $BG_COLOR: #f0f6ff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  max-width: 1440px;
   width: 100%;
+
   height: calc($HEIGHT - ($PADDING_Y * 2));
   padding: $PADDING_Y $PADDING_X;
   background-color: $BG_COLOR;
@@ -24,7 +25,7 @@ $BG_COLOR: #f0f6ff;
 
   // NOTE : 해당 max-width는 임의로 설정하였습니다.
   // 해당 width부터는 기존의 레이아웃이 어울리지 않는다 생각하였습니다.
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1440px) {
     padding: $PADDING_Y;
   }
 
