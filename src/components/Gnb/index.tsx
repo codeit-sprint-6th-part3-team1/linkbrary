@@ -12,34 +12,33 @@ interface GnbProps {
   userEmail?: string;
 }
 
+const UserProfile = ({ isLogin, userEmail }: { isLogin: boolean; userEmail: string }) => {
+  if (!isLogin) {
+    //FIXME : 로그인 버튼 교환 필요
+    return <button className={s.loginButton}>Login</button>;
+  }
+  return (
+    <div className={s.userSection}>
+      {/* FIXME : 즐겨찾기 버튼 교환 필요 */}
+      <Link href="http://www.naver.com">
+        <button>⭐ 즐겨찾기</button>
+      </Link>
+      <div className={s.UserProfile}>
+        <ProfileIcon />
+        <p className={s.email}>{userEmail}</p>{' '}
+      </div>
+    </div>
+  );
+};
+
 export default function Gnb({ isLogin = false, userIcon = '', userEmail = 'test@codeit.co.kr' }: GnbProps) {
   const deviceType: DeviceType = useWindowSize();
   const logoSize = (deviceType === DeviceType.MOBILE && { width: 88.67, height: 16 }) || { width: 133, height: 24 };
 
-  // NOTE_ASK : UserProfile 컴포넌트를 별도로 분리할 필요가 있을까???
-  const UserProfile = ({ isLogin }: { isLogin: boolean }) => {
-    if (!isLogin) {
-      //FIXME : 로그인 버튼 교환 필요
-      return <button className={s.loginButton}>Login</button>;
-    }
-    return (
-      <div className={s.userSection}>
-        {/* FIXME : 즐겨찾기 버튼 교환 필요 */}
-        <Link href="http://www.naver.com">
-          <button>⭐ 즐겨찾기</button>
-        </Link>
-        <div className={s.UserProfile}>
-          <ProfileIcon />
-          <p className={s.email}>{userEmail}</p>{' '}
-        </div>
-      </div>
-    );
-  };
-
   return (
     <header className={s.gnb}>
       <MainLogo width={logoSize.width} height={logoSize.height} />
-      <UserProfile isLogin={isLogin} />
+      <UserProfile isLogin={isLogin} userEmail={userEmail} />
     </header>
   );
 }

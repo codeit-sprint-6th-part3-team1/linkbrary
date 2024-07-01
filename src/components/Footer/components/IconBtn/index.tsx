@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import s from './style.module.scss';
 
 interface IconBtnProps {
   href: string;
@@ -9,7 +8,7 @@ interface IconBtnProps {
 
 const IconBtn = ({ href, children }: IconBtnProps) => {
   return (
-    <div className={s.icon}>
+    <div>
       <Link href={href}>{children}</Link>
     </div>
   );

@@ -4,7 +4,7 @@ import Gnb from '@/components/Gnb';
 export default function page() {
   return (
     <>
-      <Gnb />
+      <Gnb isLogin />
       <Footer />
     </>
   );
