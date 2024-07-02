@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '@/components/component(example)/AddLink/style.module.scss';
+import styles from '@/components//AddLink/style.module.scss';
 import Logo from '@public/addlink.svg';
 import Image from 'next/image';
 

@@ -1,7 +1,11 @@
 import React from 'react';
-import AddLink from '@/components/component(example)/AddLink';
-import SearchBar from '@/components/component(example)/SearchBar';
-import InputBox from '@/components/component(example)/InputBox';
+import AddLink from '@/components/AddLink';
+import SearchBar from '@/components/SearchBar';
+import InputBox from '@/components/InputBox';
+
+const style = {
+  margin: '200px',
+};
 
 export default function Home() {
   return (

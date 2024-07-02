@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import styles from '@/components/component(example)/SearchBar/style.module.scss';
+import styles from '@/components/SearchBar/style.module.scss';
 import Image from 'next/image';
 import Logo from '@public/search.svg';
 
