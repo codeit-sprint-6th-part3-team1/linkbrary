@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './styles.module.scss';
-
-
+import ModalCloseIcon from './assets/ModalCloseIcon';
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,14 +19,13 @@ const Modal = ({ isOpen = false, onClose, title = '제목을 입력해 주세요
       {isOpen && <div className={styles.bg} onClick={onClose} />}
       <div className={styles.modal}>
         <div className={styles.btnArea}>
-          <button className={styles.button} onClick={onClose}> 
-            {' '}
-            <div className="close"></div>
+          <button className={styles.button} onClick={onClose}>
+            <ModalCloseIcon />
           </button>
         </div>
         <div className={styles.titleArea}>
           <p className={styles.title}>{title}</p>
-          <p className ={styles.subTitle}>{subTitle}</p>
+          <p className={styles.subTitle}>{subTitle}</p>
         </div>
         <div className={styles.content}>
           <div>{children}</div>
