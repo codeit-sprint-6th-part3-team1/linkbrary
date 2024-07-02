@@ -11,6 +11,7 @@ export interface LinkProps {
   description: string;
   createdAt: string;
   favorite: boolean;
+  folderId: number;
 }
 
 export interface UserProps {
@@ -18,4 +19,13 @@ export interface UserProps {
   name: string;
   email: string;
   imageSource: string;
+}
+
+export type provider = 'google' | 'kakao';
+
+export interface AuthProps {
+  name: string;
+  email: string;
+  password: string;
+  provider: provider;
 }

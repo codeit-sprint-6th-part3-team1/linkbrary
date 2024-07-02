@@ -15,7 +15,11 @@ interface GnbProps {
 const UserProfile = ({ isLogin, userEmail }: { isLogin: boolean; userEmail: string }) => {
   if (!isLogin) {
     //FIXME : 로그인 버튼 교환 필요
-    return <button className={s.loginButton}>Login</button>;
+    return (
+      <Link href="/login">
+        <button className={s.loginButton}>Login</button>
+      </Link>
+    );
   }
   return (
     <div className={s.userSection}>

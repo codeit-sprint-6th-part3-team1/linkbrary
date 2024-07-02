@@ -10,51 +10,34 @@ interface UseSortResult<T> {
 const useSort = <T>(initialData: T[], key: keyof T): UseSortResult<T> => {
   const [data, setData] = useState<T[]>(initialData);
 
-  const sortAscending = useCallback(() => {
-    setData((prevData) =>
-      [...prevData].sort((a, b) => {
-        const aValue = a[key];
-        const bValue = b[key];
+  const compareValues = (a: T, b: T, order: 'asc' | 'desc') => {
+    const aValue = a[key];
+    const bValue = b[key];
 
-        if (aValue instanceof Date && bValue instanceof Date) {
-          return aValue.getTime() - bValue.getTime();
-        }
+    if (aValue instanceof Date && bValue instanceof Date) {
+      return order === 'asc' ? aValue.getTime() - bValue.getTime() : bValue.getTime() - aValue.getTime();
+    }
 
-        if (typeof aValue === 'string' && typeof bValue === 'string') {
-          return aValue.localeCompare(bValue);
-        }
+    if (typeof aValue === 'string' && typeof bValue === 'string') {
+      return order === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+    }
 
-        if (typeof aValue === 'number' && typeof bValue === 'number') {
-          return aValue - bValue;
-        }
+    if (typeof aValue === 'number' && typeof bValue === 'number') {
+      return order === 'asc' ? aValue - bValue : bValue - aValue;
+    }
 
-        return aValue > bValue ? 1 : -1;
-      }),
-    );
-  }, [key]);
+    return order === 'asc' ? (aValue > bValue ? 1 : -1) : aValue < bValue ? 1 : -1;
+  };
 
-  const sortDescending = useCallback(() => {
-    setData((prevData) =>
-      [...prevData].sort((a, b) => {
-        const aValue = a[key];
-        const bValue = b[key];
+  const sortData = useCallback(
+    (order: 'asc' | 'desc') => {
+      setData((prevData) => [...prevData].sort((a, b) => compareValues(a, b, order)));
+    },
+    [key],
+  );
 
-        if (aValue instanceof Date && bValue instanceof Date) {
-          return bValue.getTime() - aValue.getTime();
-        }
-
-        if (typeof aValue === 'string' && typeof bValue === 'string') {
-          return bValue.localeCompare(aValue);
-        }
-
-        if (typeof aValue === 'number' && typeof bValue === 'number') {
-          return bValue - aValue;
-        }
-
-        return aValue < bValue ? 1 : -1;
-      }),
-    );
-  }, [key]);
+  const sortAscending = useCallback(() => sortData('asc'), [sortData]);
+  const sortDescending = useCallback(() => sortData('desc'), [sortData]);
 
   return { data, setData, sortAscending, sortDescending };
 };

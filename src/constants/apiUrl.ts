@@ -2,20 +2,34 @@ export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const endpoints = {
   // AUTH
-  signUp: `${API_BASE_URL}/auth/sign-up`,
-  signIn: `${API_BASE_URL}/auth/sign-in`,
+  signUp: '/auth/sign-up',
+  login: '/auth/sign-in',
+  signUpWithProvider: '/auth/sign-up/{provider}',
+  signInWithProvider: '/auth/sign-in/{provider}',
 
-  //FOLDER
+  // FOLDER
+  getAllFolders: '/folders',
+  createFolder: '/folders',
+  getFolder: '/folders/{folderId}',
+  deleteFolder: '/folders/{folderId}',
+  updateFolder: '/folders/{folderId}',
 
   // LINK
-  links: `${API_BASE_URL}/links`,
+  getLinksByFolder: '/folder/{folderId}/links',
+  getAllLinks: '/links',
+  addLink: '/links',
+  deleteLink: '/links/{linkId}',
+  setFavoriteLink: '/links/{linkId}',
+  getFavorites: '/favorites',
 
-  //OAUTH
+  // OAUTH
+  setOauthApps: '/oauthApps',
 
-  //USER
-  user: `${API_BASE_URL}/user`,
+  // USER
+  getAllUsers: '/users',
+  checkEmail: '/users/check-email',
 };
-export type endpoint = keyof typeof endpoints;
+export type Endpoint = keyof typeof endpoints;
 
 export enum HttpMethod {
   GET = 'GET',
@@ -24,4 +38,3 @@ export enum HttpMethod {
   DELETE = 'DELETE',
   PATCH = 'PATCH',
 }
-export type CustomInputType = keyof typeof HttpMethod;

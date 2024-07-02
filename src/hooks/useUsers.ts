@@ -1,26 +1,62 @@
 import { useState, useCallback } from 'react';
-import { getUserListApi } from '@/lib/api/users';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '@/recoil/state';
+import useApiRequest from '@/hooks/useApiRequest';
+import { HttpMethod, Endpoint } from '@/constants/apiUrl';
+import { checkAccessToken } from '@/utils/authUtils';
 import { UserProps } from '@/types';
-import useApiCall from '@/hooks/useApiCall';
 
-const useUsers = (accessToken: string | null) => {
-  const { handleApiCall, loading, error, message } = useApiCall(accessToken);
+const useUsers = () => {
+  const accessToken = useRecoilValue(loginState);
+  const { handleApiRequest, loading, error, message, setMessage } = useApiRequest();
   const [users, setUsers] = useState<UserProps[]>([]);
 
   const getUserList = useCallback(
-    (page: number, pageSize: number) =>
-      handleApiCall(getUserListApi, 'Users fetched successfully', 'Failed to fetch users', page, pageSize).then((data) => {
-        if (Array.isArray(data)) {
-          setUsers(data);
-        } else {
-          console.error('Expected array but received:', data);
-          setUsers([]);
-        }
-      }),
-    [handleApiCall],
+    (page: number, pageSize: number) => {
+      const token = checkAccessToken(accessToken, setMessage);
+      if (!token) return;
+
+      handleApiRequest({
+        endpoint: 'getAllUsers' as Endpoint,
+        method: HttpMethod.GET,
+        accessToken: token,
+        params: { page, pageSize },
+        successMessage: 'Users fetched successfully',
+        failureMessage: 'Failed to fetch users',
+        updateState: (data) => {
+          if (Array.isArray(data)) {
+            setUsers(data);
+          } else {
+            console.error('Expected array but received:', data);
+            setUsers([]);
+          }
+        },
+      });
+    },
+    [handleApiRequest, accessToken, setMessage],
   );
 
-  return { users, getUserList, loading, error, message };
+  const checkEmail = useCallback(
+    (email: string) => {
+      const token = checkAccessToken(accessToken, setMessage);
+      if (!token) return;
+
+      handleApiRequest({
+        endpoint: 'checkEmail' as Endpoint,
+        method: HttpMethod.POST,
+        accessToken: token,
+        body: { email },
+        successMessage: 'Email checked successfully',
+        failureMessage: 'Failed to check email',
+        updateState: (data) => {
+          console.log('Email check result:', data);
+        },
+      });
+    },
+    [handleApiRequest, accessToken, setMessage],
+  );
+
+  return { users, getUserList, checkEmail, loading, error, message };
 };
 
 export default useUsers;

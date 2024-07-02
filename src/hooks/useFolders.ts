@@ -1,122 +1,102 @@
-// src/hooks/useFolders.ts
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '@/recoil/state';
 import useApiRequest from '@/hooks/useApiRequest';
 import { HttpMethod } from '@/constants/apiUrl';
-
-export interface FolderProps {
-  id: number;
-  createdAt: string;
-  name: string;
-  linkCount: number;
-}
+import { checkAccessToken } from '@/utils/authUtils';
+import { FolderProps } from '@/types';
 
 const useFolders = () => {
   const accessToken = useRecoilValue(loginState);
+  const { handleApiRequest, loading, error, message, setMessage } = useApiRequest();
   const [folders, setFolders] = useState<FolderProps[]>([]);
-  const [message, setMessage] = useState<string>('');
-  const { apiRequest, loading, error } = useApiRequest();
-
-  const handleApiRequest = useCallback(
-    async ({
-      endpoint,
-      method,
-      body,
-      onSuccessMessage,
-      onFailureMessage,
-      updateState,
-    }: {
-      endpoint: string;
-      method: HttpMethod;
-      body?: any;
-      onSuccessMessage: string;
-      onFailureMessage: string;
-      updateState: (data: any) => void;
-    }) => {
-      if (!accessToken) {
-        setMessage('Token error');
-        return;
-      }
-
-      try {
-        const data = await apiRequest({ endpoint, method, accessToken, body });
-        updateState(data);
-        setMessage(onSuccessMessage);
-      } catch (err) {
-        if (err instanceof Error) {
-          setMessage(err.message);
-        } else {
-          setMessage(onFailureMessage);
-        }
-      }
-    },
-    [accessToken, apiRequest],
-  );
 
   const getFolders = useCallback(() => {
+    const token = checkAccessToken(accessToken, setMessage);
+    if (!token) return;
+
     handleApiRequest({
-      endpoint: '/folders',
+      endpoint: 'getAllFolders',
       method: HttpMethod.GET,
-      onSuccessMessage: '',
-      onFailureMessage: 'Failed to fetch folders',
+      accessToken: token,
+      successMessage: '',
+      failureMessage: 'Failed to fetch folders',
       updateState: (data) => setFolders(data),
     });
-  }, [handleApiRequest]);
+  }, [handleApiRequest, accessToken, setMessage]);
 
   const handleAddFolder = useCallback(
     (folderName: string) => {
+      const token = checkAccessToken(accessToken, setMessage);
+      if (!token) return;
+
       handleApiRequest({
-        endpoint: '/folders',
+        endpoint: 'createFolder',
         method: HttpMethod.POST,
+        accessToken: token,
         body: { name: folderName },
-        onSuccessMessage: 'Folder added successfully',
-        onFailureMessage: 'Failed to add folder',
+        successMessage: 'Folder added successfully',
+        failureMessage: 'Failed to add folder',
         updateState: (newFolder) => setFolders((prevFolders) => [...prevFolders, newFolder]),
       });
     },
-    [handleApiRequest],
+    [handleApiRequest, accessToken, setMessage],
   );
 
   const handleUpdateFolder = useCallback(
-    (folderId: number, newName: string) => {
+    (folderId: number, name: string) => {
+      const token = checkAccessToken(accessToken, setMessage);
+      if (!token) return;
+
       handleApiRequest({
-        endpoint: `/folders/${folderId}`,
+        endpoint: 'updateFolder',
         method: HttpMethod.PUT,
-        body: { name: newName },
-        onSuccessMessage: 'Folder updated successfully',
-        onFailureMessage: 'Failed to update folder',
+        accessToken: token,
+        params: { folderId },
+        body: { name },
+        successMessage: 'Folder updated successfully',
+        failureMessage: 'Failed to update folder',
         updateState: (updatedFolder) =>
           setFolders((prevFolders) => prevFolders.map((folder) => (folder.id === folderId ? { ...folder, ...updatedFolder } : folder))),
       });
     },
-    [handleApiRequest],
+    [handleApiRequest, accessToken, setMessage],
   );
 
   const handleFolderDetail = useCallback(
     (folderId: number) => {
+      const token = checkAccessToken(accessToken, setMessage);
+      if (!token) return;
+
       handleApiRequest({
-        endpoint: `/folders/${folderId}`,
+        endpoint: 'getFolder',
         method: HttpMethod.GET,
-        onSuccessMessage: 'Folder details fetched successfully',
-        onFailureMessage: 'Failed to fetch folder details',
+        accessToken: token,
+        params: { folderId },
+        successMessage: 'Folder details fetched successfully',
+        failureMessage: 'Failed to fetch folder details',
         updateState: (data) => setFolders((prevFolders) => prevFolders.map((folder) => (folder.id === folderId ? { ...folder, ...data } : folder))),
       });
     },
-    [handleApiRequest],
+    [handleApiRequest, accessToken, setMessage],
   );
 
   const handleDeleteFolder = useCallback(
     (folderId: number) => {
+      const token = checkAccessToken(accessToken, setMessage);
+      if (!token) return;
+
       handleApiRequest({
-        endpoint: `/folders/${folderId}`,
+        endpoint: 'deleteFolder',
         method: HttpMethod.DELETE,
-        onSuccessMessage: 'Folder deleted successfully',
-        onFailureMessage: 'Failed to delete folder',
+        accessToken: token,
+        params: { folderId },
+        successMessage: 'Folder deleted successfully',
+        failureMessage: 'Failed to delete folder',
         updateState: () => setFolders((prevFolders) => prevFolders.filter((folder) => folder.id !== folderId)),
       });
     },
-    [handleApiRequest],
+    [handleApiRequest, accessToken, setMessage],
   );
 
   useEffect(() => {
