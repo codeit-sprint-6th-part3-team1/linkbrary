@@ -1,0 +1,163 @@
+@import '../../styles/';
+
+.card {
+  width: 340px;
+  height: 334px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #00000014;
+  border-radius: 15px;
+
+  box-shadow: 0px 5px 25px 0px #00000014;
+  transition: all 0.3s ease;
+
+  &:hover {
+    .cardMenuList {
+      background-color: #f0f6ff;
+      border-radius: 0 0 15px 15px;
+    }
+
+    .cardImage,
+    .cardImageNull {
+      transform: scale(1.5);
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.cardImageWrap {
+  width: 100%;
+  height: 200px;
+
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 15px 15px 0 0;
+
+  .cardImage,
+  .cardImageNull {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.3s ease;
+  }
+}
+
+.cardStarWrap {
+  position: absolute;
+
+  top: 16px;
+  right: 16px;
+
+  cursor: pointer;
+}
+
+.cardMenuList {
+  width: calc(340px - (20px * 2));
+  height: calc(135px - (15px * 2));
+
+  padding: 15px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardMenuTop {
+  height: 17px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardUpdateAt {
+  @include font-base(#666666, 400, 13px, 15.51px);
+}
+
+.cardSettingButton {
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
+
+  .cardSettingList {
+    width: 100px;
+    height: 64px;
+
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0px 2px 8px 0px #3332361a;
+    @include font-base(#333236, 400, 13px, 15.51px);
+
+    .cardSettingMenu {
+      width: 100%;
+      height: 32px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background-color: $white;
+
+      &:hover {
+        background-color: #e7effb;
+        color: #6d6afe;
+      }
+    }
+  }
+}
+
+.cardDescription {
+  width: 300px;
+  height: 49px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @include font-base(#000000, 400, 16px, 24px);
+}
+
+.cardCreatedAt {
+  @include font-base(#333333, 400, 14px, 16.71px);
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 325px;
+    height: 327px;
+  }
+
+  .cardImageWrap {
+    width: 100%;
+    height: 192px;
+
+    .cardImageNull,
+    .cardImage {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .cardMenuList {
+    width: 325px;
+    height: 135px;
+  }
+
+  .cardDescription {
+    width: 285px;
+  }
+}
