@@ -23,7 +23,6 @@ export const makeApiRequest = async (
   setMessage: (message: string) => void,
 ) => {
   const url = getEndpoint(endpoint, params);
-  console.log(`Making API request to: ${url} with method: ${method} and body: ${body}`);
   const config: AxiosRequestConfig = {
     url: folderId ? url.replace('{folderId}', folderId.toString()) : url, // folderId 처리
     method,

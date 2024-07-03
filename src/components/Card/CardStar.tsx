@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, ReactNode } from 'react';
-import CardStarFalse from '../../../public/assets/Card/CardStarFalseIcon';
-import CardStarTrue from '../../../public/assets/Card/CardStarTrueIcon';
+import CardStarFalse from '../../../public/assets/card/CardStarFalseIcon';
+import CardStarTrue from '../../../public/assets/card/CardStarTrueIcon';
 
 interface StarProps {
   addFavorites: boolean;

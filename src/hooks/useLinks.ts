@@ -53,9 +53,12 @@ const useLinks = () => {
     [apiHandler],
   );
 
-  const getAllLinks = useCallback(() => {
-    apiHandler('getAllLinks' as Endpoint, HttpMethod.GET, undefined, undefined, 'All links fetched successfully', 'Failed to fetch links', setLinks);
-  }, [apiHandler]);
+  const getAllLinks = useCallback(
+    (page: number, pageSize: number) => {
+      apiHandler('getAllLinks' as Endpoint, HttpMethod.GET, { page, pageSize }, undefined, 'All links fetched successfully', 'Failed to fetch links', setLinks);
+    },
+    [setLinks],
+  );
 
   const addLink = useCallback(
     (linkData: { url: string; folderId: number }) => {

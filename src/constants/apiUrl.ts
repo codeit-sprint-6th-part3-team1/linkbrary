@@ -16,7 +16,7 @@ export const endpoints = {
 
   // LINK
   getLinksByFolder: '/folders/{folderId}/links',
-  getAllLinks: '/links',
+  getAllLinks: '/links?page={page}&pageSize={pageSize}',
   addLink: '/links',
   deleteLink: '/links/{linkId}',
   setFavoriteLink: '/links/{linkId}',
