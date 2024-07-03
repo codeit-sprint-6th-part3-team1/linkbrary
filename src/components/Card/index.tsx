@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './style.module.scss';
-import MeatBallsIcon from '../../../public/assets/Card/MeatBallsIcon';
-import CardImageNull from '../../../public/assets/Card/CardImageNull';
+import MeatBallsIcon from '../../../public/assets/card/MeatBallsIcon';
+import CardImageNull from '../../../public/assets/card/CardImageNull';
 import CardSettingList from './CardSettingList';
 import Image from 'next/image';
 import CardStar from './CardStar';

@@ -1,22 +1,13 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  top: 16px;
-  left: 16px;
-  height: 54px;
-  padding: 15px 16px;
-}
+@import '@/styles/';
 
 .inputContainer {
   display: flex;
   align-items: center;
-  background-color: #f1f1f1;
+  background-color: #f5f5f5;
   border-radius: 10px;
-  padding: 10px 15px;
+  padding: 15px 16px;
   width: 100%;
-  max-width: 600px;
+  height: calc(54px - (16px * 2));
 }
 
 .icon {
@@ -25,35 +16,23 @@
 
 .input {
   flex: 1;
-  padding: 10px;
   border: none;
   background: none;
   outline: none;
-  font-size: 16px;
-  color: #555;
+  @include font-base(#666666, 16px, 400, 24px);
 }
 
+//TODO mobile 변수 적용
 @media (max-width: 600px) {
-  .container {
-    padding: 10px;
-    justify-content: space-between;
-    top: 80px;
-    left: 16px;
-  }
-
   .inputContainer {
     border-radius: 10px;
     padding: 13px 16px;
   }
-
   .icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
+    margin-right: 6px;
   }
 
   .input {
-    font-size: 16px;
-    padding: 8px;
+    @include font-base(#666666, 14px, 400, 16.71px);
   }
 }
