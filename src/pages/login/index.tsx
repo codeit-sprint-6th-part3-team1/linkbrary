@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 import { loginState } from '@/recoil/state';
 
 const Page: React.FC = () => {
@@ -9,6 +11,7 @@ const Page: React.FC = () => {
     password: '',
   });
   const [message, setMessage] = useState('');
+  const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -34,13 +37,17 @@ const Page: React.FC = () => {
       const data = await response.json();
       const accessToken = data.accessToken;
       setLogin(accessToken);
+      Cookies.set('accessToken', accessToken);
       setMessage('Signed in successfully');
+      router.push('/links');
     } else {
       const error = await response.json();
       setMessage(`Error: ${error.message}`);
     }
   };
-
+  const handleSignUp = () => {
+    router.push('/sign-up');
+  };
   return (
     <div>
       <h1>Sign In</h1>
@@ -56,6 +63,9 @@ const Page: React.FC = () => {
         <button type="submit">Sign In</button>
       </form>
       {message && <p>{message}</p>}
+      <div>
+        <button onClick={handleSignUp}>회원가입</button>
+      </div>
     </div>
   );
 };

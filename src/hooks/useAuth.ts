@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
 import { AuthProps } from '@/types';
-import useApiRequest from '@/hooks/useApiRequest';
 import { loginState } from '@/recoil/state';
 import { useRecoilValue } from 'recoil';
 import { HttpMethod } from '@/constants/apiUrl';
+import useApiRequest from '@/utils/apiUtilsAxios';
 
 const useAuth = () => {
   const accessToken = useRecoilValue(loginState);

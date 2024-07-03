@@ -1,3 +1,4 @@
+import router from 'next/router';
 import { useState } from 'react';
 
 // 이 친구는 왜 ok시 accessToken을 보내주는가 왜지 모르겠다
@@ -34,6 +35,8 @@ export default function page() {
       const data = await response.json();
       const accessToken = data.accessToken;
       setMessage(`User created successfully: ${accessToken}`);
+
+      router.push('/links');
     } else {
       const error = await response.json();
       if (error.code === 'P2002' && error.meta?.target?.includes('email')) {
@@ -46,7 +49,7 @@ export default function page() {
 
   return (
     <div>
-      <h1>Login Page</h1>
+      <h1>회원가입 페이지</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -63,6 +66,13 @@ export default function page() {
         <button type="submit">Sign Up</button>
       </form>
       {message && <p>{message}</p>}
+      <button
+        onClick={() => {
+          router.push('/');
+        }}
+      >
+        홈페이지로
+      </button>
     </div>
   );
 }

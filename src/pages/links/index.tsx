@@ -1,29 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 import useFolders from '@/hooks/useFolders';
 import useLinks from '@/hooks/useLinks';
 import useSort from '@/hooks/useSort';
 import Gnb from '@/components/Gnb';
 import Footer from '@/components/Footer';
-import { FolderProps } from '@/types';
+import { FolderProps, LinkProps } from '@/types';
+import Link from 'next/link';
+import useUsers from '@/hooks/useUsers';
 
 const Page: React.FC = () => {
+  const router = useRouter();
   const { folders, message: folderMessage, loading: folderLoading, handleAddFolder, handleUpdateFolder, handleDeleteFolder } = useFolders();
-  const { links, message: linkMessage, loading: linkLoading, addLink, deleteLink, updateLink, setFavoriteLink } = useLinks();
+  const {
+    links,
+    setLinks,
+    message: linkMessage,
+    loading: linkLoading,
+    getAllLinks,
+    getLinksByFolder,
+    addLink,
+    deleteLink,
+    updateLink,
+    setFavoriteLink,
+    getFavorites,
+  } = useLinks();
   const { data: sortedFolders, setData: setFolderData, sortAscending, sortDescending } = useSort<FolderProps>(folders, 'id');
+  const { user, getUser, checkEmail, loading, error, message } = useUsers();
+
   const [folderName, setFolderName] = useState<string>('');
-  const [msg, setMessage] = useState<string>(folderMessage);
+  const [msg, setMessage] = useState<string>(folderMessage || linkMessage || '');
   const [editingFolderId, setEditingFolderId] = useState<number | null>(null);
   const [editingFolderName, setEditingFolderName] = useState<string>('');
   const [newLinkUrl, setNewLinkUrl] = useState<string>('');
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
   useEffect(() => {
     setFolderData(folders);
   }, [folders, setFolderData]);
 
   useEffect(() => {
-    setMessage(folderMessage);
-  }, [folderMessage]);
+    setMessage(folderMessage || linkMessage || '');
+  }, [folderMessage, linkMessage]);
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    getAllLinks();
+  }, [getAllLinks]);
+
+  const handleLogout = () => {
+    Cookies.remove('accessToken');
+    router.push('/');
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFolderName(event.target.value);
@@ -40,6 +74,7 @@ const Page: React.FC = () => {
 
   const handleFolderSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedFolderId(Number(event.target.value));
+    setShowFavorites(false);
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -63,12 +98,74 @@ const Page: React.FC = () => {
     setEditingFolderId(null);
   };
 
-  const filteredLinks = selectedFolderId ? links.filter((link) => link.folderId === selectedFolderId) : links;
+  const handleSetFavoriteLink = (linkId: number, favorite: boolean) => {
+    setFavoriteLink(linkId, favorite);
+  };
+
+  const handleFolderButtonClick = useCallback(
+    (folderId: number) => {
+      setSelectedFolderId(folderId);
+      setShowFavorites(false);
+      getLinksByFolder(folderId, 1, 10);
+    },
+    [getLinksByFolder],
+  );
+
+  const handleShowFavorites = () => {
+    setShowFavorites(true);
+    setSelectedFolderId(null);
+    getFavorites(1, 10);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+  };
+
+  const filterLinks = useMemo(() => {
+    if (searchQuery === '') {
+      return links;
+    } else {
+      const lowercasedSearchQuery = searchQuery.toLowerCase();
+      return links.filter((link: LinkProps) => {
+        const matchesSearchQuery =
+          link.url.toLowerCase().includes(lowercasedSearchQuery) ||
+          link.title.toLowerCase().includes(lowercasedSearchQuery) ||
+          link.description.toLowerCase().includes(lowercasedSearchQuery);
+        return matchesSearchQuery;
+      });
+    }
+  }, [links, searchQuery]);
+
+  const clearSearch = () => {
+    setSearchQuery('');
+    getAllLinks();
+  };
+
+  const highlightText = (text: string, highlight: string) => {
+    if (!highlight) return text;
+
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    return (
+      <>
+        {parts.map((part, index) =>
+          part.toLowerCase() === highlight.toLowerCase() ? (
+            <span key={index} style={{ backgroundColor: 'yellow' }}>
+              {part}
+            </span>
+          ) : (
+            part
+          ),
+        )}
+      </>
+    );
+  };
 
   return (
     <div>
-      <Gnb isLogin />
-      <div style={{ height: '500px' }}>
+      {user && <Gnb isLogin userEmail={`${user.email}`} />}
+      <button onClick={handleLogout}>로그아웃</button>
+      <div>
         <h1>Add Folder Form</h1>
         <form onSubmit={handleSubmit}>
           <div>
@@ -118,6 +215,7 @@ const Page: React.FC = () => {
           <button onClick={sortDescending}>Descending</button>
         </div>
       </div>
+      <br /> <br />
       <div>
         <h1>Add Link Form</h1>
         <form onSubmit={handleLinkSubmit}>
@@ -139,14 +237,38 @@ const Page: React.FC = () => {
           <button type="submit">Add</button>
         </form>
         <h1>Links</h1>
-        <button onClick={() => setSelectedFolderId(null)}>Show All</button>
+        <input type="text" placeholder="Search links" value={searchQuery} onChange={handleSearchChange} />
+        <button onClick={clearSearch}>X</button>
+        {msg && <p>{msg}</p>}
+        {linkLoading && <p>Loading...</p>}
+        <button
+          onClick={() => {
+            setSelectedFolderId(null);
+            setShowFavorites(false);
+            getAllLinks();
+          }}
+        >
+          Show All
+        </button>
+        {folders.map((folder) => (
+          <button key={folder.id} onClick={() => handleFolderButtonClick(folder.id)}>
+            {folder.name}
+          </button>
+        ))}
+        <button onClick={handleShowFavorites}>{'⭐'}</button>
         <ul>
-          {filteredLinks.map((link) => (
+          {filterLinks.map((link) => (
             <li key={link.id}>
-              <b>{link.url}</b> {link.favorite && <span>⭐</span>}
-              <button onClick={() => updateLink(link.id, { ...link, url: 'Updated URL' })}>Update</button>
+              <Link href={link.url}>
+                <ul style={{ height: 'auto', width: '400px', overflow: 'hidden', marginBottom: '20px', textOverflow: 'ellipsis' }}>
+                  <b>{highlightText(link.title, searchQuery)}</b>
+                  {highlightText(link.url, searchQuery)}
+                </ul>
+              </Link>
+              {link.favorite && <span>⭐</span>}
+              <button onClick={() => updateLink(link.id, { url: 'Updated URL' })}>Update</button>
               <button onClick={() => deleteLink(link.id)}>Delete</button>
-              <button onClick={() => setFavoriteLink(link.id)}>Favorite</button>
+              <button onClick={() => handleSetFavoriteLink(link.id, link.favorite)}>{!link.favorite ? 'Unfavorite' : 'Favorite'}</button>
             </li>
           ))}
         </ul>

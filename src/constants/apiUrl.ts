@@ -15,7 +15,7 @@ export const endpoints = {
   updateFolder: '/folders/{folderId}',
 
   // LINK
-  getLinksByFolder: '/folder/{folderId}/links',
+  getLinksByFolder: '/folders/{folderId}/links',
   getAllLinks: '/links',
   addLink: '/links',
   deleteLink: '/links/{linkId}',

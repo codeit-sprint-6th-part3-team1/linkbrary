@@ -1,147 +1,121 @@
 import { useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '@/recoil/state';
-import { HttpMethod, endpoints, Endpoint } from '@/constants/apiUrl';
+import { HttpMethod, Endpoint } from '@/constants/apiUrl';
 import { checkAccessToken } from '@/utils/authUtils';
-import useApiRequest from '@/hooks/useApiRequest';
 import { LinkProps } from '@/types';
+import useApiRequest from '@/utils/apiUtilsAxios';
 
 const useLinks = () => {
   const accessToken = useRecoilValue(loginState);
   const { handleApiRequest, loading, error, message, setMessage } = useApiRequest();
   const [links, setLinks] = useState<LinkProps[]>([]);
 
-  const getLinksByFolder = useCallback(
-    (folderId: number, page: number, pageSize: number) => {
+  const apiHandler = useCallback(
+    (
+      endpoint: Endpoint,
+      method: HttpMethod,
+      params?: Record<string, string | number>,
+      body?: any,
+      successMessage?: string,
+      failureMessage?: string,
+      updateState?: (data: any) => void,
+    ) => {
       const token = checkAccessToken(accessToken, setMessage);
       if (!token) return;
 
       handleApiRequest({
-        endpoint: 'getLinksByFolder' as Endpoint,
-        method: HttpMethod.GET,
-        accessToken: token,
-        params: { folderId, page, pageSize },
-        successMessage: 'Links fetched successfully',
-        failureMessage: 'Failed to fetch links',
-        updateState: setLinks,
-      });
-    },
-    [handleApiRequest, accessToken, setMessage],
-  );
-
-  const getAllLinks = useCallback(
-    (page: number, pageSize: number, search?: string) => {
-      const token = checkAccessToken(accessToken, setMessage);
-      if (!token) return;
-
-      const params: Record<string, string | number> = { page, pageSize };
-      if (search) {
-        params.search = search;
-      }
-
-      handleApiRequest({
-        endpoint: 'getAllLinks' as Endpoint,
-        method: HttpMethod.GET,
+        endpoint,
+        method,
         accessToken: token,
         params,
-        successMessage: 'All links fetched successfully',
-        failureMessage: 'Failed to fetch links',
-        updateState: setLinks,
+        body,
+        successMessage: successMessage ?? '',
+        failureMessage: failureMessage ?? '',
+        updateState: updateState ?? (() => {}),
       });
     },
-    [handleApiRequest, accessToken, setMessage],
+    [accessToken, handleApiRequest, setMessage],
   );
+
+  const getLinksByFolder = useCallback(
+    (folderId: number, page: number, pageSize: number) => {
+      apiHandler(
+        'getLinksByFolder' as Endpoint,
+        HttpMethod.GET,
+        { folderId, page, pageSize },
+        undefined,
+        'Links fetched successfully',
+        'Failed to fetch links',
+        setLinks,
+      );
+    },
+    [apiHandler],
+  );
+
+  const getAllLinks = useCallback(() => {
+    apiHandler('getAllLinks' as Endpoint, HttpMethod.GET, undefined, undefined, 'All links fetched successfully', 'Failed to fetch links', setLinks);
+  }, [apiHandler]);
 
   const addLink = useCallback(
     (linkData: { url: string; folderId: number }) => {
-      const token = checkAccessToken(accessToken, setMessage);
-      if (!token) return;
-
-      handleApiRequest({
-        endpoint: 'addLink',
-        method: HttpMethod.POST,
-        accessToken: token,
-        body: linkData,
-        successMessage: 'Link added successfully',
-        failureMessage: 'Failed to add link',
-        updateState: (newLink) => setLinks((prevLinks) => [...prevLinks, newLink]),
-      });
+      apiHandler('addLink' as Endpoint, HttpMethod.POST, undefined, linkData, 'Link added successfully', 'Failed to add link', (newLink) =>
+        setLinks((prevLinks) => [...prevLinks, newLink]),
+      );
     },
-    [handleApiRequest, accessToken, setMessage],
+    [apiHandler],
   );
 
   const deleteLink = useCallback(
     (linkId: number) => {
-      const token = checkAccessToken(accessToken, setMessage);
-      if (!token) return;
-
-      handleApiRequest({
-        endpoint: 'deleteLink' as Endpoint,
-        method: HttpMethod.DELETE,
-        accessToken: token,
-        params: { linkId },
-        successMessage: 'Link deleted successfully',
-        failureMessage: 'Failed to delete link',
-        updateState: () => setLinks((prevLinks) => prevLinks.filter((link) => link.id !== linkId)),
-      });
+      apiHandler('deleteLink' as Endpoint, HttpMethod.DELETE, { linkId }, undefined, 'Link deleted successfully', 'Failed to delete link', () =>
+        setLinks((prevLinks) => prevLinks.filter((link) => link.id !== linkId)),
+      );
     },
-    [handleApiRequest, accessToken, setMessage],
+    [apiHandler],
   );
 
   const updateLink = useCallback(
     (linkId: number, linkData: { url?: string; description?: string; favorite?: boolean }) => {
-      const token = checkAccessToken(accessToken, setMessage);
-      if (!token) return;
-
-      handleApiRequest({
-        endpoint: 'updateLink' as Endpoint,
-        method: HttpMethod.PUT,
-        accessToken: token,
-        body: { ...linkData, linkId },
-        successMessage: 'Link updated successfully',
-        failureMessage: 'Failed to update link',
-        updateState: (updatedLink) => setLinks((prevLinks) => prevLinks.map((link) => (link.id === linkId ? { ...link, ...updatedLink } : link))),
-      });
+      apiHandler('updateLink' as Endpoint, HttpMethod.PUT, { linkId }, linkData, 'Link updated successfully', 'Failed to update link', (updatedLink) =>
+        setLinks((prevLinks) => prevLinks.map((link) => (link.id === linkId ? { ...link, ...updatedLink } : link))),
+      );
     },
-    [handleApiRequest, accessToken, setMessage],
+    [apiHandler],
   );
 
   const setFavoriteLink = useCallback(
-    (linkId: number) => {
-      const token = checkAccessToken(accessToken, setMessage);
-      if (!token) return;
-
-      handleApiRequest({
-        endpoint: 'setFavoriteLink' as Endpoint,
-        method: HttpMethod.POST,
-        accessToken: token,
-        params: { linkId },
-        successMessage: 'Link set as favorite successfully',
-        failureMessage: 'Failed to set link as favorite',
-        updateState: (updatedLink) => setLinks((prevLinks) => prevLinks.map((link) => (link.id === linkId ? { ...link, ...updatedLink } : link))),
-      });
+    (linkId: number, favorite: boolean) => {
+      apiHandler(
+        'setFavoriteLink' as Endpoint,
+        HttpMethod.PUT,
+        { linkId },
+        { favorite },
+        'Link set as favorite successfully',
+        'Failed to set link as favorite',
+        (updatedLink) => {
+          if (updatedLink || favorite === false) {
+            setLinks((prevLinks) => prevLinks.map((link) => (link.id === linkId ? { ...link, favorite } : link)));
+          }
+        },
+      );
     },
-    [handleApiRequest, accessToken, setMessage],
+    [apiHandler],
   );
 
   const getFavorites = useCallback(
     (page: number, pageSize: number) => {
-      const token = checkAccessToken(accessToken, setMessage);
-      if (!token) return;
-
-      handleApiRequest({
-        endpoint: 'getFavorites' as Endpoint,
-        method: HttpMethod.GET,
-        accessToken: token,
-        params: { page, pageSize },
-        successMessage: 'Favorites fetched successfully',
-        failureMessage: 'Failed to fetch favorites',
-        updateState: (data) => {
-          setLinks(data.map((link: LinkProps) => ({ ...link, favorite: link.favorite ?? false })));
-        },
-      });
+      apiHandler(
+        'getFavorites' as Endpoint,
+        HttpMethod.GET,
+        { page, pageSize },
+        undefined,
+        'Favorites fetched successfully',
+        'Failed to fetch favorites',
+        (data) => setLinks(data.map((link: LinkProps) => ({ ...link, favorite: link.favorite ?? false }))),
+      );
     },
-    [handleApiRequest, accessToken, setMessage],
+    [apiHandler],
   );
 
   return { links, setLinks, getLinksByFolder, getAllLinks, addLink, deleteLink, updateLink, setFavoriteLink, getFavorites, loading, error, message };

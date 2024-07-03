@@ -1,51 +1,41 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import { endpoints, Endpoint } from '@/constants/apiUrl';
+import { useState, useCallback } from 'react';
+import { FetchApiProps } from '@/types';
+import { makeApiRequest } from '@/hooks/useApiRequest';
 
-export const getEndpoint = (endpoint: Endpoint, params?: Record<string, string | number>): string => {
-  let url = `${process.env.NEXT_PUBLIC_API_ROOT_URL}${endpoints[endpoint]}`;
-  if (params) {
-    Object.keys(params).forEach((key) => {
-      url = url.replace(`{${key}}`, params[key].toString());
-    });
-  }
-  return url;
-};
-
-interface FetchApiProps {
-  url: string;
-  method: string;
-  accessToken: string;
-  body?: any;
+interface ApiResponse {
+  data?: any;
+  error?: Error;
 }
 
-export const fetchApi = async ({ url, method, accessToken, body }: FetchApiProps) => {
-  const config: AxiosRequestConfig = {
-    url,
-    method,
-    headers: {
-      Accept: '*/*',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-  };
+interface ApiRequestProps extends FetchApiProps {
+  successMessage?: string;
+  failureMessage?: string;
+  updateState?: (data: any) => void;
+  folderId?: number;
+}
 
-  if (body && method !== 'DELETE') {
-    config.data = body;
-  }
+const useApiRequest = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
-  try {
-    const response = await axios(config);
-    return response.data;
-  } catch (error) {
-    let errorMessage = 'API request failed';
+  const handleApiRequest = useCallback(async (props: ApiRequestProps): Promise<ApiResponse> => {
+    setLoading(true);
+    setError(null);
 
-    if (axios.isAxiosError(error) && error.response) {
-      const errorData = error.response.data;
-      errorMessage = errorData.message || errorMessage;
-    } else {
-      console.error('Error making API request:', error);
+    try {
+      const data = await makeApiRequest(props, setMessage);
+      return { data };
+    } catch (err) {
+      const error = err as Error;
+      setError(error);
+      return { error };
+    } finally {
+      setLoading(false);
     }
+  }, []);
 
-    throw new Error(errorMessage);
-  }
+  return { handleApiRequest, loading, error, message, setMessage };
 };
+
+export default useApiRequest;
