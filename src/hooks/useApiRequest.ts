@@ -1,82 +1,56 @@
-import { useState, useCallback } from 'react';
-import { HttpMethod } from '@/constants/apiUrl';
+import axios, { AxiosRequestConfig } from 'axios';
+import { endpoints, Endpoint, HttpMethod } from '@/constants/apiUrl';
+import { FetchApiProps } from '@/types';
 
-interface ApiRequestProps {
-  endpoint: string;
-  method: HttpMethod;
-  accessToken: string;
-  body?: any;
-  params?: Record<string, string | number>;
-  updateState: (data: any) => void;
-  onSuccessMessage: (data: any) => string;
-  onFailureMessage: (error: Error) => string;
-}
-
-export const buildUrl = (endpoint: string, params?: Record<string, string | number>): string => {
-  let url = `${process.env.NEXT_PUBLIC_API_ROOT_URL}${endpoint}`;
+export const getEndpoint = (endpoint: Endpoint, params?: Record<string, string | number>): string => {
+  let url = `${process.env.NEXT_PUBLIC_API_ROOT_URL}${endpoints[endpoint]}`;
   if (params) {
-    const queryParams = new URLSearchParams(params as Record<string, string>).toString();
-    url = queryParams ? `${url}?${queryParams}` : url;
+    Object.keys(params).forEach((key) => {
+      url = url.replace(`{${key}}`, params[key].toString());
+    });
   }
   return url;
 };
 
-export const fetchApi = async ({
-  url,
-  method,
-  accessToken,
-  body,
-}: Omit<ApiRequestProps, 'endpoint' | 'params' | 'updateState' | 'onSuccessMessage' | 'onFailureMessage'> & { url: string }) => {
-  const res = await fetch(url, {
+interface ApiRequestProps extends FetchApiProps {
+  successMessage?: string;
+  failureMessage?: string;
+  updateState?: (data: any) => void;
+}
+
+export const makeApiRequest = async (
+  { endpoint, method, accessToken, body, params, successMessage, failureMessage, updateState, folderId }: ApiRequestProps & { folderId?: number },
+  setMessage: (message: string) => void,
+) => {
+  const url = getEndpoint(endpoint, params);
+  console.log(`Making API request to: ${url} with method: ${method} and body: ${body}`);
+  const config: AxiosRequestConfig = {
+    url: folderId ? url.replace('{folderId}', folderId.toString()) : url, // folderId 처리
     method,
     headers: {
       Accept: '*/*',
       'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     },
-    body: body ? JSON.stringify(body) : undefined,
-  });
+  };
 
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.message || 'API request failed');
+  if (body && method !== HttpMethod.DELETE) {
+    config.data = body;
   }
-
-  const contentType = res.headers.get('Content-Type');
-  if (contentType && contentType.includes('application/json')) {
-    return res.json();
-  } else {
-    return null;
+  try {
+    const response = await axios(config);
+    if (updateState) {
+      updateState(response.status === 204 ? null : response.data);
+    }
+    if (successMessage) {
+      setMessage(successMessage);
+    }
+    return { data: response.data };
+  } catch (error) {
+    console.error('API request failed:', error);
+    if (failureMessage) {
+      setMessage(failureMessage);
+    }
+    throw error;
   }
 };
-
-const useApiRequest = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-
-  const handleApiRequest = useCallback(
-    async ({ endpoint, method, body, accessToken, params, updateState, onSuccessMessage, onFailureMessage }: ApiRequestProps) => {
-      setLoading(true);
-      setError(null);
-      const url = buildUrl(endpoint, params);
-
-      try {
-        const data = await fetchApi({ url, method, accessToken, body });
-        updateState(data);
-        setError(null);
-        return onSuccessMessage(data);
-      } catch (err) {
-        const error = err instanceof Error ? err : new Error('An unknown error occurred');
-        setError(error);
-        return onFailureMessage(error);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [],
-  );
-
-  return { handleApiRequest, loading, error };
-};
-
-export default useApiRequest;
