@@ -10,7 +10,7 @@ interface ModalProps {
   children?: React.ReactNode;
 }
 
-const Modal = ({ isOpen = false, onClose, title = '제목을 입력해 주세요', subTitle, children = null }: ModalProps) => {
+const Modal = ({ isOpen = false, onClose, title, subTitle, children = null }: ModalProps) => {
   if (isOpen === false) {
     return null;
   }
@@ -23,13 +23,15 @@ const Modal = ({ isOpen = false, onClose, title = '제목을 입력해 주세요
             <ModalCloseIcon />
           </button>
         </div>
-        <div className={styles.titleArea}>
-          <p className={styles.title}>{title}</p>
-          <p className={styles.subTitle}>{subTitle}</p>
-        </div>
-        <div className={styles.content}>
-          <div>{children}</div>
-        </div>
+        <>
+          <div className={styles.titleArea}>
+            <p className={styles.title}>{title}</p>
+            {subTitle && <p className={styles.subTitle}>{subTitle}</p>}
+          </div>
+          <div className={styles.content}>
+            <div>{children}</div>
+          </div>
+        </>
       </div>
     </div>
   );
