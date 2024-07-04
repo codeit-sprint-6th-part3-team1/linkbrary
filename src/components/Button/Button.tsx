@@ -55,3 +55,4 @@ const Button: React.FC<ButtonProps> = ({ variant, colorType, onClick, text, widt
 };
 
 export default Button;
+

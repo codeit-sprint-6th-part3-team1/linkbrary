@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Button from '../components/components/Button/Button';
-import styles from '../components/components/Button/Button.module.scss';
+import Button from '../components/Button/Button';
+import styles from '@/components/Button/Button.module.scss';
 
 const ButtonTest: React.FC = () => {
   const router = useRouter();

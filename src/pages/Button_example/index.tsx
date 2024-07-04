@@ -1,7 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Button from '../../components/components/Button/Button';
-import styles from '@/components/components/Button/Button';
+import Button from '@/components/Button/Button';
+import s from '@/components/Button/Button.module.scss';
+import ShareIcon from '../../../public/assets/Button/ShareIcon';
+import PlusIcon from '../../../public/assets/Button/PlusIcon';
 
 const Home: React.FC = () => {
   const router = useRouter();
@@ -17,12 +19,10 @@ const Home: React.FC = () => {
 
   const handleAddFolder = () => {
     console.log('폴더 추가 기능');
-    // 폴더 추가 로직 구현
   };
 
   const handleShare = () => {
     console.log('공유 기능');
-    // 공유 로직 구현
   };
 
   const handlePageNavigation = (path: string) => {
@@ -30,13 +30,16 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={s.container}>
       <h1>버튼 테스트 페이지</h1>
       <Button variant="add-link" colorType="gradient" text="링크 추가하기" onClick={handleAddLink} />
       <Button variant="add-folder" colorType="primary" onClick={handleAddFolder}>
-        폴더 추가 +
+        폴더 추가
+        <PlusIcon />
       </Button>
-      <Button variant="share" colorType="primary" onClick={handleShare} />
+      <Button variant="share" colorType="primary" onClick={() => handlePageNavigation('/all')}>
+        <ShareIcon />
+      </Button>
       <Button variant="all-large" colorType="primary" onClick={() => handlePageNavigation('/all')}>
         전체
       </Button>
