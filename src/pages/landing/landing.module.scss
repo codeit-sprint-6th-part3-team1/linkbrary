@@ -1,17 +1,36 @@
-@import '@/styles/color.scss';
-@import '@/styles/font.scss';
+@import '@/styles';
+
+$PC_WIDTH: 1440px;
+$TABLET_WIDTH: 769px;
+$MOBILE_WIDTH: 390px;
+$MAIN_PADDING_X: 104px; // Footer와 일치
+$MAIN_PADDING_Y: 32px;
 
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 0px;
+  padding: $MAIN_PADDING_Y 0;
   margin: 0 auto;
+  max-width: $PC_WIDTH;
 }
+
 .header {
   text-align: center;
   margin-top: 20px;
+  @media (max-width: $PC_WIDTH) {
+    height: 600px;
+    padding: 40px 20px;
+  }
+  @media (max-width: $TABLET_WIDTH) {
+    height: 500px;
+    padding: 30px 20px;
+  }
+  @media (max-width: $MOBILE_WIDTH) {
+    height: 400px;
+    padding: 20px 10px;
+  }
 }
 
 .title {
@@ -19,57 +38,51 @@
   width: 100%;
   height: 700px;
   text-align: center;
-  padding: 50px 20px;
+  padding: 50px $MAIN_PADDING_X; // Updated padding
   background-color: $GRAY-100;
-
-  @media (max-width: 1440px) {
+  overflow: hidden; // Add this line to ensure the image does not overflow
+  @media (max-width: $PC_WIDTH) {
     height: 600px;
-    padding: 40px 20px;
+    padding: 40px $MAIN_PADDING_X; // Updated padding
   }
-
-  @media (max-width: 769px) {
+  @media (max-width: $TABLET_WIDTH) {
     height: 500px;
-    padding: 30px 20px;
+    padding: 30px $MAIN_PADDING_X; // Updated padding
   }
-
-  @media (max-width: 390px) {
+  @media (max-width: $MOBILE_WIDTH) {
     height: 400px;
-    padding: 20px 10px;
+    padding: 20px $MAIN_PADDING_X; // Updated padding
   }
 }
 
 .titleimage {
+  align-items: center;
   margin-top: 30px;
   width: 100%;
   height: 400px;
   background: url('https://github.com/codeit-sprint-6th-part3-team1/linkbrary/assets/128791227/d230acb1-280a-4045-843f-a9e7848ce90f') no-repeat center center;
   background-size: contain;
-
-  @media (max-width: 1440px) {
+  @media (max-width: $PC_WIDTH) {
     height: 350px;
   }
-
-  @media (max-width: 769px) {
+  @media (max-width: $TABLET_WIDTH) {
     height: 300px;
   }
-
-  @media (max-width: 390px) {
+  @media (max-width: $MOBILE_WIDTH) {
     height: 250px;
   }
 }
 
 .maintext {
+  align-items: center;
   font-size: 64px;
-
-  @media (max-width: 1440px) {
+  @media (max-width: $PC_WIDTH) {
     font-size: 56px;
   }
-
-  @media (max-width: 769px) {
+  @media (max-width: $TABLET_WIDTH) {
     font-size: 30px;
   }
-
-  @media (max-width: 390px) {
+  @media (max-width: $MOBILE_WIDTH) {
     font-size: 25px;
   }
 }
@@ -93,7 +106,7 @@
 }
 
 .gradient3 {
-  background: linear-gradient(99.5deg, $gradient-share-start 19.76%, $gradient-share-end 52.69%);
+  background: linear-gradient(99.5deg, $gradient-share-start 22%, $gradient-share-end 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -105,18 +118,16 @@
 }
 
 .h2 {
+  align-items: center;
   font-size: 70px;
-
-  @media (max-width: 1440px) {
+  @media (max-width: $PC_WIDTH) {
     font-size: 60px;
   }
-
-  @media (max-width: 769px) {
+  @media (max-width: $TABLET_WIDTH) {
     font-size: 50px;
   }
-
-  @media (max-width: 390px) {
-    font-size: 40px;
+  @media (max-width: $MOBILE_WIDTH) {
+    font-size: 32px; // Update for mobile
   }
 }
 
@@ -133,27 +144,28 @@
   justify-content: center;
   align-items: center;
   margin: 40px 0;
+  @media (max-width: $TABLET_WIDTH) {
+    height: auto;
+    flex-direction: column;
+  }
+  @media (max-width: $MOBILE_WIDTH) {
+    height: auto;
+    margin: 20px 0;
+  }
 
   &:nth-child(even) {
     flex-direction: row-reverse;
-
-    @media (max-width: 769px) {
+    @media (max-width: $TABLET_WIDTH) {
       flex-direction: column-reverse;
     }
   }
 
-  @media (max-width: 1440px) {
-    height: 400px;
-  }
-
-  @media (max-width: 769px) {
-    height: auto;
+  @media (max-width: $TABLET_WIDTH) {
     flex-direction: column;
-  }
-
-  @media (max-width: 390px) {
-    height: auto;
-    margin: 20px 0;
+    &:nth-child(even),
+    &:nth-child(odd) {
+      flex-direction: column;
+    }
   }
 }
 
@@ -165,44 +177,35 @@
   justify-content: center;
   align-items: flex-start;
   margin-left: 40px;
-
   h2 {
     font-size: 50px;
     margin-bottom: 10px;
-
-    @media (max-width: 1440px) {
+    @media (max-width: $PC_WIDTH) {
       font-size: 45px;
     }
-
-    @media (max-width: 769px) {
+    @media (max-width: $TABLET_WIDTH) {
       font-size: 40px;
       text-align: center;
     }
-
-    @media (max-width: 390px) {
+    @media (max-width: $MOBILE_WIDTH) {
       font-size: 35px;
     }
   }
-
   p {
     font-size: 16px;
     color: #6b6b6b;
-
-    @media (max-width: 1440px) {
+    @media (max-width: $PC_WIDTH) {
       font-size: 14px;
     }
-
-    @media (max-width: 769px) {
+    @media (max-width: $TABLET_WIDTH) {
       font-size: 12px;
       text-align: center;
     }
-
-    @media (max-width: 390px) {
+    @media (max-width: $MOBILE_WIDTH) {
       font-size: 10px;
     }
   }
-
-  @media (max-width: 769px) {
+  @media (max-width: $TABLET_WIDTH) {
     margin-left: 0;
     align-items: center;
     text-align: center;
@@ -215,14 +218,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   img {
     max-width: 100%;
     height: auto;
   }
-}
-
-.footer {
-  text-align: center;
-  margin-top: 20px;
 }

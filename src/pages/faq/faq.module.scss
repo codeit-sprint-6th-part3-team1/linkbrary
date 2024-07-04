@@ -1,0 +1,117 @@
+@import '@/styles';
+
+$PC_WIDTH: 1440px;
+$TABLET_WIDTH: 768px;
+$MOBILE_WIDTH: 390px;
+$MAIN_PADDING_X: 104px;
+$MAIN_PADDING_Y: 32px;
+$bgColor: #f0f6ff;
+
+.faqContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px $MAIN_PADDING_X;
+  background-color: $GRAY-100;
+  max-width: $PC_WIDTH;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: $TABLET_WIDTH) {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+
+    @media (max-width: $TABLET_WIDTH) {
+      font-size: 28px;
+    }
+  }
+}
+
+.gnb {
+  $height: 102px;
+  $paddingX: 104px;
+  $paddingY: 32px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
+  height: calc($height - ($paddingY * 2));
+  padding: $paddingY $paddingX;
+  background-color: $bgColor;
+  margin: 0 auto; // 중앙 정렬을 위해 추가
+
+  .userSection {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    @media screen and (max-width: $MOBILE_WIDTH) {
+      gap: 16px;
+    }
+  }
+
+  @media screen and (max-width: 1440px) {
+    padding: $paddingY $paddingX;
+  }
+
+  @media screen and (max-width: $MOBILE_WIDTH) {
+    $height: 65px;
+    $paddingX: 32px;
+    $paddingY: 18px;
+    height: calc($height - ($paddingY * 2));
+    padding: $paddingY $paddingX;
+  }
+}
+
+.UserProfile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  .email {
+    @include font-base(#3e3e43, 400, 14px, 16.71px);
+
+    @media screen and (max-width: $TABLET_WIDTH) {
+      display: none;
+    }
+  }
+}
+
+.faqItem {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 10px;
+  background-color: $WHITE;
+  border: 1px solid $GRAY-300;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba($BLACK, 0.1);
+
+  .question {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+
+    @media (max-width: $TABLET_WIDTH) {
+      font-size: 16px;
+    }
+  }
+
+  .answer {
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $GRAY-500;
+    border-top: 1px solid $GRAY-300;
+
+    @media (max-width: $TABLET_WIDTH) {
+      font-size: 14px;
+    }
+  }
+}

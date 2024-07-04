@@ -1,13 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import s from '@/styles/landing.module.scss';
-import Button from '../components/component(example)/Button/Button';
+import Link from 'next/link';
+import s from './landing.module.scss';
+import Button from '../../components/Button/Button';
 import Gnb from '@/components/Gnb';
 import Footer from '@/components/Footer';
 
 const Home: React.FC = () => {
   const router = useRouter();
-  const isLoggedIn = false; // 로그인 상태 체크 (임시로 false 설정)
+  const isLoggedIn = false;
 
   const handleLinkClick = () => {
     if (isLoggedIn) {
@@ -25,7 +26,9 @@ const Home: React.FC = () => {
           <h1 className={s.maintext}>
             <span className={s.gradientmain}>세상의 모든 정보</span>를<br /> 쉽게 저장하고 관리해 보세요
           </h1>
-          <Button variant="add-link" colorType="gradient" text="링크 추가하기" onClick={handleLinkClick} />
+          <Link href="/addlink">
+            <Button variant="add-link" colorType="gradient" text="링크 추가하기" />
+          </Link>
           <div className={s.titleimage} />
         </div>
         <div className={s.body}>
