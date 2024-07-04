@@ -1,8 +1,7 @@
-// pages/faq.tsx
 import React, { useState } from 'react';
-import s from './faq.module.scss';
+import s from './faq.module.scss'; // FAQ 페이지에서 사용하는 SCSS 파일
 import MainLogo from '@/../public/assets/gnb/MainLogo';
-import Footer from '@/components/Footer';
+import Footer from '@/components/Footer'; // Footer 컴포넌트 import (경로는 실제 파일 위치에 맞게 수정해주세요)
 
 interface FAQItemProps {
   question: string;
@@ -65,7 +64,9 @@ const FAQ: React.FC = () => {
           <FAQItem key={index} question={item.question} answer={item.answer} isOpen={openIndex === index} onClick={() => handleClick(index)} />
         ))}
       </main>
-      <Footer />
+      <footer className={s.footer}>
+        <Footer />
+      </footer>
     </div>
   );
 };

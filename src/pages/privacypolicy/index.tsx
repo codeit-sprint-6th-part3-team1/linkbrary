@@ -121,7 +121,9 @@ const PrivacyPolicy: React.FC = () => {
           </ul>
         </div>
       </div>
-      <Footer />
+      <footer className={s.footer}>
+        <Footer />
+      </footer>
     </>
   );
 };

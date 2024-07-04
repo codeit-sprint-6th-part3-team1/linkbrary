@@ -11,11 +11,12 @@ $bgColor: #f0f6ff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px $MAIN_PADDING_X;
   background-color: $GRAY-100;
   max-width: $PC_WIDTH;
   margin: 0 auto;
   width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
 
   @media (max-width: $TABLET_WIDTH) {
     padding: 10px;
@@ -32,19 +33,14 @@ $bgColor: #f0f6ff;
 }
 
 .gnb {
-  $height: 102px;
-  $paddingX: 104px;
-  $paddingY: 32px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1440px;
-  height: calc($height - ($paddingY * 2));
-  padding: $paddingY $paddingX;
+  max-width: $PC_WIDTH;
+  padding-top: 40px;
   background-color: $bgColor;
-  margin: 0 auto; // 중앙 정렬을 위해 추가
+  margin: 0 auto;
 
   .userSection {
     display: flex;
@@ -57,15 +53,12 @@ $bgColor: #f0f6ff;
   }
 
   @media screen and (max-width: 1440px) {
-    padding: $paddingY $paddingX;
   }
 
   @media screen and (max-width: $MOBILE_WIDTH) {
     $height: 65px;
     $paddingX: 32px;
     $paddingY: 18px;
-    height: calc($height - ($paddingY * 2));
-    padding: $paddingY $paddingX;
   }
 }
 
@@ -114,4 +107,11 @@ $bgColor: #f0f6ff;
       font-size: 14px;
     }
   }
+}
+.footer {
+  max-width: $PC_WIDTH;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

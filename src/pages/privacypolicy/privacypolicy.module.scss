@@ -1,23 +1,21 @@
+// privacypolicy.module.scss
+
 @import '@/styles';
 
 $PC_WIDTH: 1440px;
 $TABLET_WIDTH: 768px;
 $MOBILE_WIDTH: 390px;
-$MAIN_PADDING_X: 104px;
-$MAIN_PADDING_Y: 32px;
 $bgColor: #f0f6ff;
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px $MAIN_PADDING_X;
   background-color: $GRAY-100;
   max-width: $PC_WIDTH;
-  margin: 0 auto;
   width: 100%;
 
-  @media (max-width: $tabletWidth) {
+  @media (max-width: $TABLET_WIDTH) {
     padding: 10px;
   }
 }
@@ -31,7 +29,7 @@ $bgColor: #f0f6ff;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    @media (max-width: $tabletWidth) {
+    @media (max-width: $TABLET_WIDTH) {
       font-size: 28px;
     }
   }
@@ -60,7 +58,7 @@ $bgColor: #f0f6ff;
       }
     }
 
-    @media (max-width: $tabletWidth) {
+    @media (max-width: $TABLET_WIDTH) {
       font-size: 14px;
     }
   }
@@ -72,7 +70,7 @@ $bgColor: #f0f6ff;
     border-left: 4px solid $PRIMARY;
     padding-left: 10px;
 
-    @media (max-width: $tabletWidth) {
+    @media (max-width: $TABLET_WIDTH) {
       font-size: 20px;
     }
   }
@@ -89,7 +87,7 @@ $bgColor: #f0f6ff;
     font-size: 16px;
     color: $PRIMARY;
 
-    @media (max-width: $tabletWidth) {
+    @media (max-width: $TABLET_WIDTH) {
       font-size: 14px;
     }
   }
@@ -103,7 +101,7 @@ $bgColor: #f0f6ff;
     font-size: 18px;
     color: $BLACK;
 
-    @media (max-width: $tabletWidth) {
+    @media (max-width: $TABLET_WIDTH) {
       font-size: 16px;
     }
   }
@@ -125,7 +123,7 @@ $bgColor: #f0f6ff;
           color: $RED;
         }
 
-        @media (max-width: $tabletWidth) {
+        @media (max-width: $TABLET_WIDTH) {
           font-size: 14px;
         }
       }
@@ -134,17 +132,20 @@ $bgColor: #f0f6ff;
 }
 
 .gnb {
-  $height: 102px;
-  $paddingX: 104px;
-  $paddingY: 32px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: calc($height - ($paddingY * 2));
-  padding: $paddingY $paddingX;
+  height: 100px;
   background-color: $bgColor;
   width: 100%;
   max-width: $PC_WIDTH; // 최대 너비 설정
   margin: 0 auto;
+}
+
+.footer {
+  max-width: $PC_WIDTH;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
