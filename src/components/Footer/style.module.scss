@@ -16,7 +16,6 @@ $snsWrapperMaxWidth: 116px;
   height: calc($footerHeight - ($footerPadding * 2));
   align-items: flex-start;
   white-space: nowrap;
-  width: 100%;
 
   @media screen and (max-width: $footerTabletWidth) {
     padding: $footerPadding;
@@ -51,7 +50,6 @@ $contractColor: #cfcfcf;
   width: fit-content;
   gap: 30px;
   justify-content: center;
-  grid-column: 2 / 3;
 
   @media screen and (max-width: $footerTabletWidth) {
     justify-content: flex-start;

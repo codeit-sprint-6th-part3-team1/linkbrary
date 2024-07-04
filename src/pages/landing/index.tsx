@@ -97,7 +97,9 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        <div className={s.footer}>
+          <Footer />
+        </div>
       </main>
     </div>
   );
