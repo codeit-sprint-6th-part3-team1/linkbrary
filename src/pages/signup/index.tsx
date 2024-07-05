@@ -4,7 +4,8 @@ import LogoIcon from '../components/LogoIcon';
 import Label from '../components/Label';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import axiosInstance, { setAuthToken } from '@/lib/axios';
+import axiosInstance from '@/lib/axios';
+import Cookies from 'js-cookie';
 
 export default function signup() {
   const [values, setValues] = useState({
@@ -31,21 +32,22 @@ export default function signup() {
       const { email, password } = values;
 
       const response = await axiosInstance.post('/auth/sign-up', { email, password, name: email });
-      const accessToken = response.data.accessToken;
 
       if (response.status === 400) {
         alert('중복된 이메일 입니다');
         return;
       }
 
-      if (accessToken) {
-        sessionStorage.setItem('accessToken', accessToken);
-        setAuthToken(accessToken);
-        alert('가입이 완료되었습니다');
+      if (response.status === 200) {
+        const { accessToken } = response.data;
+        Cookies.set('accessToken', accessToken, { path: '/' });
+        alert('Signup successful');
         router.push('/login');
       } else {
-        alert('No access token found in the response');
+        alert('회원가입 실패');
       }
+
+      setValues({ email: '', password: '', passwordRepeat: '' });
     } catch (error) {
       console.error(error);
     }

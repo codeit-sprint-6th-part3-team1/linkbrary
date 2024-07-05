@@ -1,12 +1,13 @@
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import axiosInstance from '@/lib/axios';
+import Cookies from 'js-cookie';
 import styles from './style.module.scss';
 import Link from 'next/link';
 import LogoIcon from '../components/LogoIcon';
 import KakaoIcon from '../components/KakaoIcon';
 import GoogleIcon from '../components/GoogleIcon';
 import Label from '../components/Label';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import axios from '@/lib/axios';
 
 export default function Login() {
   const [values, setValues] = useState({
@@ -29,11 +30,21 @@ export default function Login() {
     e.preventDefault();
 
     const { email, password } = values;
-    await axios.post('/auth/sign-in', {
-      email,
-      password,
-    });
-    router.push('/share');
+    try {
+      const response = await axiosInstance.post('/auth/sign-in', { email, password });
+      if (response.status === 200) {
+        const { accessToken } = response.data;
+        Cookies.set('accessToken', accessToken, { path: '/' });
+        alert('Login successful');
+        router.push('/');
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      alert('An unexpected error occurred');
+    }
+
+    // router.push('/share');
   };
 
   return (
