@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import s from './style.module.scss';
 import IconBtn from './components/IconBtn';

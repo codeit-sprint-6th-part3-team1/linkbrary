@@ -3,7 +3,7 @@
 $PC_WIDTH: 1440px;
 $TABLET_WIDTH: 769px;
 $MOBILE_WIDTH: 390px;
-$MAIN_PADDING_X: 104px; // Footer와 일치
+$MAIN_PADDING_X: 104px;
 $MAIN_PADDING_Y: 32px;
 
 .main {
@@ -19,6 +19,8 @@ $MAIN_PADDING_Y: 32px;
 .header {
   text-align: center;
   margin-top: 20px;
+  max-width: $PC_WIDTH;
+
   @media (max-width: $PC_WIDTH) {
     height: 600px;
     padding: 40px 20px;
@@ -38,20 +40,21 @@ $MAIN_PADDING_Y: 32px;
   width: 100%;
   height: 700px;
   text-align: center;
-  padding: 50px $MAIN_PADDING_X; // Updated padding
   background-color: $GRAY-100;
-  overflow: hidden; // Add this line to ensure the image does not overflow
+  overflow: hidden;
+  max-width: $PC_WIDTH;
+
   @media (max-width: $PC_WIDTH) {
     height: 600px;
-    padding: 40px $MAIN_PADDING_X; // Updated padding
+    padding: 40px $MAIN_PADDING_X;
   }
   @media (max-width: $TABLET_WIDTH) {
     height: 500px;
-    padding: 30px $MAIN_PADDING_X; // Updated padding
+    padding: 30px $MAIN_PADDING_X;
   }
   @media (max-width: $MOBILE_WIDTH) {
     height: 400px;
-    padding: 20px $MAIN_PADDING_X; // Updated padding
+    padding: 20px $MAIN_PADDING_X;
   }
 }
 
@@ -127,7 +130,7 @@ $MAIN_PADDING_Y: 32px;
     font-size: 50px;
   }
   @media (max-width: $MOBILE_WIDTH) {
-    font-size: 32px; // Update for mobile
+    font-size: 32px;
   }
 }
 
@@ -222,6 +225,16 @@ $MAIN_PADDING_Y: 32px;
     max-width: 100%;
     height: auto;
   }
+}
+
+.gnb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  max-width: $PC_WIDTH;
+  margin: 0 auto;
 }
 
 .footer {

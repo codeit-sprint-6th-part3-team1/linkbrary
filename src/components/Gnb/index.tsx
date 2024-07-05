@@ -47,3 +47,4 @@ export default function Gnb({ isLogin = false, userIcon = '', userEmail = 'test@
     </header>
   );
 }
+

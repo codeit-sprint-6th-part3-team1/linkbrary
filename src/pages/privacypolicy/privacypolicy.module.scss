@@ -14,6 +14,7 @@ $bgColor: #f0f6ff;
   background-color: $GRAY-100;
   max-width: $PC_WIDTH;
   width: 100%;
+  margin: 0 auto;
 
   @media (max-width: $TABLET_WIDTH) {
     padding: 10px;
@@ -147,6 +148,7 @@ $bgColor: #f0f6ff;
   width: 100%;
   align-items: center;
   background-color: $BLACK;
+  margin: 0 auto;
 
   .container {
     display: flex;

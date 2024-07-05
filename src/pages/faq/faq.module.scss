@@ -111,9 +111,9 @@ $bgColor: #f0f6ff;
 .footer {
   max-width: $PC_WIDTH;
   width: 100%;
-
   align-items: center;
   background-color: $BLACK;
+  margin: 0 auto;
 
   .container {
     display: flex;

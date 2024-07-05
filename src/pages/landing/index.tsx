@@ -21,7 +21,9 @@ const Home: React.FC = () => {
   return (
     <div>
       <main className={s.main}>
-        <Gnb isLogin={isLoggedIn} />
+        <div className={s.gnb}>
+          <Gnb isLogin={isLoggedIn} />
+        </div>
         <div className={s.title}>
           <h1 className={s.maintext}>
             <span className={s.gradientmain}>세상의 모든 정보</span>를<br /> 쉽게 저장하고 관리해 보세요
