@@ -32,6 +32,8 @@ const Home: React.FC = () => {
   return (
     <div className={s.container}>
       <h1>버튼 테스트 페이지</h1>
+      <Button variant="action" colorType="gradient" text="추가하기" onClick={handleAddFolder} />
+      <Button variant="action" colorType="red" text="삭제하기" onClick={handleAddFolder} />
       <Button variant="add-link" colorType="gradient" text="링크 추가하기" onClick={handleAddLink} />
       <Button variant="add-folder" colorType="primary" onClick={handleAddFolder}>
         폴더 추가

@@ -4,6 +4,7 @@ import styles from './Button.module.scss';
 type ButtonStyleProps = {
   /**
    * 버튼의 스타일 변형을 지정합니다.
+   * - 'action': 폴더 변경, 삭제, 추가 모달 버튼
    * - 'login': 로그인 버튼
    * - 'add-link': 링크 추가 버튼
    * - 'add-folder': 폴더 추가 버튼
@@ -11,15 +12,16 @@ type ButtonStyleProps = {
    * - 'all-large': 전체 큰 버튼
    * - 'all-small': 전체 작은 버튼
    */
-  variant: 'login' | 'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small';
+  variant: 'action' | 'login' | 'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small';
   /**
    * 버튼의 색상 유형을 지정합니다.
    * - 'primary': 기본 색상
    * - 'white': 흰색
    * - 'gray-200': 회색 (200 레벨)
    * - 'gradient': 기본 색상 그라데이션
+   * - 'red': 빨강
    */
-  colorType: 'primary' | 'white' | 'gray-200' | 'gradient';
+  colorType: 'primary' | 'white' | 'gray-200' | 'gradient' | 'red';
 };
 
 interface ButtonProps extends ButtonStyleProps {
@@ -38,7 +40,7 @@ interface ButtonProps extends ButtonStyleProps {
  * <Button variant="add-link" colorType="primary" onClick={() => console.log('Button clicked')} text="Add Link" />
  *
  * @param {Object} props - 컴포넌트의 props
- * @param {'login' | 'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small'} props.variant - 버튼의 스타일 변형
+ * @param {'action' | 'login' | 'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small'} props.variant - 버튼의 스타일 변형
  * @param {'primary' | 'white' | 'gray-200' | 'gradient'} props.colorType - 버튼의 색상 유형
  * @param {React.ReactNode} [props.children] - 버튼 안에 렌더링할 자식 요소들
  * @param {() => void} [props.onClick] - 버튼 클릭 시 호출되는 함수
