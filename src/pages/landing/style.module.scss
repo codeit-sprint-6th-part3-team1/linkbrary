@@ -8,9 +8,8 @@ $MAIN_PADDING_Y: 32px;
 
 .main {
   padding-top: 90px;
-
   @media (max-width: $TABLET_WIDTH) {
-    padding-top: 70px;
+    padding-top: 80px;
   }
   @media (max-width: $MOBILE_WIDTH) {
     padding-top: 50px;
@@ -21,7 +20,7 @@ $MAIN_PADDING_Y: 32px;
   width: 100%;
   height: 700px;
   text-align: center;
-  background-color: $GRAY-100;
+  background-color: $gray-100;
   overflow: hidden;
   box-sizing: border-box;
 
@@ -52,6 +51,7 @@ $MAIN_PADDING_Y: 32px;
   word-break: keep-all;
   align-items: center;
   font-size: 64px;
+
   @media (max-width: $PC_WIDTH) {
     font-size: 56px;
   }
@@ -64,7 +64,7 @@ $MAIN_PADDING_Y: 32px;
 }
 
 .gradientmain {
-  background: linear-gradient(91.26deg, $PRIMARY 17.28%, $main-gradient-end 74.98%);
+  background: linear-gradient(91.26deg, $primary 17.28%, $main-gradient-end 74.98%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -214,7 +214,7 @@ $MAIN_PADDING_Y: 32px;
 .footer {
   width: 100%;
   align-items: center;
-  background-color: $BLACK;
+  background-color: $black;
 
   .container {
     display: flex;
@@ -242,7 +242,7 @@ $MAIN_PADDING_Y: 32px;
       transition: color 0.3s;
 
       &:hover {
-        color: $RED;
+        color: $red;
       }
     }
 

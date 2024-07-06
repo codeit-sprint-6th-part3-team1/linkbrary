@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# launch
+/.vscode
+.vecode
+
+# package-lock.json
+.package-lock.json

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import s from './faq.module.scss';
+import s from '@/pages/faq/style.module.scss';
 import MainLogo from '@/../public/assets/gnb/MainLogo';
 import Footer from '@/components/Footer';
 

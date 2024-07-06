@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import s from './privacypolicy.module.scss';
+import s from '@/pages/privacypolicy/style.module.scss';
 import MainLogo from '@/../public/assets/gnb/MainLogo'; // 로고 임포트
 import Footer from '@/components/Footer';
 

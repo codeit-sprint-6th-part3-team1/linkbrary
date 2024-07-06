@@ -11,7 +11,7 @@ $snsWrapperMaxWidth: 116px;
 
 .footer {
   display: flex;
-  background-color: $BLACK;
+  background-color: $black;
   padding: $footerPadding 104px;
   height: calc($footerHeight - ($footerPadding * 2));
   align-items: flex-start;

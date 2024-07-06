@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import s from './landing.module.scss';
-import Button from '../../components/Button/Button';
+import s from '@/pages/landing/style.module.scss';
+import Button from '@/components/Button/Button';
 import Gnb from '@/components/Gnb';
 import Footer from '@/components/Footer';
 
@@ -21,8 +21,10 @@ const Home: React.FC = () => {
   return (
     <div>
       <main className={s.main}>
-        <div className={s.gnb}>
-          <Gnb isLogin={isLoggedIn} />
+        <div className={s.gnbWrapper}>
+          <div className={s.gnb}>
+            <Gnb isLogin={isLoggedIn} />
+          </div>
         </div>
         <div className={s.title}>
           <h1 className={s.maintext}>

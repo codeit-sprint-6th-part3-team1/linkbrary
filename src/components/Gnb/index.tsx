@@ -17,9 +17,7 @@ const UserProfile = ({ isLogin, userEmail }: { isLogin: boolean; userEmail: stri
   if (!isLogin) {
     return (
       <Link href="/login">
-        <div className={s.button}>
-          <Button variant="add-link" colorType="gradient" width="140px" onClick={() => console.log('Add Link button clicked')} text="로그인" />
-        </div>
+        <Button variant="login" colorType="gradient" onClick={() => console.log('login button clicked')} text="로그인" />
       </Link>
     );
   }
