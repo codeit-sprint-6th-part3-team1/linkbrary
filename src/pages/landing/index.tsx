@@ -30,9 +30,11 @@ const Home: React.FC = () => {
           <h1 className={s.maintext}>
             <span className={s.gradientmain}>세상의 모든 정보</span>를<br /> 쉽게 저장하고 관리해 보세요
           </h1>
-          <Link href="/addlink">
-            <Button variant="add-link" colorType="gradient" text="링크 추가하기" />
-          </Link>
+          <div className="addbutton">
+            <Link href="/addlink">
+              <Button variant="add-link" colorType="gradient" text="링크 추가하기" />
+            </Link>
+          </div>
           <div className={s.titleimage} />
         </div>
         <div className={s.body}>
