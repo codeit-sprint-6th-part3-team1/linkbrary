@@ -4,13 +4,14 @@ import styles from './Button.module.scss';
 type ButtonStyleProps = {
   /**
    * 버튼의 스타일 변형을 지정합니다.
+   * - 'login': 로그인 버튼
    * - 'add-link': 링크 추가 버튼
    * - 'add-folder': 폴더 추가 버튼
    * - 'share': 공유 버튼
    * - 'all-large': 전체 큰 버튼
    * - 'all-small': 전체 작은 버튼
    */
-  variant: 'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small';
+  variant: 'login' | 'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small';
   /**
    * 버튼의 색상 유형을 지정합니다.
    * - 'primary': 기본 색상
@@ -37,7 +38,7 @@ interface ButtonProps extends ButtonStyleProps {
  * <Button variant="add-link" colorType="primary" onClick={() => console.log('Button clicked')} text="Add Link" />
  *
  * @param {Object} props - 컴포넌트의 props
- * @param {'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small'} props.variant - 버튼의 스타일 변형
+ * @param {'login' | 'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small'} props.variant - 버튼의 스타일 변형
  * @param {'primary' | 'white' | 'gray-200' | 'gradient'} props.colorType - 버튼의 색상 유형
  * @param {React.ReactNode} [props.children] - 버튼 안에 렌더링할 자식 요소들
  * @param {() => void} [props.onClick] - 버튼 클릭 시 호출되는 함수
@@ -55,4 +56,3 @@ const Button: React.FC<ButtonProps> = ({ variant, colorType, onClick, text, widt
 };
 
 export default Button;
-
