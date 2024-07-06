@@ -4,39 +4,41 @@ $mobile: 390px;
 $tablet: 769px;
 $desktop: 1440px;
 
-.container{
+.container {
   display: flex;
   height: 100px;
   padding: 30px 80px;
-  background-color: #F0F6FF;
+  background-color: #f0f6ff;
   flex-direction: column;
 }
 
-.buttonContainer, .middleContainer, .cardContainer{
-  padding: 1rem;
-}
+// .buttonContainer,
+// .middleContainer,
+// .cardContainer {
+//   padding: 1rem;
+// }
 
-.buttonContainer{
+.buttonContainer {
   flex-direction: column;
-  width: 1,060px;
+  width: 1, 060px;
   height: 35px;
   justify-content: space-between;
   flex: 0 1 auto;
 
-  .FolderTypes{
-    width: Hug (52px)px;
-    height: Hug (35px)px;
+  .FolderTypes {
+    width: Hug (52px) px;
+    height: Hug (35px) px;
     padding: 8px 12px;
     border-radius: 5px;
-    border: 1px solid #6D6AFE;
+    border: 1px solid #6d6afe;
     color: #000000;
     background-color: #ffffff;
     margin-right: 10px;
     cursor: pointer;
-  
+
     &:hover {
       background: linear-gradient(to right, #c596ff, #fffb8a);
-      }
+    }
   }
 
   .addFolderButton {
@@ -47,37 +49,39 @@ $desktop: 1440px;
     left: 3275px;
     padding: 8px 24px 8px 24px;
     gap: 20px;
-    color: #FFFFFF;
-    background-color: #6D6AFE;
+    color: #ffffff;
+    background-color: #6d6afe;
     font-weight: bold;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #ffffff;
     border-radius: 20px;
     justify-content: left;
     cursor: pointer;
   }
-  
 }
 
-.middleContainer{
-  flex: 1;
-
+.middleContainer {
+  // flex: 1;
+  > h2 {
+    margin: 0;
+    // width: 200px;
+  }
+  display: flex;
+  padding: 24px 0;
+  align-items: center;
+  justify-content: space-between;
   .button {
-    float: right;
-    position: relative;
-    top: -45px;
+    // float: right;
+    // position: relative;
+    // top: -45px;
     background-color: #ffffff;
     border: none;
     cursor: pointer;
   }
 }
 
-.cardContainer{
+.cardContainer {
   flex: 0 1 auto;
 }
-
-
-
-
 
 @media (max-width: $desktop) {
   .linkPage {
