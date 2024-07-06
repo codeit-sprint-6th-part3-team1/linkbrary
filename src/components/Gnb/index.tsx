@@ -15,10 +15,11 @@ interface GnbProps {
 
 const UserProfile = ({ isLogin, userEmail }: { isLogin: boolean; userEmail: string }) => {
   if (!isLogin) {
-    //FIXME : 로그인 버튼 교환 필요
     return (
       <Link href="/login">
-        <Button variant="add-link" colorType="primary" width="133px" onClick={() => console.log('Add Link button clicked')} text="로그인" />
+        <div className={s.button}>
+          <Button variant="add-link" colorType="gradient" width="140px" onClick={() => console.log('Add Link button clicked')} text="로그인" />
+        </div>
       </Link>
     );
   }
@@ -47,4 +48,3 @@ export default function Gnb({ isLogin = false, userIcon = '', userEmail = 'test@
     </header>
   );
 }
-

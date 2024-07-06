@@ -1,15 +1,20 @@
 import React from 'react';
+import Link from 'next/link';
 import s from './privacypolicy.module.scss';
 import MainLogo from '@/../public/assets/gnb/MainLogo'; // 로고 임포트
 import Footer from '@/components/Footer';
 
 const PrivacyPolicy: React.FC = () => {
-  const isLogin = true; // 또는 false로 설정 가능
+  const isLogin = true;
 
   return (
     <>
       <header className={s.gnb}>
-        <MainLogo />
+        <Link href="/landing">
+          <div className={s.logoLink}>
+            <MainLogo />
+          </div>
+        </Link>
       </header>
       <div className={s.container}>
         <div className={s.header}>

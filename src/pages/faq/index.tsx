@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import s from './faq.module.scss'; // FAQ 페이지에서 사용하는 SCSS 파일
+import Link from 'next/link';
+import s from './faq.module.scss';
 import MainLogo from '@/../public/assets/gnb/MainLogo';
-import Footer from '@/components/Footer'; // Footer 컴포넌트 import (경로는 실제 파일 위치에 맞게 수정해주세요)
+import Footer from '@/components/Footer';
 
 interface FAQItemProps {
   question: string;
@@ -56,7 +57,11 @@ const FAQ: React.FC = () => {
   return (
     <div>
       <header className={s.gnb}>
-        <MainLogo />
+        <Link href="/landing">
+          <div className={s.logoLink}>
+            <MainLogo />
+          </div>
+        </Link>
       </header>
       <main className={s.faqContainer}>
         <h1>자주 묻는 질문</h1>

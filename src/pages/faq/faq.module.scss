@@ -12,21 +12,16 @@ $bgColor: #f0f6ff;
   flex-direction: column;
   align-items: center;
   background-color: $GRAY-100;
-  max-width: $PC_WIDTH;
   margin: 0 auto;
   width: 100%;
   padding-top: 50px;
   padding-bottom: 50px;
 
-  @media (max-width: $TABLET_WIDTH) {
-    padding: 10px;
-  }
-
   h1 {
     font-size: 36px;
     margin-bottom: 20px;
 
-    @media (max-width: $TABLET_WIDTH) {
+    @media (max-width: 1440px) {
       font-size: 28px;
     }
   }
@@ -37,7 +32,6 @@ $bgColor: #f0f6ff;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: $PC_WIDTH;
   padding-top: 40px;
   background-color: $bgColor;
   margin: 0 auto;
@@ -47,18 +41,13 @@ $bgColor: #f0f6ff;
     align-items: center;
     gap: 24px;
 
-    @media screen and (max-width: $MOBILE_WIDTH) {
+    @media (max-width: 1440px) {
       gap: 16px;
     }
   }
 
-  @media screen and (max-width: 1440px) {
-  }
-
-  @media screen and (max-width: $MOBILE_WIDTH) {
-    $height: 65px;
-    $paddingX: 32px;
-    $paddingY: 18px;
+  @media (max-width: 1440px) {
+    padding: 10px;
   }
 }
 
@@ -70,7 +59,7 @@ $bgColor: #f0f6ff;
   .email {
     @include font-base(#3e3e43, 400, 14px, 16.71px);
 
-    @media screen and (max-width: $TABLET_WIDTH) {
+    @media (max-width: 1440px) {
       display: none;
     }
   }
@@ -91,7 +80,7 @@ $bgColor: #f0f6ff;
     font-weight: bold;
     cursor: pointer;
 
-    @media (max-width: $TABLET_WIDTH) {
+    @media (max-width: 1440px) {
       font-size: 16px;
     }
   }
@@ -103,11 +92,12 @@ $bgColor: #f0f6ff;
     color: $GRAY-500;
     border-top: 1px solid $GRAY-300;
 
-    @media (max-width: $TABLET_WIDTH) {
+    @media (max-width: 1440px) {
       font-size: 14px;
     }
   }
 }
+
 .footer {
   max-width: $PC_WIDTH;
   width: 100%;
@@ -122,9 +112,8 @@ $bgColor: #f0f6ff;
     max-width: $PC_WIDTH;
     width: 100%;
 
-    @media screen and (max-width: $footerTabletWidth) {
+    @media (max-width: 1440px) {
       flex-direction: column;
-      gap: 20px;
     }
   }
 
@@ -146,7 +135,7 @@ $bgColor: #f0f6ff;
       }
     }
 
-    @media screen and (max-width: $footerTabletWidth) {
+    @media (max-width: 1440px) {
       flex-direction: column;
       gap: 10px;
     }
@@ -156,7 +145,7 @@ $bgColor: #f0f6ff;
     display: flex;
     gap: 20px;
 
-    @media screen and (max-width: $footerTabletWidth) {
+    @media (max-width: 1440px) {
       margin-top: 20px;
       gap: 16px;
     }

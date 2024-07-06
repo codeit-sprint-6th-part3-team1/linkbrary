@@ -4,14 +4,12 @@ $bgColor: #f0f6ff;
 
 .gnb {
   $height: 102px;
-  $paddingX: 104px;
+  $paddingX: 200px;
   $paddingY: 32px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: 1440px;
 
   height: calc($height - ($paddingY * 2));
   padding: $paddingY $paddingX;
@@ -25,8 +23,8 @@ $bgColor: #f0f6ff;
 
   // NOTE : 해당 max-width는 임의로 설정하였습니다.
   // 해당 width부터는 기존의 레이아웃이 어울리지 않는다 생각하였습니다.
-  @media screen and (max-width: 1440px) {
-    padding: $paddingY $paddingX;
+  @media screen and (max-width: 950px) {
+    padding: $paddingY;
   }
 
   @media screen and (max-width: $mobileWidth) {

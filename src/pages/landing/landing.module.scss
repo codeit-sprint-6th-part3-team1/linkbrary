@@ -7,76 +7,49 @@ $MAIN_PADDING_X: 104px;
 $MAIN_PADDING_Y: 32px;
 
 .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: $MAIN_PADDING_Y 0;
-  margin: 0 auto;
-  max-width: $PC_WIDTH;
-}
+  padding-top: 90px;
 
-.header {
-  text-align: center;
-  margin-top: 20px;
-  max-width: $PC_WIDTH;
-
-  @media (max-width: $PC_WIDTH) {
-    height: 600px;
-    padding: 40px 20px;
-  }
   @media (max-width: $TABLET_WIDTH) {
-    height: 500px;
-    padding: 30px 20px;
+    padding-top: 70px;
   }
   @media (max-width: $MOBILE_WIDTH) {
-    height: 400px;
-    padding: 20px 10px;
+    padding-top: 50px;
   }
 }
 
 .title {
-  position: relative;
   width: 100%;
   height: 700px;
   text-align: center;
   background-color: $GRAY-100;
   overflow: hidden;
-  max-width: $PC_WIDTH;
+  box-sizing: border-box;
 
   @media (max-width: $PC_WIDTH) {
     height: 600px;
-    padding: 40px $MAIN_PADDING_X;
   }
   @media (max-width: $TABLET_WIDTH) {
     height: 500px;
-    padding: 30px $MAIN_PADDING_X;
   }
   @media (max-width: $MOBILE_WIDTH) {
     height: 400px;
-    padding: 20px $MAIN_PADDING_X;
   }
 }
 
 .titleimage {
   align-items: center;
-  margin-top: 30px;
   width: 100%;
-  height: 400px;
+  height: 450px;
   background: url('https://github.com/codeit-sprint-6th-part3-team1/linkbrary/assets/128791227/d230acb1-280a-4045-843f-a9e7848ce90f') no-repeat center center;
   background-size: contain;
+
   @media (max-width: $PC_WIDTH) {
     height: 350px;
-  }
-  @media (max-width: $TABLET_WIDTH) {
-    height: 300px;
-  }
-  @media (max-width: $MOBILE_WIDTH) {
-    height: 250px;
   }
 }
 
 .maintext {
+  word-break: keep-all;
   align-items: center;
   font-size: 64px;
   @media (max-width: $PC_WIDTH) {
@@ -146,14 +119,15 @@ $MAIN_PADDING_Y: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 40px 0;
+  margin: 80px auto;
+
   @media (max-width: $TABLET_WIDTH) {
     height: auto;
     flex-direction: column;
   }
   @media (max-width: $MOBILE_WIDTH) {
     height: auto;
-    margin: 20px 0;
+    margin: 0 auto;
   }
 
   &:nth-child(even) {
@@ -173,6 +147,7 @@ $MAIN_PADDING_Y: 32px;
 }
 
 .text {
+  word-break: keep-all;
   flex: 4;
   padding: 20px;
   display: flex;
@@ -180,18 +155,19 @@ $MAIN_PADDING_Y: 32px;
   justify-content: center;
   align-items: flex-start;
   margin-left: 40px;
+
   h2 {
     font-size: 50px;
     margin-bottom: 10px;
     @media (max-width: $PC_WIDTH) {
-      font-size: 45px;
+      font-size: 40px;
     }
     @media (max-width: $TABLET_WIDTH) {
-      font-size: 40px;
+      font-size: 35px;
       text-align: center;
     }
     @media (max-width: $MOBILE_WIDTH) {
-      font-size: 35px;
+      font-size: 30px;
     }
   }
   p {
@@ -228,17 +204,14 @@ $MAIN_PADDING_Y: 32px;
 }
 
 .gnb {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100px;
-  width: 100%;
-  max-width: $PC_WIDTH;
-  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .footer {
-  max-width: $PC_WIDTH;
   width: 100%;
   align-items: center;
   background-color: $BLACK;
@@ -247,7 +220,6 @@ $MAIN_PADDING_Y: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: $PC_WIDTH;
     width: 100%;
 
     @media screen and (max-width: $footerTabletWidth) {
