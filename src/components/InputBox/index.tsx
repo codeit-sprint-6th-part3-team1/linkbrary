@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './style.module.scss';
-import showIcon from '@public/input-show.svg';
-import hideIcon from '@public/input-hide.svg';
+import showIcon from '@public/assets/input/EyeShowIcon.svg';
+import hideIcon from '@public/assets/input/EyeOffIcon.svg';
 import { InputTypes } from '@/constants/inputTypes';
 import Image from 'next/image';
 
@@ -56,7 +56,7 @@ const InputBox = ({ err, errMsg = '내용을 다시 작성해주세요', type = 
               }}
             ></input>
         
-            <Image src={pw ? hideIcon : showIcon} 
+            < Image src={pw ? hideIcon : showIcon} 
               onClick={() => {
                 setPw(!pw);
               }}

@@ -1,7 +1,5 @@
 import React from 'react';
-import AddLink from '@/components/AddLink';
-import SearchBar from '@/components/SearchBar';
-import InputBox from '@/components/InputBox';
+import LinkPage from './LinkPage';
 
 const style = {
   margin: '200px',
@@ -10,9 +8,7 @@ const style = {
 export default function Home() {
   return (
     <>
-      <AddLink />
-      <SearchBar />
-      <InputBox />
+      <LinkPage />
     </>
   );
 }

@@ -1,22 +1,27 @@
 import React, { useState, ChangeEvent } from 'react';
 import styles from '@/components/SearchBar/style.module.scss';
 import Image from 'next/image';
-import Logo from '@public/search.svg';
+import Logo from '@public/assets/input/SearchIcon.svg';
 
 //SearchBar 타입 정의
 interface Search {
   id: number;
   url: string;
 }
+interface SearchBarProps {
+  onSearch: (query: string) => void;
+}
 
 //SearchBar 컴포넌트 정의
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [url, setUrl] = useState<string>('');
   const [error, setError] = useState<string>('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
     setUrl(event.target.value);
     if (error) setError('');
+    onSearch(query);
   };
 
   return (

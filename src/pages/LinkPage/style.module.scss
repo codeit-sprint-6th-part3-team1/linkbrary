@@ -1,0 +1,98 @@
+@import '@/styles';
+
+$mobile: 390px;
+$tablet: 769px;
+$desktop: 1440px;
+
+.container{
+  display: flex;
+  height: 100px;
+  padding: 30px 80px;
+  background-color: #F0F6FF;
+  flex-direction: column;
+}
+
+.buttonContainer, .middleContainer, .cardContainer{
+  padding: 1rem;
+}
+
+.buttonContainer{
+  flex-direction: column;
+  width: 1,060px;
+  height: 35px;
+  justify-content: space-between;
+  flex: 0 1 auto;
+
+  .FolderTypes{
+    width: Hug (52px)px;
+    height: Hug (35px)px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #6D6AFE;
+    color: #000000;
+    background-color: #ffffff;
+    margin-right: 10px;
+    cursor: pointer;
+  
+    &:hover {
+      background: linear-gradient(to right, #c596ff, #fffb8a);
+      }
+  }
+
+  .addFolderButton {
+    float: right;
+    width: 127px;
+    height: 35px;
+    top: 318px;
+    left: 3275px;
+    padding: 8px 24px 8px 24px;
+    gap: 20px;
+    color: #FFFFFF;
+    background-color: #6D6AFE;
+    font-weight: bold;
+    border: 1px solid #FFFFFF;
+    border-radius: 20px;
+    justify-content: left;
+    cursor: pointer;
+  }
+  
+}
+
+.middleContainer{
+  flex: 1;
+
+  .button {
+    float: right;
+    position: relative;
+    top: -45px;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.cardContainer{
+  flex: 0 1 auto;
+}
+
+
+
+
+
+@media (max-width: $desktop) {
+  .linkPage {
+    width: 100%;
+  }
+}
+
+@media (max-width: $mobile) {
+  .linkPage {
+    width: 100%;
+  }
+}
+
+@media (max-width: $tablet) {
+  .linkPage {
+    width: 100%;
+  }
+}

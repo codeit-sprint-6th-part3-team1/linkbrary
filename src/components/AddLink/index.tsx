@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from '@/components//AddLink/style.module.scss';
-import Logo from '@public/addlink.svg';
+import Logo from '@public/assets/input/AddLinkIcon.svg';
 import Image from 'next/image';
 
 
@@ -10,14 +10,24 @@ interface Link {
   url: string;
 }
 
+interface AddLinkProps {
+  onAddLink: (newLink: Link) => void;
+}
+
 // AddLink 컴포넌트 정의
-const AddLink: React.FC = () => {
+const AddLink: React.FC<AddLinkProps> = ({ onAddLink }) => {
   const [links, setLinks] = useState<Link[]>([]);
   const [url, setUrl] = useState<string>('');
   const [error, setError] = useState<string>('');
 
   const handleAddLink = () => {
-    setLinks([...links, { id: Date.now(), url }]);
+    const newLink: Link = { id: 0, url };
+    
+    onAddLink(newLink);
+    setUrl('');
+    setError('');
+
+    onAddLink(newLink);
     setUrl('');
     setError('');
   };
