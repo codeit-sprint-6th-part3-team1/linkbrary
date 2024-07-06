@@ -10,6 +10,7 @@ import NewNameIcon from '@public/assets/Button/NewNameIcon';
 import DeleteIcon from '@public/assets/Button/DeleteIcon';
 import styles from './style.module.scss';
 import Link from 'next/link';
+import { cardExample } from './testData';
 import { folderExample } from './testData';
 
 interface Link {
@@ -87,59 +88,48 @@ const LinkPage = () => {
           <AddLink onAddLink={handleAddLink} />
         </div>
       </header>
-      <div className={styles.content}>
-        <SearchBar onSearch={handleSearch} />
-        {searchQuery.length != 0 && <div>{'asdddddddddd'}</div>}
-        <div className={styles.buttonContainer}>
-          {folderExample.map((folder, index) => (
-            <button key={index} className={styles.FolderTypes} onClick={handleFolderTypes}>
-              {folder.name}
-            </button>
-          ))}
-          {/* <button className={styles.FolderTypes} onClick={handleFolderTypes}>
-            전체
-          </button>
-          <button className={styles.FolderTypes} onClick={handleFolderTypes}>
-            다이어트
-          </button>
-          <button className={styles.FolderTypes} onClick={handleFolderTypes}>
-            코딩 참고용
-          </button>
-          <button className={styles.FolderTypes} onClick={handleFolderTypes}>
-            채용 사이트
-          </button>
-          <button className={styles.FolderTypes} onClick={handleFolderTypes}>
-            내 모음집
-          </button> */}
-          <button className={styles.addFolderButton} onClick={handleAddFolder}>
-            폴더 추가
-            <PlusIcon />
-          </button>
-        </div>
 
-        <div className={styles.middleContainer}>
-          <h2>{'asdasda'}</h2>
-          <div>
-            <button className={styles.button} onClick={handleShare}>
-              <Link href="https://www.instagram.com/">
-                <ShareIcon />
-              </Link>
-            </button>
-            <button className={styles.button} onClick={handleRename}>
-              <NewNameIcon />
-            </button>
-            <button className={styles.button} onClick={handleDelete}>
-              <DeleteIcon />
+      <div className={styles.bodyContainer}>
+        <div className={styles.bodyContent}>
+          <SearchBar onSearch={handleSearch} />
+          {searchQuery.length != 0 && <div>{'asdddddddddd'}</div>}
+          <div className={styles.buttonContainer}>
+            {folderExample.map((folder, index) => (
+              <button key={index} className={styles.FolderTypes} onClick={handleFolderTypes}>
+                {folder.name}
+              </button>
+            ))}
+      
+            <button className={styles.addFolderButton} onClick={handleAddFolder}>
+              폴더 추가
+              <PlusIcon />
             </button>
           </div>
-        </div>
 
-        <div className={styles.cardContainer}>
-          {folderExample.map((folder, index) => (
-            <Card content={folder.name} updatedAt={'string'} createdAt={'string'} />
-          ))}
+          <div className={styles.middleContainer}>
+            <h2>{'전체'}</h2>
+            <div>
+              <button className={styles.button} onClick={handleShare}>
+                <Link href="https://www.instagram.com/">
+                  <ShareIcon />
+                </Link>
+              </button>
+              <button className={styles.button} onClick={handleRename}>
+                <NewNameIcon />
+              </button>
+              <button className={styles.button} onClick={handleDelete}>
+                <DeleteIcon />
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.cardContainer}>
+            {cardExample.map((card, index) => (
+              <Card content={card.content} updatedAt={card.updatedAt} createdAt={card.createdAt} />
+            ))}
+          </div>
         </div>
-      </div>
+        </div>
       <Footer />
     </div>
   );

@@ -26,5 +26,4 @@ export const cardExample = [
   { content: 'asd', updatedAt: '2021-09-01', createdAt: '2021-09-01' },
   { content: 'asd', updatedAt: '2021-09-01', createdAt: '2021-09-01' },
   { content: 'asd', updatedAt: '2021-09-01', createdAt: '2021-09-01' },
-  { content: 'asd', updatedAt: '2021-09-01', createdAt: '2021-09-01' },
 ];

@@ -1,13 +1,16 @@
 @import '@/styles';
 
-$mobile: 390px;
-$tablet: 769px;
-$desktop: 1440px;
+$desktop: 1060px;
+$tablet: 704px;
+
+.header{
+  //position: fixed;
+  flex-direction: column;
+}
 
 .container {
   display: flex;
-  height: 100px;
-  padding: 30px 80px;
+  //padding: 30px 80px;
   background-color: #f0f6ff;
   flex-direction: column;
 }
@@ -18,9 +21,22 @@ $desktop: 1440px;
 //   padding: 1rem;
 // }
 
+.bodyContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.bodyContent{
+  max-width: 1060px;
+  align-items: stetch;
+  gap: 40px;
+}
+
 .buttonContainer {
   flex-direction: column;
-  width: 1, 060px;
+  width: 1060px;
   height: 35px;
   justify-content: space-between;
   flex: 0 1 auto;
@@ -80,23 +96,39 @@ $desktop: 1440px;
 }
 
 .cardContainer {
+  display: grid;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1060px;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 25px 20px;
+  flex-wrap: wrap;
   flex: 0 1 auto;
 }
 
-@media (max-width: $desktop) {
-  .linkPage {
-    width: 100%;
+
+@media (max-width: 1060px) {
+  .bodyContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .cardContainer{
+    display: grid;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+    margin-left: 70px;
   }
 }
 
-@media (max-width: $mobile) {
-  .linkPage {
-    width: 100%;
-  }
-}
-
-@media (max-width: $tablet) {
-  .linkPage {
-    width: 100%;
+@media (max-width: 704px) {
+  .cardContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    grid-template: repeat(1, 1fr) / repeat(1, 1fr);
   }
 }
