@@ -94,8 +94,8 @@
 }
 
 .inputBackground {
-  width: 100%;
-  height: 60px;
+  width: calc(100% - (15 * 2px));
+  height: calc(60px - (18 * 2px));
   padding: 18px 15px;
 
   border: 1px solid #ccd5e3;

@@ -8,6 +8,7 @@ import LogoIcon from '../components/LogoIcon';
 import KakaoIcon from '../components/KakaoIcon';
 import GoogleIcon from '../components/GoogleIcon';
 import Label from '../components/Label';
+import { signIn } from 'next-auth/react';
 
 export default function Login() {
   const [values, setValues] = useState({
@@ -36,16 +37,18 @@ export default function Login() {
         const { accessToken } = response.data;
         Cookies.set('accessToken', accessToken, { path: '/' });
         alert('Login successful');
-        router.push('/');
+        router.push('/link');
       } else {
         alert(response.data.message);
       }
     } catch (error) {
       alert('An unexpected error occurred');
     }
-
-    // router.push('/share');
   };
+
+  // const handleGoogleSignIn = () => {
+  //   signIn('google');
+  // };
 
   return (
     <div className={styles.container}>
@@ -93,12 +96,12 @@ export default function Login() {
         <div className={styles.easyLoginContainer}>
           <p className={styles.easyLoginTitle}>소셜 로그인</p>
           <div className={styles.easyLoginButtonWrap}>
-            <Link href="" className={styles.easyLoginButton}>
+            <button className={styles.easyLoginButton}>
               <GoogleIcon />
-            </Link>
-            <Link href="" className={styles.easyLoginButton}>
+            </button>
+            <button className={styles.easyLoginButton}>
               <KakaoIcon />
-            </Link>
+            </button>
           </div>
         </div>
       </main>

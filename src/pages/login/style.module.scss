@@ -21,7 +21,6 @@
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  border: 1px solid red;
 }
 
 .loginForm {
@@ -31,8 +30,6 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-
-  border: 1px solid black;
 }
 
 .formHeaderContainer {
@@ -105,7 +102,7 @@
 
 .inputBackground {
   // width: 100%;
-  // width: calc(100% - (15 * 2));
+  width: calc(100% - (15 * 2px));
   // height: 60px;
   height: (60px - (18 * 2));
 
@@ -135,7 +132,7 @@
 }
 
 .easyLoginContainer {
-  width: 100%;
+  width: calc(100% - (24 * 2px));
   height: 66px;
 
   padding: 12px 24px;
@@ -160,6 +157,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.easyLoginButton {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
 }
 
 @media screen and (max-width: 390px) {
