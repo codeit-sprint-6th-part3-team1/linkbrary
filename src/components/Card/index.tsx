@@ -1,64 +1,9 @@
 import { useState } from 'react';
 import styles from './style.module.scss';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import MeatBallsIcon from './MeatBallsIcon';
-import CardImageNull from './CardImageNull';
-import CardStarFalse from './CardStarFalseIcon';
-import CardStarTrue from './CardStarTrueIcon';
-=======
+// import MeatBallsIcon from '../../../public/assets/card/MeatBallsIcon';
 import MeatBallsIcon from './asset/MeatBallsIcon';
+// import CardImageNull from '../../../public/assets/card/CardImageNull';
 import CardImageNull from './asset/CardImageNull';
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
-import CardSettingList from './CardSettingList';
-import Image from 'next/image';
-import CardStar from './CardStar';
-import { getUpdatedAt } from '@/util/getUserTime';
-
-// Props interface로 타입 정의
-interface CardProps {
-  imageUrl?: string;
-  updatedAt: string;
-  content: string;
-  createdAt: string;
-}
-
-// Props 설정 & 타입정의
-export default function Card({ imageUrl, updatedAt, content, createdAt }: CardProps) {
-  const [addFavorites, setAddFavorites] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const userCreatedAt: Date = new Date(createdAt);
-
-  const onFavoritesClick = () => {
-    setAddFavorites((prevState) => !prevState);
-  };
-
-  const onDropdownOpen = () => {
-    setDropdownOpen((prevState) => !prevState);
-  };
-
-<<<<<<< HEAD
-  // util로 이동 예정
-  const userUpDateAt = (date: string): string => {
-    let userTime: number | string;
-    const currentDate = new Date();
-    const itemDate = new Date(date);
-    const timeDiff = currentDate.getTime() - itemDate.getTime();
-    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-    if (hours > 0 && hours < 24) {
-      userTime = `${hours} hours ago`;
-    } else if (hours >= 24) {
-      const day = Math.floor(hours / 24);
-      userTime = `${day} days ago`;
-    } else {
-      userTime = `${minutes} minutes ago`;
-    }
-    return userTime;
-=======
-import MeatBallsIcon from '../../../public/assets/card/MeatBallsIcon';
-import CardImageNull from '../../../public/assets/card/CardImageNull';
 import CardSettingList from './CardSettingList';
 import Image from 'next/image';
 import CardStar from './CardStar';
@@ -84,7 +29,7 @@ interface CardProps {
 // Props 설정 & 타입정의
 export default function Card({ imageUrl, updatedAt, content, createdAt }: CardProps) {
   const [addFavorites, setAddFavorites] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [dropDownOpen, setDropDownOpen] = useState(false);
 
   const userCreatedAt = new Date(createdAt);
 
@@ -95,75 +40,32 @@ export default function Card({ imageUrl, updatedAt, content, createdAt }: CardPr
 
   // 드롭다운 메뉴 클릭
   const onDropdownOpen = () => {
-    setOpenDropdown((prevOpenDropdown) => !prevOpenDropdown);
->>>>>>> main
-  };
-=======
-  /**
-   *
-   *
-   */
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
+    setDropDownOpen((prevOpenDropdown) => !prevOpenDropdown);
 
-  return (
-    <li className={styles.card}>
-      <div className={styles.cardImageWrap}>
-        {imageUrl ? <Image className={styles.cardImage} fill src={imageUrl} alt="링크 이미지" /> : <CardImageNull />}
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <div className={styles.cardStarWrap} onClick={onStarClick}>
-          {isStar ? <CardStarTrue /> : <CardStarFalse />}
-=======
-        <div className={styles.cardStarWrap} onClick={onFavoritesClick}>
-          <CardStar addFavorites={addFavorites} />
->>>>>>> main
-=======
-        <div className={styles.cardStarWrap} onClick={onFavoritesClick}>
-          <CardStar addFavorites={addFavorites} />
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
+    return (
+      <li className={styles.card}>
+        <div className={styles.cardImageWrap}>
+          {imageUrl ? <Image className={styles.cardImage} fill src={imageUrl} alt="링크 이미지" /> : <CardImageNull />}
+          <div className={styles.cardStarWrap} onClick={onFavoritesClick}>
+            <CardStar addFavorites={addFavorites} />
+          </div>
         </div>
-      </div>
-      <div className={styles.cardMenuList}>
-        <div className={styles.cardMenuTop}>
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <p className={styles.cardUpdateAt}>{userUpDateAt(upDatedAt)}</p>
-          <button className={styles.cardSettingButton} onClick={onSettingMenuClick}>
-            <MeatBallsIcon />
-            {isSettingMenu ? <CardSettingList /> : null}
-=======
-          <p className={styles.cardUpdateAt}>{getUpdatedAt(updatedAt)}</p>
-          <button className={styles.cardSettingButton} onClick={onDropdownOpen}>
-            <MeatBallsIcon />
-            {openDropdown && <CardSettingList />}
->>>>>>> main
-=======
-          <p className={styles.cardUpdateAt}>{getUpdatedAt(updatedAt)}</p>
-          <button className={styles.cardSettingButton} onClick={onDropdownOpen}>
-            <MeatBallsIcon />
-            {dropdownOpen && <CardSettingList />}
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
-          </button>
+        <div className={styles.cardMenuList}>
+          <div className={styles.cardMenuTop}>
+            <p className={styles.cardUpdateAt}>{getUpdatedAt(updatedAt)}</p>
+            <button className={styles.cardSettingButton} onClick={onDropdownOpen}>
+              <MeatBallsIcon />
+              {dropDownOpen && <CardSettingList />}
+            </button>
+          </div>
+          <p className={styles.cardDescription}>{content}</p>
+          <p className={styles.cardCreatedAt}>
+            <span className={styles.cardFullYear}>{userCreatedAt.getFullYear()}. </span>
+            <span className={styles.cardMonth}>{userCreatedAt.getMonth() + 1}. </span>
+            <span className={styles.cardDay}>{userCreatedAt.getDate()}</span>
+          </p>
         </div>
-        <p className={styles.cardDescription}>{content}</p>
-        <p className={styles.cardCreatedAt}>
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <span className={styles.cardFullYear}>{yy}. </span>
-          <span className={styles.cardMonth}>{mm}. </span>
-          <span className={styles.cardDay}>{dd}</span>
-=======
-          <span className={styles.cardFullYear}>{userCreatedAt.getFullYear()}. </span>
-          <span className={styles.cardMonth}>{userCreatedAt.getMonth() + 1}. </span>
-          <span className={styles.cardDay}>{userCreatedAt.getDate()}</span>
->>>>>>> main
-=======
-          <span className={styles.cardFullYear}>{userCreatedAt.getFullYear()}. </span>
-          <span className={styles.cardMonth}>{userCreatedAt.getMonth() + 1}. </span>
-          <span className={styles.cardDay}>{userCreatedAt.getDay()}</span>
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
-        </p>
-      </div>
-    </li>
-  );
+      </li>
+    );
+  };
 }

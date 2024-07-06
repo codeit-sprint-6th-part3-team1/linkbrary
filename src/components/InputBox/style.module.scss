@@ -31,8 +31,8 @@ $errRed: #ff5b56;
   @include font-base(#373740, 400, 16px, 24px);
 }
 .errMsg {
-  margin: 6px 0 0 0;
-  width: 200px;
+  // margin: 6px 0 0 0;
+  width: 100%;
   height: 20px;
-  @include font-base($errRed, 400, 16px, 24px);
+  @include font-base($errRed, 400, 14px, 16.71px);
 }

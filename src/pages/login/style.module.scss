@@ -1,4 +1,4 @@
-@import '../../styles/';
+@import '@/styles';
 
 .container {
   width: 100vw;
@@ -15,21 +15,13 @@
 
 .loginContainer {
   width: 400px;
-  height: 491px;
+  max-height: 507px;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 32px;
-}
-
-.loginForm {
-  width: 100%;
-  height: 393px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
 }
 
 .formHeaderContainer {
@@ -67,7 +59,7 @@
 }
 
 .titleLinkWrap {
-  padding: 0 0 4px 8px;
+  padding: 0 0 0 8px;
 }
 
 .titleLink {
@@ -78,9 +70,16 @@
   @include font-base(#6d6afe, 600, 16px, 19.09px);
 }
 
+.loginForm {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .inputContainer {
   width: 100%;
-  height: 202px;
 
   display: flex;
   flex-direction: column;
@@ -89,7 +88,7 @@
 
 .inputWrap {
   width: 100%;
-  height: 89px;
+  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -98,26 +97,6 @@
 
 .inputLabel {
   @include font-base(#000000, 400, 14px, 16 71px);
-}
-
-.inputBackground {
-  // width: 100%;
-  width: calc(100% - (15 * 2px));
-  // height: 60px;
-  height: (60px - (18 * 2));
-
-  padding: 18px 15px;
-
-  border: 1px solid #ccd5e3;
-  background-color: $white;
-  border-radius: 8px;
-
-  input {
-    width: 100%;
-    height: 24px;
-    border: none;
-    outline: none;
-  }
 }
 
 .formButton {
@@ -132,7 +111,8 @@
 }
 
 .easyLoginContainer {
-  width: calc(100% - (24 * 2px));
+  // width: calc(100% - (24 * 2px));
+  width: 100%;
   height: 66px;
 
   padding: 12px 24px;

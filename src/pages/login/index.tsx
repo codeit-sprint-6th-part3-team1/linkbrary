@@ -9,6 +9,8 @@ import KakaoIcon from '../components/KakaoIcon';
 import GoogleIcon from '../components/GoogleIcon';
 import Label from '../components/Label';
 import { signIn } from 'next-auth/react';
+import InputBox from '@/components/InputBox';
+import { InputTypes } from '@/constants/inputTypes';
 
 export default function Login() {
   const [values, setValues] = useState({
@@ -16,15 +18,40 @@ export default function Login() {
     password: '',
   });
 
+  const [emailError, setEmailError] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  const validateEmail = (value: string) => emailRegex.test(value);
+  const validatePassword = (value: string) => value.length >= 8;
+
+  const handleChange = (name: string, value: string) => {
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
+
+    if (name === 'email') {
+      setEmailError(!validateEmail(value));
+      setEmailErrorMessage('이메일 형식으로 작성해 주세요.');
+      if (value === '') {
+        setEmailError(true);
+        setEmailErrorMessage('이메일을 입력해주세요.');
+      }
+    } else if (name === 'password') {
+      setPasswordError(!validatePassword(value));
+      setPasswordErrorMessage('8자 이상 입력해주세요.');
+      if (value === '') {
+        setPasswordError(true);
+        setPasswordErrorMessage('비밀번호를 입력해주세요.');
+      }
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -36,13 +63,19 @@ export default function Login() {
       if (response.status === 200) {
         const { accessToken } = response.data;
         Cookies.set('accessToken', accessToken, { path: '/' });
-        alert('Login successful');
-        router.push('/link');
-      } else {
-        alert(response.data.message);
+        router.push('/links');
       }
-    } catch (error) {
-      alert('An unexpected error occurred');
+    } catch (error: any) {
+      console.error(error);
+      if (error.response && error.response.status === 400) {
+        const errorMessage: string = error.response.data.message;
+        setEmailError(true);
+        setEmailErrorMessage(errorMessage);
+      } else if (error.response && error.response.status === 401) {
+        const errorMessage: string = error.response.data.message;
+        setPasswordError(true);
+        setPasswordErrorMessage(errorMessage);
+      }
     }
   };
 
@@ -50,43 +83,51 @@ export default function Login() {
   //   signIn('google');
   // };
 
+  // 로그인시 다시 들어갔을때, 토큰 있을떄, 토큰으로 인증으로
+
   return (
     <div className={styles.container}>
       <main className={styles.loginContainer}>
-        <form className={styles.loginForm} onSubmit={handleSubmit}>
-          <div className={styles.formHeaderContainer}>
-            <div className={styles.formHeaderWrap}>
-              <Link className={styles.formLogo} href="/">
-                <LogoIcon />
-              </Link>
-              <div className={styles.formTitleContainer}>
-                <p className={styles.formTitle}>회원이 아니신가요?</p>
-                <div className={styles.titleLinkWrap}>
-                  <Link className={styles.titleLink} href="/signup">
-                    회원 가입하기
-                  </Link>
-                </div>
+        <div className={styles.formHeaderContainer}>
+          <div className={styles.formHeaderWrap}>
+            <Link className={styles.formLogo} href="/">
+              <LogoIcon />
+            </Link>
+            <div className={styles.formTitleContainer}>
+              <p className={styles.formTitle}>회원이 아니신가요?</p>
+              <div className={styles.titleLinkWrap}>
+                <Link className={styles.titleLink} href="/signup">
+                  회원 가입하기
+                </Link>
               </div>
             </div>
           </div>
+        </div>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
           <div className={styles.inputContainer}>
             <div className={styles.inputWrap}>
               <Label className={styles.inputLabel} htmlFor="email">
                 이메일
               </Label>
-              <div className={styles.inputBackground}>
-                {/* 인풋 컴포넌트  */}
-                <input id="email" name="email" type="text" placeholder="내용 입력" value={values.email} onChange={handleChange} />
-              </div>
+              <InputBox
+                type={InputTypes.EMAIL}
+                value={values.email}
+                err={emailError}
+                errMsg={emailErrorMessage}
+                onValueChange={(value) => handleChange('email', value)}
+              />
             </div>
             <div className={styles.inputWrap}>
               <Label className={styles.inputLabel} htmlFor="password">
                 비밀번호
               </Label>
-              <div className={styles.inputBackground}>
-                {/* 인풋 컴포넌트  */}
-                <input id="password" name="password" type="password" placeholder="내용 입력" value={values.password} onChange={handleChange} />
-              </div>
+              <InputBox
+                type={InputTypes.PASSWORD}
+                value={values.password}
+                err={passwordError}
+                errMsg={passwordErrorMessage}
+                onValueChange={(value) => handleChange('password', value)}
+              />
             </div>
           </div>
           <button type="submit" className={styles.formButton}>

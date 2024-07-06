@@ -1,4 +1,4 @@
-@import '../../styles/';
+@import '@/styles';
 
 .container {
   width: 100vw;
@@ -16,11 +16,6 @@
 .signupContainer {
   width: 400px;
   height: 529px;
-}
-
-.signupForm {
-  width: 100%;
-  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -71,9 +66,16 @@
   @include font-base(#6d6afe, 600, 16px, 19.09px);
 }
 
+.signupForm {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .inputContainer {
   width: 100%;
-  height: 338px;
 
   display: flex;
   flex-direction: column;
@@ -82,7 +84,7 @@
 
 .inputWrap {
   width: 100%;
-  height: 89px;
+  // height: auto;
 
   display: flex;
   flex-direction: column;
@@ -90,24 +92,24 @@
 }
 
 .inputLabel {
-  @include font-base(#000000, 400, 14px, 16 71px);
+  @include font-base(#000000, 400, 14px, 16.71px);
 }
 
-.inputBackground {
-  width: calc(100% - (15 * 2px));
-  height: calc(60px - (18 * 2px));
-  padding: 18px 15px;
+// .inputBackground {
+//   width: calc(100% - (15 * 2px));
+//   height: calc(60px - (18 * 2px));
+//   padding: 18px 15px;
 
-  border: 1px solid #ccd5e3;
-  background-color: $white;
-  border-radius: 8px;
-  input {
-    width: 100%;
-    height: 24px;
-    border: none;
-    outline: none;
-  }
-}
+//   border: 1px solid #ccd5e3;
+//   background-color: $white;
+//   border-radius: 8px;
+//   input {
+//     width: 100%;
+//     height: 24px;
+//     border: none;
+//     outline: none;
+//   }
+// }
 
 .formButton {
   width: 100%;
@@ -121,21 +123,21 @@
 }
 
 @media screen and (max-width: 1199px) {
-  .signupContainer {
-    height: 506px;
-  }
+  // .signupContainer {
+  //   height: 506px;
+  // }
 
-  .inputContainer {
-    height: 315px;
-  }
+  // .inputContainer {
+  //   height: 315px;
+  // }
 }
 
 @media screen and (max-width: 390px) {
-  .signupContainer {
-    width: 325px;
-  }
+  // .signupContainer {
+  //   width: 325px;
+  // }
 
-  .inputContainer {
-    height: 315px;
-  }
+  // .inputContainer {
+  //   height: 315px;
+  // }
 }

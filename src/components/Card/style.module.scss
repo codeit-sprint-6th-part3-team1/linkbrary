@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-@import '../../styles';
-=======
 @import '../../styles/';
->>>>>>> main
-=======
-@import '../../styles/';
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
 
 .card {
   width: 340px;
@@ -15,35 +7,16 @@
   display: flex;
   flex-direction: column;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  box-shadow: 0px 5px 25px 0px #00000014;
-  border-radius: 15px;
-=======
   border: 1px solid #00000014;
   border-radius: 15px;
 
   box-shadow: 0px 5px 25px 0px #00000014;
->>>>>>> main
-=======
-  border: 1px solid #00000014;
-  border-radius: 15px;
-
-  box-shadow: 0px 5px 25px 0px #00000014;
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   transition: all 0.3s ease;
 
   &:hover {
     .cardMenuList {
       background-color: #f0f6ff;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       border-radius: 0 0 15px 15px;
->>>>>>> main
-=======
-      border-radius: 0 0 15px 15px;
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
     }
 
     .cardImage,
@@ -52,16 +25,6 @@
     }
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  li {
-    list-style: none;
-  }
-
-=======
->>>>>>> main
-=======
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   * {
     margin: 0;
     padding: 0;
@@ -69,27 +32,12 @@
 }
 
 .cardImageWrap {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  width: 340px;
-=======
   width: 100%;
->>>>>>> main
-=======
-  width: 100%;
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   height: 200px;
 
   position: relative;
   overflow: hidden;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  border-top: 1px solid transparent;
-=======
->>>>>>> main
-=======
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   border-radius: 15px 15px 0 0;
 
   .cardImage,
@@ -103,75 +51,26 @@
 }
 
 .cardStarWrap {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  width: 34px;
-  height: 34px;
-
-=======
->>>>>>> main
-=======
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   position: absolute;
 
   top: 16px;
   right: 16px;
 
   cursor: pointer;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-  .cardStar {
-    width: 100%;
-    height: auto;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-=======
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
-}
-
-.cardMenuList {
-  // width: calc(340px - (20px * 2));
-  // height: calc(135px - (15px * 2));
-  width: 100%;
-  height: 135px;
-=======
 }
 
 .cardMenuList {
   width: calc(340px - (20px * 2));
   height: calc(135px - (15px * 2));
->>>>>>> main
 
   padding: 15px 20px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-  gap: 10px;
-
-  background-color: $white;
-  border-radius: 0 0 15px 15px;
 }
 
 .cardMenuTop {
-  width: 100%;
-=======
-}
-
-.cardMenuTop {
->>>>>>> main
-=======
-}
-
-.cardMenuTop {
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   height: 17px;
 
   display: flex;
@@ -184,18 +83,6 @@
 }
 
 .cardSettingButton {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: relative;
-
-=======
->>>>>>> main
-=======
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   border: none;
   background-color: transparent;
 
@@ -206,14 +93,6 @@
     height: 64px;
 
     position: absolute;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    top: 18px;
-    left: 0;
-=======
->>>>>>> main
-=======
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
 
     display: flex;
     flex-direction: column;
@@ -221,15 +100,7 @@
     align-items: center;
 
     box-shadow: 0px 2px 8px 0px #3332361a;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    @include font-base(#333236, 400, 14px, 16.71px);
-=======
     @include font-base(#333236, 400, 13px, 15.51px);
->>>>>>> main
-=======
-    @include font-base(#333236, 400, 13px, 15.51px);
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
 
     .cardSettingMenu {
       width: 100%;
@@ -250,11 +121,6 @@
 }
 
 .cardDescription {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   width: 300px;
   height: 49px;
   display: -webkit-box;
@@ -262,10 +128,6 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
   @include font-base(#000000, 400, 16px, 24px);
 }
 
@@ -290,30 +152,12 @@
     }
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  .cardStarWrap {
-    width: 30px;
-    height: 30px;
-  }
-
-  .cardMenuList {
-=======
   .cardMenuList {
     width: 325px;
     height: 135px;
   }
 
   .cardDescription {
->>>>>>> main
-=======
-  .cardMenuList {
-    width: 325px;
-    height: 135px;
-  }
-
-  .cardDescription {
->>>>>>> a246fcbaf6d9013f2ef70341543812f83b4e5a56
     width: 285px;
   }
 }

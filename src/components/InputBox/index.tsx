@@ -6,19 +6,20 @@ import { InputTypes } from '@/constants/inputTypes';
 import Image from 'next/image';
 
 interface InputBoxProps {
+  value: string;
   err?: boolean;
   errMsg?: string;
   type?: InputTypes;
   onValueChange?: (value: string) => void;
 }
 
-const InputBox = ({ err, errMsg = '내용을 다시 작성해주세요', type = InputTypes.PASSWORD, onValueChange }: InputBoxProps) => {
-  const [value, setValue] = useState<string>('');
+const InputBox = ({ value, err, errMsg = '내용을 다시 작성해주세요', type = InputTypes.PASSWORD, onValueChange }: InputBoxProps) => {
+  // const [value, setValue] = useState<string>('');
   const [pw, setPw] = useState<boolean>(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
-    setValue(text);
+    // setValue(text);
     if (onValueChange) {
       onValueChange(text);
     }
