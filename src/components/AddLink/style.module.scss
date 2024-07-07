@@ -10,7 +10,7 @@
 .inputContainer {
   display: flex;
   align-items: center;
-  border: 1px solid #6D6AFE;
+  border: 1px solid #6d6afe;
   border-radius: 15px;
   padding: 16px 20px;
   width: 100%;
@@ -33,7 +33,7 @@
 .button {
   padding: 10px 20px;
   line-height: 16.71px;
-  background: linear-gradient(to right, #6D6AFE, #6AE3FE);
+  background: linear-gradient(to right, #6d6afe, #6ae3fe);
   color: white;
   border: none;
   border-radius: 8px;
@@ -43,8 +43,8 @@
   font-size: 14px;
   transition: background-color 0.3s;
 
- &:hover {
-  background: linear-gradient(to right, #5a0db8, #f373b7);
+  &:hover {
+    background: linear-gradient(to right, #5a0db8, #f373b7);
   }
 }
 
@@ -94,5 +94,3 @@
     padding: 8px;
   }
 }
-
-
