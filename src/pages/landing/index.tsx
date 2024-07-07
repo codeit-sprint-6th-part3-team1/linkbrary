@@ -35,7 +35,9 @@ const Home: React.FC = () => {
               <Button variant="add-link" colorType="gradient" text="링크 추가하기" />
             </Link>
           </div>
-          <div className={s.titleimage} />
+          <div className={s.imagewrap}>
+            <div className={s.titleimage} />
+          </div>
         </div>
         <div className={s.body}>
           <div className={s.section}>
