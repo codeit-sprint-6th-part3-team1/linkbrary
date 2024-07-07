@@ -1,6 +1,6 @@
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export const endpoints = {
+export const ENDPOINTS = {
   // AUTH
   signUp: '/auth/sign-up',
   login: '/auth/sign-in',
@@ -27,9 +27,9 @@ export const endpoints = {
 
   // USER
   getAllUsers: '/users',
-  checkEmail: '/users/check-email',
+  checkDuplicateEmail: '/users/check-email',
 };
-export type Endpoint = keyof typeof endpoints;
+export type ENDPOINT = keyof typeof ENDPOINTS;
 
 export enum HttpMethod {
   GET = 'GET',

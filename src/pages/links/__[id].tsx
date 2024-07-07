@@ -1,21 +1,26 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useMemo,useState } from 'react';
 import Cookies from 'js-cookie';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import type { FolderProps, LinkProps } from '@/types';
+
 import useFolders from '@/hooks/useFolders';
 import useLinks from '@/hooks/useLinks';
 import useSort from '@/hooks/useSort';
-import Gnb from '@/components/Gnb';
-import Footer from '@/components/Footer';
-import { FolderProps, LinkProps } from '@/types';
-import Link from 'next/link';
 import useUsers from '@/hooks/useUsers';
 
-const Page: React.FC = () => {
+import Footer from '@/components/Footer';
+import Gnb from '@/components/Gnb';
+import Pagination from '@/components/Pagination';
+import Skeleton from '@/components/Skeleton';
+
+export default function Page() {
   const router = useRouter();
+  const { id } = router.query;
   const { folders, message: folderMessage, loading: folderLoading, handleAddFolder, handleUpdateFolder, handleDeleteFolder } = useFolders();
   const {
     links,
-    setLinks,
     message: linkMessage,
     loading: linkLoading,
     getAllLinks,
@@ -27,7 +32,7 @@ const Page: React.FC = () => {
     getFavorites,
   } = useLinks();
   const { data: sortedFolders, setData: setFolderData, sortAscending, sortDescending } = useSort<FolderProps>(folders, 'id');
-  const { user, getUser, checkEmail, loading, error, message } = useUsers();
+  const { user, getUser } = useUsers();
 
   const [folderName, setFolderName] = useState<string>('');
   const [msg, setMessage] = useState<string>(folderMessage || linkMessage || '');
@@ -37,6 +42,12 @@ const Page: React.FC = () => {
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
+  const [deleting, setDeleting] = useState<boolean>(false);
+
+  const itemsPerPage = 10;
+  const currentPage = id ? Number(id) : 1;
+
+  const { data: sortedFoldersByLinkCount, sortAscending: sortByLinkCountAsc, sortDescending: sortByLinkCountDesc } = useSort<FolderProps>(folders, 'linkCount');
 
   useEffect(() => {
     setFolderData(folders);
@@ -51,8 +62,10 @@ const Page: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    getAllLinks();
-  }, [getAllLinks]);
+    if (id) {
+      getAllLinks(currentPage, itemsPerPage);
+    }
+  }, [id, getAllLinks]);
 
   const handleLogout = () => {
     Cookies.remove('accessToken');
@@ -89,6 +102,8 @@ const Page: React.FC = () => {
       const linkData = { url: newLinkUrl, folderId: selectedFolderId };
       await addLink(linkData);
       setNewLinkUrl('');
+      // Update links after adding a new link
+      await getLinksByFolder(selectedFolderId, 1, itemsPerPage);
     }
   };
 
@@ -99,7 +114,15 @@ const Page: React.FC = () => {
   };
 
   const handleSetFavoriteLink = (linkId: number, favorite: boolean) => {
-    setFavoriteLink(linkId, favorite);
+    setFavoriteLink(linkId, !favorite);
+  };
+
+  const handleDeleteLink = async (linkId: number, folderId: number) => {
+    await deleteLink(linkId);
+    // Update the folder's linkCount
+    setFolderData((prevData) => prevData.map((folder) => (folder.id === folderId ? { ...folder, linkCount: folder.linkCount - 1 } : folder)));
+    // Update links after deleting a link
+    await getLinksByFolder(folderId, 1, itemsPerPage);
   };
 
   const handleFolderButtonClick = useCallback(
@@ -125,7 +148,7 @@ const Page: React.FC = () => {
   const filterLinks = useMemo(() => {
     if (searchQuery === '') {
       return links;
-    } else {
+    } 
       const lowercasedSearchQuery = searchQuery.toLowerCase();
       return links.filter((link: LinkProps) => {
         const matchesSearchQuery =
@@ -134,12 +157,16 @@ const Page: React.FC = () => {
           link.description.toLowerCase().includes(lowercasedSearchQuery);
         return matchesSearchQuery;
       });
-    }
+    
   }, [links, searchQuery]);
 
   const clearSearch = () => {
     setSearchQuery('');
-    getAllLinks();
+    getAllLinks(currentPage, itemsPerPage);
+  };
+
+  const handlePageChange = (page: number) => {
+    router.push(`/links/${page}`);
   };
 
   const highlightText = (text: string, highlight: string) => {
@@ -161,6 +188,17 @@ const Page: React.FC = () => {
     );
   };
 
+  const handleDeleteFolderWithLinks = async (folderId: number) => {
+    setDeleting(true);
+    const folderLinks = links.filter((link) => link.folderId === folderId);
+    for (const link of folderLinks) {
+      await deleteLink(link.id);
+    }
+    await handleDeleteFolder(folderId);
+    setFolderData((prevData) => prevData.filter((folder) => folder.id !== folderId));
+    setDeleting(false);
+  };
+
   return (
     <div>
       {user && <Gnb isLogin userEmail={`${user.email}`} />}
@@ -176,43 +214,55 @@ const Page: React.FC = () => {
         </form>
         {msg && <p>{msg}</p>}
         <h1>Folders</h1>
-        {folderLoading && <p>Loading...</p>}
-        <ul>
-          {sortedFolders.map((folder) => (
-            <li key={folder.id}>
-              {editingFolderId === folder.id ? (
-                <form onSubmit={(event) => handleEditSubmit(event, folder.id)}>
-                  <input type="text" value={editingFolderName} onChange={handleEditChange} required />
-                  <button type="submit">Save</button>
-                  <button type="button" onClick={() => setEditingFolderId(null)}>
-                    Cancel
-                  </button>
-                </form>
-              ) : (
-                <>
-                  <b>{folder.name}</b> {folder.createdAt}
-                  <button
-                    onClick={() => {
-                      setEditingFolderId(folder.id);
-                      setEditingFolderName(folder.name);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button onClick={() => handleDeleteFolder(folder.id)}>X</button>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
+        {folderLoading ? (
+          <Skeleton count={5} />
+        ) : (
+          <ul>
+            {sortedFolders.map((folder) => (
+              <li key={folder.id}>
+                {editingFolderId === folder.id ? (
+                  <form onSubmit={(event) => handleEditSubmit(event, folder.id)}>
+                    <input type="text" value={editingFolderName} onChange={handleEditChange} required />
+                    <button type="submit">Save</button>
+                    <button type="button" onClick={() => setEditingFolderId(null)}>
+                      Cancel
+                    </button>
+                  </form>
+                ) : (
+                  <>
+                    <b>{folder.name}</b> <div>{folder.createdAt}</div>
+                    <div>{folder.linkCount}</div>
+                    <button
+                      onClick={() => {
+                        setEditingFolderId(folder.id);
+                        setEditingFolderName(folder.name);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button onClick={() => handleDeleteFolderWithLinks(folder.id)}>{deleting ? 'Deleting...' : 'X'}</button>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
         <h1>Folder sorting test</h1>
         <div>
-          <label>Sort by creation date (Ascending)</label>
+          <label>작성 오래된 순</label>
           <button onClick={sortAscending}>Ascending</button>
         </div>
         <div>
-          <label>Sort by creation date (Descending)</label>
+          <label>최근 작성 순</label>
           <button onClick={sortDescending}>Descending</button>
+        </div>
+        <div>
+          <label>링크 적은 순</label>
+          <button onClick={sortByLinkCountAsc}>Ascending</button>
+        </div>
+        <div>
+          <label>링크 많은 순</label>
+          <button onClick={sortByLinkCountDesc}>Descending</button>
         </div>
       </div>
       <br /> <br />
@@ -240,42 +290,46 @@ const Page: React.FC = () => {
         <input type="text" placeholder="Search links" value={searchQuery} onChange={handleSearchChange} />
         <button onClick={clearSearch}>X</button>
         {msg && <p>{msg}</p>}
-        {linkLoading && <p>Loading...</p>}
-        <button
-          onClick={() => {
-            setSelectedFolderId(null);
-            setShowFavorites(false);
-            getAllLinks();
-          }}
-        >
-          Show All
-        </button>
-        {folders.map((folder) => (
-          <button key={folder.id} onClick={() => handleFolderButtonClick(folder.id)}>
-            {folder.name}
-          </button>
-        ))}
-        <button onClick={handleShowFavorites}>{'⭐'}</button>
-        <ul>
-          {filterLinks.map((link) => (
-            <li key={link.id}>
-              <Link href={link.url}>
-                <ul style={{ height: 'auto', width: '400px', overflow: 'hidden', marginBottom: '20px', textOverflow: 'ellipsis' }}>
-                  <b>{highlightText(link.title, searchQuery)}</b>
-                  {highlightText(link.url, searchQuery)}
-                </ul>
-              </Link>
-              {link.favorite && <span>⭐</span>}
-              <button onClick={() => updateLink(link.id, { url: 'Updated URL' })}>Update</button>
-              <button onClick={() => deleteLink(link.id)}>Delete</button>
-              <button onClick={() => handleSetFavoriteLink(link.id, link.favorite)}>{!link.favorite ? 'Unfavorite' : 'Favorite'}</button>
-            </li>
-          ))}
-        </ul>
+        {linkLoading ? (
+          <Skeleton count={5} />
+        ) : (
+          <>
+            <button
+              onClick={() => {
+                setSelectedFolderId(null);
+                setShowFavorites(false);
+                getAllLinks(currentPage, itemsPerPage);
+              }}
+            >
+              Show All
+            </button>
+            {folders.map((folder) => (
+              <button key={folder.id} onClick={() => handleFolderButtonClick(folder.id)}>
+                {folder.name}
+              </button>
+            ))}
+            <button onClick={handleShowFavorites}>⭐</button>
+            <ul style={{ display: 'flex', width: '100vw', flexWrap: 'wrap' }}>
+              {filterLinks.map((link) => (
+                <li key={link.id}>
+                  <Link href={link.url}>
+                    <ul style={{ height: 'auto', width: '200px', overflow: 'hidden', marginBottom: '20px', textOverflow: 'ellipsis' }}>
+                      <b>{highlightText(link.title, searchQuery)}</b>
+                      <p>{highlightText(link.url, searchQuery)}</p>
+                      {!link.createdAt ? '😥' : highlightText(link.createdAt, searchQuery)}
+                    </ul>
+                  </Link>
+                  {link.favorite && <span>⭐</span>}
+                  <button onClick={() => handleDeleteLink(link.id, Number(link.folderId))}>Delete</button>
+                  <button onClick={() => handleSetFavoriteLink(link.id, link.favorite)}>{link.favorite ? 'Unfavorite' : 'Favorite'}</button>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
+      <Pagination currentPage={currentPage} totalPages={Math.ceil(links.length / itemsPerPage)} onPageChange={handlePageChange} />
       <Footer />
     </div>
   );
-};
-
-export default Page;
+}

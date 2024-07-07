@@ -1,12 +1,12 @@
 import Footer from '@/components/Footer';
 import Gnb from '@/components/Gnb';
 
-const Page = () => {
+function Page() {
   return (
     <div>
-      <Gnb isLogin={false}></Gnb> Home
+      <Gnb isLogin={false} /> Home
       <Footer />
     </div>
   );
-};
+}
 export default Page;

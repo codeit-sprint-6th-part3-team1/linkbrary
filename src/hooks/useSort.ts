@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 interface UseSortResult<T> {
   data: T[];
@@ -14,6 +14,10 @@ const useSort = <T>(initialData: T[], key: keyof T): UseSortResult<T> => {
     const aValue = a[key];
     const bValue = b[key];
 
+    if (aValue == null && bValue == null) return 0;
+    if (aValue == null) return order === 'asc' ? -1 : 1;
+    if (bValue == null) return order === 'asc' ? 1 : -1;
+
     if (aValue instanceof Date && bValue instanceof Date) {
       return order === 'asc' ? aValue.getTime() - bValue.getTime() : bValue.getTime() - aValue.getTime();
     }
@@ -24,6 +28,13 @@ const useSort = <T>(initialData: T[], key: keyof T): UseSortResult<T> => {
 
     if (typeof aValue === 'number' && typeof bValue === 'number') {
       return order === 'asc' ? aValue - bValue : bValue - aValue;
+    }
+
+    // Handle date strings
+    if (key === 'createdAt') {
+      const dateA = new Date(aValue as unknown as string);
+      const dateB = new Date(bValue as unknown as string);
+      return order === 'asc' ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
     }
 
     return order === 'asc' ? (aValue > bValue ? 1 : -1) : aValue < bValue ? 1 : -1;

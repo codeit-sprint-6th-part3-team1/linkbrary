@@ -1,53 +1,41 @@
-import React, { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Cookies from 'js-cookie';
-import { loginState } from '@/recoil/state';
 
-const Page: React.FC = () => {
-  const setLogin = useSetRecoilState(loginState);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-  const [message, setMessage] = useState('');
+import useForm from '@/hooks/useForm';
+import useLogin from '@/hooks/useLogin';
+
+export default function Page() {
   const router = useRouter();
+  const [message, setMessage] = useState(''); // TODO 삭제
+  const { isLoggedIn, login } = useLogin();
+  const { formData, handleChange, resetForm } = useForm({ email: '', password: '' });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/links/1');
+    }
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const response = await fetch('https://linkbrary-api.vercel.app/6-1/auth/sign-in', {
-      method: 'POST',
-      headers: {
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      const accessToken = data.accessToken;
-      setLogin(accessToken);
-      Cookies.set('accessToken', accessToken);
-      setMessage('Signed in successfully');
-      router.push('/links');
-    } else {
-      const error = await response.json();
-      setMessage(`Error: ${error.message}`);
+    try {
+      const success = await login({ email: formData.email, password: formData.password });
+      if (success) {
+        resetForm();
+        router.push('/links/1');
+      } else {
+        setMessage('Login failed');
+      }
+    } catch (error: any) {
+      setMessage(`'로그인 실패', ${error}`);
     }
   };
+
   const handleSignUp = () => {
     router.push('/sign-up');
   };
+
   return (
     <div>
       <h1>Sign In</h1>
@@ -64,10 +52,9 @@ const Page: React.FC = () => {
       </form>
       {message && <p>{message}</p>}
       <div>
-        <button onClick={handleSignUp}>회원가입</button>
+        <p>아직 회원이 아니신가요?</p>
+        <button onClick={handleSignUp}>Sign Up</button>
       </div>
     </div>
   );
-};
-
-export default Page;
+}

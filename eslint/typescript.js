@@ -9,6 +9,10 @@ module.exports = {
       },
       plugins: ['@typescript-eslint'],
       extends: ['plugin:@typescript-eslint/recommended', 'plugin:@typescript-eslint/recommended-requiring-type-checking', 'plugin:import/typescript'],
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: ['../tsconfig.json'], // Specify it only for TypeScript files
+      },
       rules: {
         // function definition은 hoisting되기 때문에 define 되기 전에 사용해도 됩니다.
         // React component 등에서, 메인(default export) 컴포넌트를 위에 정의하고 private 컴포넌트를 밑에 정의하는 패턴에서 유용합니다.

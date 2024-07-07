@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
-import { FolderProps } from '@/types';
+import { useCallback, useState } from 'react';
+
+import type { FolderProps } from '@/types';
 
 const useSortFolders = () => {
   const [folders, setFolders] = useState<FolderProps[]>([]);

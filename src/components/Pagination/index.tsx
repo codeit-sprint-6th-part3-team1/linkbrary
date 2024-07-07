@@ -12,15 +12,15 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
   return (
     <div className="pagination">
-      <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+      <button type="button" onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
         {'<'}
       </button>
       {pageNumbers.map((page) => (
-        <button key={page} onClick={() => onPageChange(page)} className={page === currentPage ? 'active' : ''}>
+        <button key={page} type="button" onClick={() => onPageChange(page)} className={page === currentPage ? 'active' : ''}>
           {page}
         </button>
       ))}
-      <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+      <button type="button" onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
         {'>'}
       </button>
     </div>

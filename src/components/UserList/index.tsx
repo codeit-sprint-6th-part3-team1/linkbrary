@@ -1,11 +1,11 @@
-import { UserProps } from '@/types';
+import type { UserProps } from '@/types';
 
 interface UserListProps {
   users: UserProps[];
   onUserClick: (userId: number) => void;
 }
 
-const UserList = ({ users, onUserClick }: UserListProps) => {
+function UserList({ users, onUserClick }: UserListProps) {
   return (
     <div>
       <h2>User List</h2>
@@ -22,6 +22,6 @@ const UserList = ({ users, onUserClick }: UserListProps) => {
       </ul>
     </div>
   );
-};
+}
 
 export default UserList;

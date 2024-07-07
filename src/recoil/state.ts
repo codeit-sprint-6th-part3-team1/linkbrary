@@ -1,28 +1,20 @@
 import { atom } from 'recoil';
 
-const localStorageEffect =
-  (key: string) =>
-  ({ setSelf, onSet }: any) => {
-    if (typeof window !== 'undefined') {
-      const savedValue = localStorage.getItem(key);
-      if (savedValue != null) {
-        setSelf(JSON.parse(savedValue));
-      }
-    }
+import type { FolderProps, LinkProps, UserProps } from '@/types';
 
-    onSet((newValue: any, _: any, isReset: boolean) => {
-      if (typeof window !== 'undefined') {
-        if (isReset) {
-          localStorage.removeItem(key);
-        } else {
-          localStorage.setItem(key, JSON.stringify(newValue));
-        }
-      }
-    });
-  };
+import { userDefault } from '@/constants/defaultValue';
 
-export const loginState = atom<string | null>({
-  key: 'loginState',
-  default: null,
-  effects_UNSTABLE: [localStorageEffect('loginState')],
+export const linkListState = atom<LinkProps[]>({
+  key: 'linkListState',
+  default: [],
+});
+
+export const folderListState = atom<FolderProps[]>({
+  key: 'folderListState',
+  default: [],
+});
+
+export const userState = atom<UserProps[]>({
+  key: 'userState',
+  default: [userDefault],
 });

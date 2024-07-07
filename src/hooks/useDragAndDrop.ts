@@ -30,11 +30,11 @@ const useDragAndDrop = (index: number, moveFolder: (dragIndex: number, hoverInde
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset?.y - hoverBoundingRect.top;
 
-      if (dragIndex < hoverIndex && hoverClientY! < hoverMiddleY) {
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
       }
 
-      if (dragIndex > hoverIndex && hoverClientY! > hoverMiddleY) {
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
 

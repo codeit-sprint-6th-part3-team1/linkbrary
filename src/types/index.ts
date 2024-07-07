@@ -1,10 +1,10 @@
-import { Endpoint, HttpMethod } from '@/constants/apiUrl';
+import type { ENDPOINT, HttpMethod } from '@/constants/apiUrl';
 
 export interface FolderProps {
   id: number;
-  createdAt: string;
   name: string;
-  linkCount: number;
+  linkCount?: number;
+  createdAt: string;
 }
 
 export interface LinkProps {
@@ -22,23 +22,36 @@ export interface UserProps {
   id: number;
   name: string;
   email: string;
-  imageSource: string;
+  // imageSource: string; // 현재 제공되지 않는 요소
   createdAt: string;
 }
 
-export type provider = 'google' | 'kakao';
-
-export interface AuthProps {
-  name: string;
-  email: string;
-  password: string;
-  provider: provider;
+export interface CardProps {
+  title: string;
+  description: string;
+  imageSource: string;
+  url: string;
+  favorite: boolean;
+  createdAt: string;
 }
 
-export interface FetchApiProps {
-  endpoint: Endpoint;
+export type Provider = 'google' | 'kakao';
+export interface AuthProps {
+  name?: string;
+  email: string;
+  password: string;
+  provider?: Provider;
+}
+
+export interface ApiProps {
+  endpoint: ENDPOINT;
   method: HttpMethod;
-  accessToken: string | null;
+  accessToken: string;
   body?: any;
   params?: Record<string, string | number>;
+}
+
+export interface PagingOptions {
+  page?: number;
+  pageSize?: number;
 }

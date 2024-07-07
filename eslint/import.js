@@ -26,10 +26,24 @@ module.exports = {
           ['^\\u0000'],
           // Packages. 'react' related packages come first.
           ['^react', '^\\w', '^@'],
-          // Aliases imports.
-          ['^src'],
+          // Recoil imports
+          ['^recoil'],
+          // Types
+          ['^@/types'],
+          // Libs
+          ['^@/libs'],
+          // Hooks
+          ['^@/hooks'],
+          // Constants
+          ['^@/constants'],
+          // Utils
+          ['^@/utils'],
+          // Components from '@/components'
+          ['^@/components'],
           // Relative imports. Put same-folder imports first and parent imports last.
-          ['^\\.', '^\\.\\.'],
+          ['^\\./', '^\\.\\./'],
+          // Public assets
+          ['^../../../public/'],
           // SVG icons
           ['^.+\\.svg$'],
           // json files
