@@ -9,6 +9,7 @@ import showIcon from '../../../public/assets/input/eye-on.svg';
 import styles from './style.module.scss';
 
 interface InputBoxProps {
+  value: string;
   err?: boolean;
   errMsg?: string;
   type?: InputTypes;
@@ -21,7 +22,7 @@ function InputBox({ err, errMsg = '내용을 다시 작성해주세요', type = 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
-    setValue(text);
+    // setValue(text);
     if (onValueChange) {
       onValueChange(text);
     }

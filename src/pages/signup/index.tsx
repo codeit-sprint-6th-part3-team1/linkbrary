@@ -1,21 +1,19 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import styles from './style.module.scss';
 import axiosInstance from '@/lib/axios';
 import Cookies from 'js-cookie';
-import styles from './style.module.scss';
 import Link from 'next/link';
 import LogoIcon from '../components/LogoIcon';
-import KakaoIcon from '../components/KakaoIcon';
-import GoogleIcon from '../components/GoogleIcon';
 import Label from '../components/Label';
 import InputBox from '@/components/InputBox';
 import { InputTypes } from '@/constants/inputTypes';
-import { signIn, signOut, useSession } from 'next-auth/react';
 
-export default function Login() {
+export default function signup() {
   const [values, setValues] = useState({
     email: '',
     password: '',
+    passwordRepeat: '',
   });
 
   /**
@@ -33,106 +31,108 @@ export default function Login() {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
+  const [passwordRepeatError, setPasswordRepeatError] = useState(false);
+  const [passwordRepeatErrorMessage, setPasswordRepeatErrorMessage] = useState('');
+
+  // 버튼의 disabled 값을 제어 합니다
+  const [isDisabled, setIsDisabled] = useState(true);
+  // 버튼의 disabled true || false 여부에 따라 버튼의 색상
+
+  const disabledTrue = { background: 'linear-gradient(90.99deg, #3E3E43 0.12%, #9FA6B2 101.84%)', color: '#9FA6B2' };
+  const disabledFalse = { background: 'linear-gradient(90.99deg, #6d6afe 0.12%, #6ae3fe 101.84%)', color: '#f5f5f5' };
+  // { background: 'gray', color: '#9FA6B2' };
   const router = useRouter();
-
-  // 이메일 형식 검사를 위한 정규표현식
+  // 이메일 형식 검사
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   // 이메일 유효성을 검사할 함수
   const validateEmail = (value: string) => emailRegex.test(value);
   // 비밀번호가 8자 이하 일때 검사할 함수
   const validatePassword = (value: string) => value.length >= 8;
 
-  // 각 인풋의 값을 가져와 유효성 검사를 하는 함수
+  /**
+   * 각 인풋의 모든 값이 채워지고, 유효성 검사에 통과할시 회원가입 버튼 활성화
+   */
+  useEffect(() => {
+    const allFieldsFilled = values.email !== '' && values.password !== '' && values.passwordRepeat !== '';
+    const noErrors = !emailError && !passwordError && !passwordRepeatError;
+    setIsDisabled(!(allFieldsFilled && noErrors));
+  }, [values, emailError, passwordError, passwordRepeatError]);
+
   const handleChange = (name: string, value: string) => {
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
 
-    // 유효성 검사
     if (name === 'email') {
-      // 이메일 형식이 아닐 경우 에러값은 true가 됩니다.
       setEmailError(!validateEmail(value));
-      // 에러가 true 일때 에러 메세지 전달
       setEmailErrorMessage('이메일 형식으로 작성해 주세요.');
       if (value === '') {
-        // 인풋의 값이 빈 값일때 에러를 생성해 메세지를 전달합니다
         setEmailError(true);
-        setEmailErrorMessage('이메일을 입력해주세요.');
+        setEmailErrorMessage('이메일을 입력해 주세요.');
       }
     } else if (name === 'password') {
-      // 비밀번호가 8자리 이하일때 에러값은 true가 됩니다.
       setPasswordError(!validatePassword(value));
-      // 에러가 true 일때 에러 메세지 전달
       setPasswordErrorMessage('8자 이상 입력해주세요.');
       if (value === '') {
-        // 인풋의 값이 빈 값일때 에러를 생성해 메세지를 전달합니다
         setPasswordError(true);
-        setPasswordErrorMessage('비밀번호를 입력해주세요.');
+        setPasswordErrorMessage('비밀번호를 입력해 주세요.');
+      }
+    } else if (name === 'passwordRepeat') {
+      setPasswordRepeatError(value !== values.password);
+      setPasswordRepeatErrorMessage('비밀번호가 일치하지 않습니다.');
+      if (value === '') {
+        setPasswordRepeatError(true);
+        setPasswordRepeatErrorMessage('비밀번호가 일치하지 않습니다.');
       }
     }
   };
 
-  // 로그인을 위한 함수
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { email, password } = values;
-
     try {
-      // 로그인 버튼 클릭시 POST 리퀘스트를 보냅니다.
-      const response = await axiosInstance.post('/auth/sign-in', { email, password });
-      // 응답 요청 성공시
+      const { email, password } = values;
+
+      const response = await axiosInstance.post('/auth/sign-up', { email, password, name: email });
+
       if (response.status === 200) {
-        // 엑세스 토큰을 쿠키에 값을 저장합니다
         const { accessToken } = response.data;
         Cookies.set('accessToken', accessToken, { path: '/' });
-        // 로그인 성공시 links 페이지로 이동합니다
-        router.push('/links');
+        alert('가입이 완료되었습니다');
+        router.push('/login');
       }
+
+      setValues({ email: '', password: '', passwordRepeat: '' });
     } catch (error: any) {
       console.error(error);
       if (error.response && error.response.status === 400) {
-        // 이메일 중복을 메세지로 보여줍니다
         const errorMessage: string = error.response.data.message;
         setEmailError(true);
         setEmailErrorMessage(errorMessage);
-      } else if (error.response && error.response.status === 401) {
-        // 비밀번호가 틀릴시 메세지로 보여줍니다
-        const errorMessage: string = error.response.data.message;
-        setPasswordError(true);
-        setPasswordErrorMessage(errorMessage);
       }
     }
   };
 
-  // 구글 간편 로그인
-  const handleGoogleSignIn = () => {
-    signIn('google', { redirect: true, callbackUrl: '/' });
-  };
-
-  const handleKakaoSignIn = () => {};
-
   return (
     <div className={styles.container}>
-      <main className={styles.loginContainer}>
+      <main className={styles.signupContainer}>
         <div className={styles.formHeaderContainer}>
           <div className={styles.formHeaderWrap}>
             <Link className={styles.formLogo} href="/">
               <LogoIcon />
             </Link>
             <div className={styles.formTitleContainer}>
-              <p className={styles.formTitle}>회원이 아니신가요?</p>
+              <p className={styles.formTitle}>이미 회원이신가요?</p>
               <div className={styles.titleLinkWrap}>
-                <Link className={styles.titleLink} href="/signup">
-                  회원 가입하기
+                <Link className={styles.titleLink} href="/login">
+                  로그인 하기
                 </Link>
               </div>
             </div>
           </div>
         </div>
-        <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <form className={styles.signupForm} onSubmit={handleSubmit}>
           <div className={styles.inputContainer}>
             <div className={styles.inputWrap}>
               <Label className={styles.inputLabel} htmlFor="email">
@@ -158,22 +158,23 @@ export default function Login() {
                 onValueChange={(value) => handleChange('password', value)}
               />
             </div>
+            <div className={styles.inputWrap}>
+              <Label className={styles.inputLabel} htmlFor="passwordRepeat">
+                비밀번호 확인
+              </Label>
+              <InputBox
+                type={InputTypes.PASSWORD}
+                value={values.passwordRepeat}
+                err={passwordRepeatError}
+                errMsg={passwordRepeatErrorMessage}
+                onValueChange={(value) => handleChange('passwordRepeat', value)}
+              />
+            </div>
           </div>
-          <button type="submit" className={styles.formButton}>
-            로그인
+          <button disabled={isDisabled} className={styles.formButton} style={isDisabled ? disabledTrue : disabledFalse}>
+            회원가입
           </button>
         </form>
-        <div className={styles.easyLoginContainer}>
-          <p className={styles.easyLoginTitle}>소셜 로그인</p>
-          <div className={styles.easyLoginButtonWrap}>
-            <button className={styles.easyLoginButton} onClick={handleGoogleSignIn}>
-              <GoogleIcon />
-            </button>
-            <button className={styles.easyLoginButton}>
-              <KakaoIcon />
-            </button>
-          </div>
-        </div>
       </main>
     </div>
   );
