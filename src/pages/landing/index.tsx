@@ -6,7 +6,7 @@ import Button from '@/components/Button/Button';
 import Gnb from '@/components/Gnb';
 import Footer from '@/components/Footer';
 
-const Home: React.FC = () => {
+export default function Randing() {
   const router = useRouter();
   const isLoggedIn = false;
 
@@ -111,6 +111,4 @@ const Home: React.FC = () => {
       </main>
     </div>
   );
-};
-
-export default Home;
+}

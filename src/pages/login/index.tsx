@@ -1,16 +1,21 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
-import axiosInstance from '@/lib/axios';
 import Cookies from 'js-cookie';
-import styles from './style.module.scss';
 import Link from 'next/link';
-import LogoIcon from '../components/LogoIcon';
-import KakaoIcon from '../components/KakaoIcon';
-import GoogleIcon from '../components/GoogleIcon';
-import Label from '../components/Label';
-import InputBox from '@/components/InputBox';
-import { InputTypes } from '@/constants/inputTypes';
+import { useRouter } from 'next/router';
 import { signIn, signOut, useSession } from 'next-auth/react';
+
+import axiosInstance from '@/libs/axios';
+
+import { InputTypes } from '@/constants/inputTypes';
+
+import InputBox from '@/components/InputBox';
+
+import GoogleIcon from '../components/GoogleIcon';
+import KakaoIcon from '../components/KakaoIcon';
+import Label from '../components/Label';
+import LogoIcon from '../components/LogoIcon';
+
+import styles from './style.module.scss';
 
 export default function Login() {
   const [values, setValues] = useState({
@@ -89,7 +94,7 @@ export default function Login() {
         const { accessToken } = response.data;
         Cookies.set('accessToken', accessToken, { path: '/' });
         // 로그인 성공시 links 페이지로 이동합니다
-        router.push('/links');
+        await router.push('/links');
       }
     } catch (error: any) {
       console.error(error);
@@ -108,11 +113,11 @@ export default function Login() {
   };
 
   // 구글 간편 로그인
-  const handleGoogleSignIn = () => {
-    signIn('google', { redirect: true, callbackUrl: '/' });
+  const handleGoogleSignIn = async () => {
+    await signIn('google', { redirect: true, callbackUrl: '/' });
   };
 
-  const handleKakaoSignIn = () => {};
+  // const handleKakaoSignIn = () => {};
 
   return (
     <div className={styles.container}>
@@ -166,10 +171,10 @@ export default function Login() {
         <div className={styles.easyLoginContainer}>
           <p className={styles.easyLoginTitle}>소셜 로그인</p>
           <div className={styles.easyLoginButtonWrap}>
-            <button className={styles.easyLoginButton} onClick={handleGoogleSignIn}>
+            <button className={styles.easyLoginButton} onClick={handleGoogleSignIn} aria-label="Google Sign In" type="button">
               <GoogleIcon />
             </button>
-            <button className={styles.easyLoginButton}>
+            <button className={styles.easyLoginButton} aria-label="Kakao Sign In" type="button">
               <KakaoIcon />
             </button>
           </div>

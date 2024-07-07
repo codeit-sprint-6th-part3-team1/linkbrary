@@ -5,12 +5,12 @@ import useWindowSize from '@/hooks/useWindowSize';
 
 import { DeviceType } from '@/constants/deviceSizes';
 
+import Button from '@/components/Button/Button';
+
 import MainLogo from '../../../public/assets/gnb/MainLogo';
 import ProfileIcon from '../../../public/assets/gnb/ProfileIcon';
 
 import s from './style.module.scss';
-import Link from 'next/link';
-import Button from '@/components/Button/Button';
 
 interface GnbProps {
   isLogin: boolean;
@@ -30,7 +30,7 @@ function UserProfile({ isLogin, userEmail }: { isLogin: boolean; userEmail: stri
     <div className={s.userSection}>
       {/* FIXME: 즐겨찾기 버튼 교환 필요 */}
       <Link href="http://www.naver.com">
-        <button>⭐ 즐겨찾기</button>
+        <button type="button">⭐ 즐겨찾기</button>
       </Link>
       <div className={s.UserProfile}>
         <ProfileIcon />

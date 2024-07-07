@@ -1,9 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+
 import Button from '@/components/Button/Button';
-import s from '@/components/Button/Button.module.scss';
-import ShareIcon from '../../../public/assets/Button/ShareIcon';
+
 import PlusIcon from '../../../public/assets/Button/PlusIcon';
+import ShareIcon from '../../../public/assets/Button/ShareIcon';
+
+import s from '@/components/Button/Button.module.scss';
 
 const Home: React.FC = () => {
   const router = useRouter();
