@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import s from './style.module.scss';
 import IconBtn from './components/IconBtn';
@@ -13,11 +14,11 @@ export default function Footer() {
         <div className={s.copyright}>©codeit - 2023</div>
         <div className={s.contractList}>
           {/* TODO : 링크 연결 */}
-          <Link href={''} className={s.contract}>
+          <Link href={'/privacypolicy'} className={s.contract}>
             Privacy Policy
           </Link>
           {/* TODO : 링크 연결 */}
-          <Link href={''} className={s.contract}>
+          <Link href={'/faq'} className={s.contract}>
             FAQ
           </Link>
         </div>

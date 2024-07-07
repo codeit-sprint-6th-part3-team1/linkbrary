@@ -41,7 +41,7 @@ interface ButtonProps extends ButtonStyleProps {
  *
  * @param {Object} props - 컴포넌트의 props
  * @param {'action' | 'login' | 'add-link' | 'add-folder' | 'share' | 'all-large' | 'all-small'} props.variant - 버튼의 스타일 변형
- * @param {'primary' | 'white' | 'gray-200' | 'gradient'} props.colorType - 버튼의 색상 유형
+ * @param {'primary' | 'white' | 'gray-200' | 'gradient' } props.colorType - 버튼의 색상 유형
  * @param {React.ReactNode} [props.children] - 버튼 안에 렌더링할 자식 요소들
  * @param {() => void} [props.onClick] - 버튼 클릭 시 호출되는 함수
  * @param {string} [props.text] - 버튼에 표시할 텍스트

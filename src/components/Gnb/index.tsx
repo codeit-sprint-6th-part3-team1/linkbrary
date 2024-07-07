@@ -5,6 +5,7 @@ import useWindowSize from '@/hooks/useWindowSize';
 import { DeviceType } from '@/constants/deviceSizes';
 import s from './style.module.scss';
 import Link from 'next/link';
+import Button from '@/components/Button/Button';
 
 interface GnbProps {
   isLogin: boolean;
@@ -14,8 +15,11 @@ interface GnbProps {
 
 const UserProfile = ({ isLogin, userEmail }: { isLogin: boolean; userEmail: string }) => {
   if (!isLogin) {
-    //FIXME : 로그인 버튼 교환 필요
-    return <button className={s.loginButton}>Login</button>;
+    return (
+      <Link href="/login">
+        <Button variant="login" colorType="gradient" onClick={() => console.log('login button clicked')} text="로그인" />
+      </Link>
+    );
   }
   return (
     <div className={s.userSection}>
