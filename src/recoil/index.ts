@@ -4,6 +4,8 @@ import type { FolderProps, LinkProps, UserProps } from '@/types';
 
 import { userDefault } from '@/constants/defaultValue';
 
+import { getCookie } from '@/utils/cookie';
+
 export const linkListState = atom<LinkProps[]>({
   key: 'linkListState',
   default: [],
@@ -14,7 +16,12 @@ export const folderListState = atom<FolderProps[]>({
   default: [],
 });
 
-export const userState = atom<UserProps[]>({
+export const userState = atom<UserProps>({
   key: 'userState',
-  default: [userDefault],
+  default: userDefault,
+});
+
+export const loginState = atom<boolean>({
+  key: 'loginState',
+  default: !!getCookie('accessToken'),
 });

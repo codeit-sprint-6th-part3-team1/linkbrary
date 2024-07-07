@@ -22,7 +22,7 @@ export interface UserProps {
   id: number;
   name: string;
   email: string;
-  // imageSource: string; // 현재 제공되지 않는 요소
+  imageSource: string;
   createdAt: string;
 }
 
@@ -54,4 +54,9 @@ export interface ApiProps {
 export interface PagingOptions {
   page?: number;
   pageSize?: number;
+}
+
+export interface validatorProps {
+  email?: string;
+  password?: string;
 }

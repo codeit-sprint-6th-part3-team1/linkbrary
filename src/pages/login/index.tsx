@@ -1,26 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-
 import useForm from '@/hooks/useForm';
 import useLogin from '@/hooks/useLogin';
 
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
 export default function Page() {
   const router = useRouter();
-  const [message, setMessage] = useState(''); // TODO 삭제
+  const [message, setMessage] = useState('');
   const { isLoggedIn, login } = useLogin();
-  const { formData, handleChange, resetForm } = useForm({ email: '', password: '' });
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.push('/links/1');
-    }
-  }, []);
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
+  const onSubmit = async (formData: LoginFormValues) => {
     try {
-      const success = await login({ email: formData.email, password: formData.password });
+      const success = await login(formData);
       if (success) {
         resetForm();
         router.push('/links/1');
@@ -31,6 +26,17 @@ export default function Page() {
       setMessage(`'로그인 실패', ${error}`);
     }
   };
+
+  const { formData, handleChange, handleSubmit, resetForm, errors, isLoading } = useForm<LoginFormValues>({
+    inputValue: { email: '', password: '' },
+    onSubmit,
+  });
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/links/1');
+    }
+  }, [isLoggedIn, router]);
 
   const handleSignUp = () => {
     router.push('/sign-up');
@@ -43,12 +49,16 @@ export default function Page() {
         <div>
           <label>Email:</label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          {errors.email && <p>{errors.email}</p>}
         </div>
         <div>
           <label>Password:</label>
           <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+          {errors.password && <p>{errors.password}</p>}
         </div>
-        <button type="submit">Sign In</button>
+        <button type="submit" disabled={isLoading}>
+          Sign In
+        </button>
       </form>
       {message && <p>{message}</p>}
       <div>

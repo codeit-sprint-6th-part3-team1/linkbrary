@@ -13,5 +13,7 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 'off', // 유효하지 않은 href 사용 금지
     '@typescript-eslint/no-unsafe-return': 'off', // any return 금지
     '@typescript-eslint/no-unsafe-argument': 'off', // any argument 금지
+    '@typescript-eslint/no-explicit-any': 'off', // any 금지
+    '@typescript-eslint/no-unsafe-member-access': 'off', // any member 접근 금지
   },
 };

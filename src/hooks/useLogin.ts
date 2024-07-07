@@ -1,28 +1,25 @@
-// useLogin.ts
-import { loginState } from '@/recoil/loginState';
-import { userState } from '@/recoil/state';
-
+import { loginState, userState } from '@/recoil';
 import { useRecoilState } from 'recoil';
-
 import type { AuthProps } from '@/types';
-
 import { login as loginApi } from '@/libs/authService';
 import { getAllUsers } from '@/libs/userService';
-
 import { userDefault } from '@/constants/defaultValue';
-
 import { getCookie, removeCookie, setCookie } from '@/utils/cookie';
+import { useEffect, useState } from 'react';
 
 const useLogin = () => {
   const [isLoggedIn, setLoginState] = useRecoilState(loginState);
-  const [, setUserInfo] = useRecoilState(userState);
+  const [userInfo, setUserInfo] = useRecoilState(userState);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchUsers = async () => {
     try {
-      const users = await getAllUsers();
-      setUserInfo(users);
+      const userData = await getAllUsers();
+      setUserInfo(userData);
     } catch (error) {
-      console.error('Error fetching users:', error);
+      setUserInfo(userDefault);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -30,8 +27,8 @@ const useLogin = () => {
     try {
       const token = await loginApi({ email, password });
       setCookie('accessToken', token);
+      await fetchUsers();
       setLoginState(true);
-      fetchUsers();
       return true;
     } catch (error) {
       setLoginState(false);
@@ -42,7 +39,7 @@ const useLogin = () => {
   const logout = () => {
     removeCookie('accessToken');
     setLoginState(false);
-    setUserInfo([userDefault]);
+    setUserInfo(userDefault);
   };
 
   const checkLoginStatus = () => {
@@ -50,7 +47,15 @@ const useLogin = () => {
     setLoginState(!!accessToken);
   };
 
-  return { isLoggedIn, login, logout, checkLoginStatus };
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchUsers();
+    } else {
+      setIsLoading(false);
+    }
+  }, [isLoggedIn]);
+
+  return { isLoggedIn, login, logout, checkLoginStatus, isLoading, userInfo };
 };
 
 export default useLogin;
