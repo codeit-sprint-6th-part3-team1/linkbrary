@@ -1,24 +1,16 @@
-$mobile: 325px;
-$tablet: 704px;
-$desktop: 800px;
-
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
-  justify-content: space-between;
   top: 16px;
   left: 16px;
-
 }
 
 .inputContainer {
-  background-color: #ffffff;
   display: flex;
   align-items: center;
-  border: 1px solid #6D6AFE;
+  border: 1px solid #6d6afe;
   border-radius: 15px;
   padding: 16px 20px;
   width: 100%;
@@ -41,7 +33,7 @@ $desktop: 800px;
 .button {
   padding: 10px 20px;
   line-height: 16.71px;
-  background: linear-gradient(to right, #6D6AFE, #6AE3FE);
+  background: linear-gradient(to right, #6d6afe, #6ae3fe);
   color: white;
   border: none;
   border-radius: 8px;
@@ -51,8 +43,8 @@ $desktop: 800px;
   font-size: 14px;
   transition: background-color 0.3s;
 
- &:hover {
-  background: linear-gradient(to right, #5a0db8, #f373b7);
+  &:hover {
+    background: linear-gradient(to right, #5a0db8, #f373b7);
   }
 }
 
@@ -82,53 +74,23 @@ $desktop: 800px;
   }
 }
 
-// @media (max-width: 600px) {
-//   .container {
-//     padding: 10px;
-//     justify-content: space-between;
-//     top: 80px;
-//     left: 16px;
-//   }
-
-//   .inputContainer {
-//     padding: 8px 10px;
-//   }
-
-//   .icon {
-//     width: 16px;
-//     height: 16px;
-//     margin-right: 8px;
-//   }
-
-//   .input {
-//     font-size: 14px;
-//     padding: 8px;
-//   }
-// }
-
-@media (max-width: 767px) {
+@media (max-width: 600px) {
   .container {
-    flex-direction: column;
-    align-items: stretch;
+    padding: 10px;
   }
 
   .inputContainer {
-    margin-right: 0;
-    margin-bottom: 1rem;
-    width: 100%;
+    padding: 8px 12px;
   }
 
-  
-}
-
-/* 테블릿 스타일 */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .contanier {
-    flex-direction: row;
-    align-items: center;
+  .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
   }
 
-  .inputContainer {
-    width: 70%;
+  .input {
+    font-size: 14px;
+    padding: 8px;
   }
 }

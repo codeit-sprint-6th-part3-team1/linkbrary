@@ -1,0 +1,147 @@
+@import '@/styles';
+
+$PC_WIDTH: 1440px;
+$TABLET_WIDTH: 768px;
+$MOBILE_WIDTH: 390px;
+$MAIN_PADDING_X: 104px;
+$MAIN_PADDING_Y: 32px;
+$bgColor: #f0f6ff;
+
+.faqContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $gray-100;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 100px;
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 50px;
+
+    @media (max-width: 1440px) {
+      font-size: 28px;
+    }
+  }
+}
+
+.gnb {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-top: 40px;
+  background-color: $bgColor;
+  margin: 0 auto;
+
+  .userSection {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    @media (max-width: 1440px) {
+      gap: 16px;
+    }
+  }
+}
+
+.UserProfile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  .email {
+    @include font-base(#3e3e43, 400, 14px, 16.71px);
+
+    @media (max-width: 1440px) {
+      display: none;
+    }
+  }
+}
+
+.faqItem {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 10px;
+  background-color: $white;
+  border: 1px solid $gray-300;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba($black, 0.1);
+
+  .question {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+
+    @media (max-width: 1440px) {
+      font-size: 16px;
+    }
+  }
+
+  .answer {
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $gray-500;
+    border-top: 1px solid $gray-300;
+
+    @media (max-width: 1440px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.footer {
+  width: 100%;
+  align-items: center;
+  background-color: $black;
+  margin: 0 auto;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    @media (max-width: 1440px) {
+      flex-direction: column;
+    }
+  }
+
+  .copyright {
+    @include font-base(#676767, 400, 16px, 18.4px);
+  }
+
+  .contractList {
+    display: flex;
+    gap: 20px;
+
+    a {
+      @include font-base(#cfcfcf, 400, 16px, 18.4px);
+      text-decoration: none;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $red;
+      }
+    }
+
+    @media (max-width: 1440px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  .snsList {
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: 1440px) {
+      margin-top: 20px;
+      gap: 16px;
+    }
+  }
+}

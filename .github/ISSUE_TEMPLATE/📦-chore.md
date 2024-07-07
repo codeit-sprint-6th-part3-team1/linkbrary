@@ -2,7 +2,7 @@
 name: "\U0001F4E6 Chore"
 about: 빌드 및 패키지, 설정을 변경해요
 title: "\U0001F4E6 Chore : "
-labels: ''
+labels: "\U0001F4E6 Chore"
 assignees: ''
 
 ---
