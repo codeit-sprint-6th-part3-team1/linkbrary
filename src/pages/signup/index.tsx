@@ -1,12 +1,11 @@
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styles from './style.module.scss';
+import axiosInstance from '@/lib/axios';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
 import LogoIcon from '../components/LogoIcon';
 import Label from '../components/Label';
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import axiosInstance from '@/lib/axios';
-import { AxiosResponse, AxiosError } from 'axios';
-import Cookies from 'js-cookie';
 import InputBox from '@/components/InputBox';
 import { InputTypes } from '@/constants/inputTypes';
 
@@ -17,6 +16,15 @@ export default function signup() {
     passwordRepeat: '',
   });
 
+  /**
+   * # 에러 발생시 InputBox 컴포넌트에 전달할 State
+   *
+   * emailError = true: 에러 발생, false: 에러 없음
+   * emailErrorMessage = true: 에러가 발생시 생성되는 에러 메세지, false: 에러 메세지 없음
+   *
+   * passwordError = true: 에러 발생, false: 에러 없음
+   * passwordErrorMessage = true: 에러가 발생시 생성되는 에러 메세지, false: 에러 메세지 없음
+   */
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
 
@@ -26,17 +34,24 @@ export default function signup() {
   const [passwordRepeatError, setPasswordRepeatError] = useState(false);
   const [passwordRepeatErrorMessage, setPasswordRepeatErrorMessage] = useState('');
 
+  // 버튼의 disabled 값을 제어 합니다
   const [isDisabled, setIsDisabled] = useState(true);
-  const disabledTrue = { background: 'gray', color: '#9FA6B2' };
+  // 버튼의 disabled true || false 여부에 따라 버튼의 색상
+
+  const disabledTrue = { background: 'linear-gradient(90.99deg, #3E3E43 0.12%, #9FA6B2 101.84%)', color: '#9FA6B2' };
   const disabledFalse = { background: 'linear-gradient(90.99deg, #6d6afe 0.12%, #6ae3fe 101.84%)', color: '#f5f5f5' };
-
+  // { background: 'gray', color: '#9FA6B2' };
   const router = useRouter();
-
+  // 이메일 형식 검사
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+  // 이메일 유효성을 검사할 함수
   const validateEmail = (value: string) => emailRegex.test(value);
+  // 비밀번호가 8자 이하 일때 검사할 함수
   const validatePassword = (value: string) => value.length >= 8;
 
+  /**
+   * 각 인풋의 모든 값이 채워지고, 유효성 검사에 통과할시 회원가입 버튼 활성화
+   */
   useEffect(() => {
     const allFieldsFilled = values.email !== '' && values.password !== '' && values.passwordRepeat !== '';
     const noErrors = !emailError && !passwordError && !passwordRepeatError;
@@ -71,16 +86,6 @@ export default function signup() {
         setPasswordRepeatErrorMessage('비밀번호가 일치하지 않습니다.');
       }
     }
-
-    // if (values.email !== '' && values.password !== '' && values.passwordRepeat !== '') {
-    //   if (emailError !== false && passwordError !== false && passwordRepeatError !== false) {
-    //     setIsDisabled(false);
-    //   } else {
-    //     setIsDisabled(true);
-    //   }
-    // } else {
-    //   setIsDisabled(true);
-    // }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -94,7 +99,7 @@ export default function signup() {
       if (response.status === 200) {
         const { accessToken } = response.data;
         Cookies.set('accessToken', accessToken, { path: '/' });
-        alert('Signup successful');
+        alert('가입이 완료되었습니다');
         router.push('/login');
       }
 
