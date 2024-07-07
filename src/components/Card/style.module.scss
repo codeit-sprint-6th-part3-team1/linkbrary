@@ -153,8 +153,10 @@
   }
 
   .cardMenuList {
-    width: 325px;
-    height: 135px;
+    // width: 325px;
+    // height: 135px;
+    width: calc(325px - (20px * 2));
+    height: calc(135px - (15px * 2));
   }
 
   .cardDescription {

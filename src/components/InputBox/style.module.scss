@@ -22,6 +22,10 @@ $errRed: #ff5b56;
   background-color: white;
 }
 
+.inputContainer img {
+  pointer-events: none;
+}
+
 .input {
   border-width: 0;
   font-size: 16px;

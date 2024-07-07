@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './style.module.scss';
+
 // import MeatBallsIcon from '../../../public/assets/card/MeatBallsIcon';
 import MeatBallsIcon from './asset/MeatBallsIcon';
 // import CardImageNull from '../../../public/assets/card/CardImageNull';
@@ -11,8 +12,6 @@ import { getUpdatedAt } from '@/utils/getUserTime';
 
 
 import CardStar from './CardStar';
-
-
 
 /**
  * Card 컴포넌트의 필요한 이벤트 헨들러, Props

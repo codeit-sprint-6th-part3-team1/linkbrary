@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
-import styles from '../../../src/components/Card/style.module.scss';
 
 const CardStarTrue = (props: SVGProps<SVGSVGElement>) => (
-  <svg className={styles.cardStar} xmlns="http://www.w3.org/2000/svg" width={30} height={31} fill="none" {...props}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={30} height={31} fill="none" {...props}>
     <path
       fill="#6D6AFE"
       stroke="#fff"
