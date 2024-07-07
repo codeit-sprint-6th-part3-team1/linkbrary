@@ -1,0 +1,161 @@
+@import '@/styles';
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  max-height: 982px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // 백그라운드 컬러 변수 지정 예정
+  background-color: #f0f6ff;
+}
+
+.loginContainer {
+  width: 400px;
+  max-height: 507px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.formHeaderContainer {
+  width: 100%;
+  height: 78px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formHeaderWrap {
+  width: auto;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 16px;
+}
+
+.formTitleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formTitle {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  @include font-base(#000000, 400, 16px, 24px);
+}
+
+.titleLinkWrap {
+  padding: 0 0 0 8px;
+}
+
+.titleLink {
+  display: flex;
+  align-items: flex-start;
+  text-decoration: none;
+  border-bottom: 1px solid #6d6afe;
+  @include font-base(#6d6afe, 600, 16px, 19.09px);
+}
+
+.loginForm {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.inputContainer {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputWrap {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputLabel {
+  @include font-base(#000000, 400, 14px, 16 71px);
+}
+
+.formButton {
+  width: 100%;
+  height: 53px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90.99deg, #6d6afe 0.12%, #6ae3fe 101.84%);
+  @include font-base(#f5f5f5, 600, 18px, 21.48px);
+
+  cursor: pointer;
+}
+
+.easyLoginContainer {
+  // width: calc(100% - (24 * 2px));
+  width: 100%;
+  height: 66px;
+
+  padding: 12px 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid #ccd5e3;
+  border-radius: 8px;
+  background-color: #e7effb;
+}
+
+.easyLoginTitle {
+  @include font-base(#373740, 400, 14px, 16.71px);
+}
+
+.easyLoginButtonWrap {
+  width: 100px;
+  height: 42px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.easyLoginButton {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
+}
+
+@media screen and (max-width: 390px) {
+  .loginContainer {
+    width: 325px;
+    height: 491px;
+  }
+
+  .inputContainer {
+    width: 325px;
+  }
+}
