@@ -6,8 +6,13 @@ import MeatBallsIcon from './asset/MeatBallsIcon';
 import CardImageNull from './asset/CardImageNull';
 import CardSettingList from './CardSettingList';
 import Image from 'next/image';
+
+import { getUpdatedAt } from '@/utils/getUserTime';
+
+
 import CardStar from './CardStar';
-import { getUpdatedAt } from '@/util/getUserTime';
+
+
 
 /**
  * Card 컴포넌트의 필요한 이벤트 헨들러, Props

@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+
+import useWindowSize from '@/hooks/useWindowSize';
+
+import { DeviceType } from '@/constants/deviceSizes';
+
 import MainLogo from '../../../public/assets/gnb/MainLogo';
 import ProfileIcon from '../../../public/assets/gnb/ProfileIcon';
-import useWindowSize from '@/hooks/useWindowSize';
-import { DeviceType } from '@/constants/deviceSizes';
+
 import s from './style.module.scss';
 import Link from 'next/link';
+import Button from '@/components/Button/Button';
 
 interface GnbProps {
   isLogin: boolean;
@@ -12,28 +18,41 @@ interface GnbProps {
   userEmail?: string;
 }
 
-const UserProfile = ({ isLogin, userEmail }: { isLogin: boolean; userEmail: string }) => {
+function UserProfile({ isLogin, userEmail }: { isLogin: boolean; userEmail: string }) {
   if (!isLogin) {
-    //FIXME : 로그인 버튼 교환 필요
-    return <button className={s.loginButton}>Login</button>;
+    return (
+      <Link href="/login">
+        <Button variant="login" colorType="gradient" onClick={() => console.log('login button clicked')} text="로그인" />
+      </Link>
+    );
   }
   return (
     <div className={s.userSection}>
-      {/* FIXME : 즐겨찾기 버튼 교환 필요 */}
+      {/* FIXME: 즐겨찾기 버튼 교환 필요 */}
       <Link href="http://www.naver.com">
         <button>⭐ 즐겨찾기</button>
       </Link>
       <div className={s.UserProfile}>
         <ProfileIcon />
-        <p className={s.email}>{userEmail}</p>{' '}
+        <p className={s.email}>{userEmail}</p>
       </div>
     </div>
   );
-};
+}
 
 export default function Gnb({ isLogin = false, userIcon = '', userEmail = 'test@codeit.co.kr' }: GnbProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const deviceType: DeviceType = useWindowSize();
   const logoSize = (deviceType === DeviceType.MOBILE && { width: 88.67, height: 16 }) || { width: 133, height: 24 };
+
+  if (!isMounted) {
+    return null; // 초기 렌더링 시 서버와 클라이언트가 일치하도록 빈 UI 반환
+  }
 
   return (
     <header className={s.gnb}>

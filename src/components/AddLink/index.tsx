@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import styles from '@/components//AddLink/style.module.scss';
-import Logo from '../../../public/assets/input/add-link.svg';
 import Image from 'next/image';
+
+import Logo from '../../../public/assets/input/add-link.svg';
+
+import styles from '@/components//AddLink/style.module.scss';
 
 // Link 타입 정의
 interface Link {

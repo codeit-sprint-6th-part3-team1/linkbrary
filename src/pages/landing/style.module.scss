@@ -1,0 +1,297 @@
+@import '@/styles';
+
+$PC_WIDTH: 1440px;
+$TABLET_WIDTH: 769px;
+$MOBILE_WIDTH: 390px;
+$MAIN_PADDING_X: 104px;
+$MAIN_PADDING_Y: 32px;
+
+.main {
+  padding-top: 90px;
+  @media (max-width: $TABLET_WIDTH) {
+    padding-top: 80px;
+  }
+  @media (max-width: $MOBILE_WIDTH) {
+    padding-top: 50px;
+  }
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background-color: $gray-100;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  @media (max-width: $PC_WIDTH) {
+    height: 950px;
+  }
+  @media (max-width: $TABLET_WIDTH) {
+    height: 750px;
+  }
+  @media (max-width: $MOBILE_WIDTH) {
+    height: 370px;
+  }
+
+  .maintext {
+    flex-grow: 0; /* 요소가 가변적으로 공간을 차지 */
+    word-break: keep-all;
+    align-items: center;
+    font-size: 64px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    @media (max-width: $TABLET_WIDTH) {
+      font-size: 64px;
+      margin-top: 70px;
+      margin-bottom: 70px;
+    }
+    @media (max-width: $MOBILE_WIDTH) {
+      font-size: 32px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+  }
+
+  .addbutton {
+    flex-grow: 1; /* 요소가 가변적으로 공간을 차지 */
+    margin: 30px;
+    @media (max-width: $TABLET_WIDTH) {
+      margin: 30px;
+    }
+    @media (max-width: $MOBILE_WIDTH) {
+      margin: 30px;
+    }
+  }
+
+  .imagewrap {
+    flex-grow: 3; /* 더 많은 공간을 차지하도록 설정 */
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .titleimage {
+      width: 100%;
+      background: url('https://github.com/codeit-sprint-6th-part3-team1/linkbrary/assets/128791227/d230acb1-280a-4045-843f-a9e7848ce90f') no-repeat center
+        center;
+      background-size: contain;
+      height: 100%;
+      border-radius: 15px;
+      margin-top: 70px;
+
+      @media (max-width: $TABLET_WIDTH) {
+        margin-top: 30px;
+      }
+      @media (max-width: $MOBILE_WIDTH) {
+        margin: 30px;
+      }
+    }
+  }
+}
+
+.gradientmain {
+  background: linear-gradient(91.26deg, $primary 17.28%, $main-gradient-end 74.98%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient1 {
+  background: linear-gradient(95.63deg, $gradient-wish-link-start 1.72%, $gradient-wish-link-end 74.97%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient2 {
+  background: linear-gradient(277.01deg, $gradient-management-start 59.22%, $gradient-management-end 93.66%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient3 {
+  background: linear-gradient(99.5deg, $gradient-share-start 22%, $gradient-share-end 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient4 {
+  background: linear-gradient(271.36deg, $gradient-search-start -9.84%, $gradient-search-end 107.18%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.h2 {
+  align-items: center;
+  font-size: 70px;
+  @media (max-width: $PC_WIDTH) {
+    font-size: 60px;
+  }
+  @media (max-width: $TABLET_WIDTH) {
+    font-size: 50px;
+  }
+  @media (max-width: $MOBILE_WIDTH) {
+    font-size: 32px;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.section {
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 80px auto;
+
+  @media (max-width: $TABLET_WIDTH) {
+    height: auto;
+    flex-direction: column;
+  }
+  @media (max-width: $MOBILE_WIDTH) {
+    height: auto;
+    margin: 0 auto;
+  }
+
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+    @media (max-width: $TABLET_WIDTH) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  @media (max-width: $TABLET_WIDTH) {
+    flex-direction: column;
+    &:nth-child(even),
+    &:nth-child(odd) {
+      flex-direction: column;
+    }
+  }
+}
+
+.text {
+  word-break: keep-all;
+  flex: 4;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 40px;
+
+  h2 {
+    font-size: 50px;
+    margin-bottom: 10px;
+    @media (max-width: $PC_WIDTH) {
+      font-size: 40px;
+    }
+    @media (max-width: $TABLET_WIDTH) {
+      font-size: 35px;
+      text-align: center;
+    }
+    @media (max-width: $MOBILE_WIDTH) {
+      font-size: 30px;
+    }
+  }
+  p {
+    font-size: 16px;
+    color: #6b6b6b;
+    @media (max-width: $PC_WIDTH) {
+      font-size: 14px;
+    }
+    @media (max-width: $TABLET_WIDTH) {
+      font-size: 12px;
+      text-align: center;
+    }
+    @media (max-width: $MOBILE_WIDTH) {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: $TABLET_WIDTH) {
+    margin-left: 0;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.image {
+  flex: 6;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.gnb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.footer {
+  width: 100%;
+  align-items: center;
+  background-color: $black;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @media screen and (max-width: $footerTabletWidth) {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  .copyright {
+    @include font-base(#676767, 400, 16px, 18.4px);
+  }
+
+  .contractList {
+    display: flex;
+    gap: 20px;
+
+    a {
+      @include font-base(#cfcfcf, 400, 16px, 18.4px);
+      text-decoration: none;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $red;
+      }
+    }
+
+    @media screen and (max-width: $footerTabletWidth) {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  .snsList {
+    display: flex;
+    gap: 20px;
+
+    @media screen and (max-width: $footerTabletWidth) {
+      margin-top: 20px;
+      gap: 16px;
+    }
+  }
+}

@@ -37,3 +37,7 @@ next-env.d.ts
 
 # launch
 /.vscode
+.vecode
+
+# package-lock.json
+.package-lock.json
