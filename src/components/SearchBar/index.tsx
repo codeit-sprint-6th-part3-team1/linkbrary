@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import styles from '@/components/SearchBar/style.module.scss';
 import Image from 'next/image';
+
 import searchIcon from '../../../public/assets/input/search.svg';
+
+import styles from '@/components/SearchBar/style.module.scss';
+
 interface SearchProps {
   onUrlChange: (url: string) => void;
 }
 
-const SearchBar = ({ onUrlChange }: SearchProps) => {
+function SearchBar({ onUrlChange }: SearchProps) {
   const [url, setUrl] = useState<string>('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +26,6 @@ const SearchBar = ({ onUrlChange }: SearchProps) => {
       <input type="text" value={url} onChange={handleInputChange} placeholder="링크를 검색해 보세요." className={styles.input} />
     </div>
   );
-};
+}
 
 export default SearchBar;

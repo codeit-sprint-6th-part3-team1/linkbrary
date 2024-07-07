@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import styles from './style.module.scss';
-import MeatBallsIcon from '../../../public/assets/card/MeatBallsIcon';
-import CardImageNull from '../../../public/assets/card/CardImageNull';
-import CardSettingList from './CardSettingList';
 import Image from 'next/image';
+
+import { getUpdatedAt } from '@/utils/getUserTime';
+
+import CardSettingList from './CardSettingList';
 import CardStar from './CardStar';
-import { getUpdatedAt } from '@/util/getUserTime';
+
+import CardImageNull from '../../../public/assets/card/CardImageNull';
+import MeatBallsIcon from '../../../public/assets/card/MeatBallsIcon';
+
+import styles from './style.module.scss';
 
 /**
  * Card 컴포넌트의 필요한 이벤트 헨들러, Props
