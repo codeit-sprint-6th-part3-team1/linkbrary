@@ -1,6 +1,6 @@
 import type { UserProps } from '@/types';
 
-import { ENDPOINTS } from '@/constants/apiUrl';
+import { ENDPOINTS } from '@/constants';
 
 import axiosInstance from './axiosInstance';
 
@@ -9,4 +9,4 @@ export const getAllUsers = async (): Promise<UserProps> => {
   return res.data;
 };
 
-export const checkDuplicateEmail = async (email: string) => await axiosInstance.post(ENDPOINTS.checkDuplicateEmail, { email });
+export const checkDuplicateEmail = async (email: string) => axiosInstance.post(ENDPOINTS.checkDuplicateEmail, { email });

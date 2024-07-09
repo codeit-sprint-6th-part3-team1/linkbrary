@@ -3,15 +3,19 @@
 $bgColor: #f0f6ff;
 
 .gnb {
-  $height: 102px;
   $paddingX: 200px;
-  $paddingY: 32px;
+  $paddingY: 20px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 
-  height: calc($height - ($paddingY * 2));
+  height: $GNB_HEIGHT_PC_TABLET;
   padding: $paddingY $paddingX;
   background-color: $bgColor;
 
@@ -27,13 +31,9 @@ $bgColor: #f0f6ff;
     padding: $paddingY;
   }
 
-  @media screen and (max-width: $mobileWidth) {
-    $height: 65px;
-    $paddingX: 32px;
-    $paddingY: 18px;
-
-    height: calc($height - ($paddingY * 2));
-    padding: $paddingY $paddingX;
+  @media screen and (max-width: $MOBILE_WIDTH) {
+    height: $GNB_HEIGHT_MOBILE;
+    padding: 13px 32px;
 
     .userSection {
       gap: 16px;
@@ -49,10 +49,10 @@ $bgColor: #f0f6ff;
 
   $emailColor: #3e3e43;
   .email {
-    @include font-base($emailColor, 400, 14px, 16.71px);
+    @include fontSetting($emailColor, 400, 14px, 16.71px);
   }
 
-  @media screen and (max-width: $tabletWidth) {
+  @media screen and (max-width: $TABLET_WIDTH) {
     .email {
       display: none;
     }

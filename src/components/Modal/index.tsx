@@ -1,6 +1,7 @@
-import React from 'react';
-import styles from './styles.module.scss';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import ModalCloseIcon from './assets/ModalCloseIcon';
+
+import styles from './styles.module.scss';
 
 interface ModalProps {
   isOpen: boolean;
@@ -11,27 +12,24 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen = false, onClose, title, subTitle, children = null }: ModalProps) => {
-  if (isOpen === false) {
+  if (!isOpen) {
     return null;
   }
+
   return (
     <div className={styles.modalFrame}>
-      {isOpen && <div className={styles.bg} onClick={onClose} />}
+      <div className={styles.bg} onClick={onClose} />
       <div className={styles.modal}>
         <div className={styles.btnArea}>
-          <button className={styles.button} onClick={onClose}>
+          <button className={styles.button} onClick={onClose} type="button" aria-label="Close Modal">
             <ModalCloseIcon />
           </button>
         </div>
-        <>
-          <div className={styles.titleArea}>
-            <p className={styles.title}>{title}</p>
-            {subTitle && <p className={styles.subTitle}>{subTitle}</p>}
-          </div>
-          <div className={styles.content}>
-            <div>{children}</div>
-          </div>
-        </>
+        <div className={styles.titleArea}>
+          <p className={styles.title}>{title}</p>
+          {subTitle && <p className={styles.subTitle}>{subTitle}</p>}
+        </div>
+        <div className={styles.content}>{children}</div>
       </div>
     </div>
   );

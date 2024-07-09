@@ -1,3 +1,5 @@
+@import '@/styles';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -28,7 +30,7 @@
   border: none;
   background: none;
   outline: none;
-  @include font-base(#666666, 16px, 400, 24px);
+  @include fontSetting(#666666, 16px, 400, 24px);
 }
 
 //TODO mobile 변수 적용
@@ -42,6 +44,6 @@
   }
 
   .input {
-    @include font-base(#666666, 14px, 400, 16.71px);
+    @include fontSetting(#666666, 14px, 400, 16.71px);
   }
 }

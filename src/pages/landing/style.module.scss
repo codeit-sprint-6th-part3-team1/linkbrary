@@ -1,31 +1,17 @@
 @import '@/styles';
 
-$PC_WIDTH: 1440px;
-$TABLET_WIDTH: 769px;
-$MOBILE_WIDTH: 390px;
 $MAIN_PADDING_X: 104px;
 $MAIN_PADDING_Y: 32px;
 
-.main {
-  padding-top: 90px;
-  @media (max-width: $TABLET_WIDTH) {
-    padding-top: 80px;
-  }
-  @media (max-width: $MOBILE_WIDTH) {
-    padding-top: 50px;
-  }
-}
-.title {
+.top {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: 100vh;
   text-align: center;
   background-color: $gray-100;
   overflow: hidden;
-  box-sizing: border-box;
 
   @media (max-width: $PC_WIDTH) {
     height: 950px;
@@ -37,27 +23,25 @@ $MAIN_PADDING_Y: 32px;
     height: 370px;
   }
 
-  .maintext {
-    flex-grow: 0; /* 요소가 가변적으로 공간을 차지 */
+  .mainText {
+    flex-grow: 0;
+    width: 100%;
     word-break: keep-all;
-    align-items: center;
     font-size: 64px;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin: 70px 0 40px 0;
 
     @media (max-width: $TABLET_WIDTH) {
-      font-size: 64px;
-      margin-top: 70px;
-      margin-bottom: 70px;
+      max-width: 520px;
+      margin: 40px 0;
     }
     @media (max-width: $MOBILE_WIDTH) {
       font-size: 32px;
-      margin-top: 40px;
-      margin-bottom: 40px;
+      max-width: 270px;
+      margin: 28px 0 24px 0;
     }
   }
 
-  .addbutton {
+  .addBtn {
     flex-grow: 1; /* 요소가 가변적으로 공간을 차지 */
     margin: 30px;
     @media (max-width: $TABLET_WIDTH) {
@@ -68,7 +52,7 @@ $MAIN_PADDING_Y: 32px;
     }
   }
 
-  .imagewrap {
+  .imageWrap {
     flex-grow: 3; /* 더 많은 공간을 차지하도록 설정 */
     display: flex;
     justify-content: center;
@@ -77,7 +61,7 @@ $MAIN_PADDING_Y: 32px;
     width: 100%;
     height: 100%;
 
-    .titleimage {
+    .titleImage {
       width: 100%;
       background: url('https://github.com/codeit-sprint-6th-part3-team1/linkbrary/assets/128791227/d230acb1-280a-4045-843f-a9e7848ce90f') no-repeat center
         center;
@@ -96,33 +80,33 @@ $MAIN_PADDING_Y: 32px;
   }
 }
 
-.gradientmain {
+.gradientMain {
   background: linear-gradient(91.26deg, $primary 17.28%, $main-gradient-end 74.98%);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient1 {
   background: linear-gradient(95.63deg, $gradient-wish-link-start 1.72%, $gradient-wish-link-end 74.97%);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient2 {
   background: linear-gradient(277.01deg, $gradient-management-start 59.22%, $gradient-management-end 93.66%);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient3 {
   background: linear-gradient(99.5deg, $gradient-share-start 22%, $gradient-share-end 100%);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient4 {
   background: linear-gradient(271.36deg, $gradient-search-start -9.84%, $gradient-search-end 107.18%);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -233,65 +217,5 @@ $MAIN_PADDING_Y: 32px;
   img {
     max-width: 100%;
     height: auto;
-  }
-}
-
-.gnb {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-
-.footer {
-  width: 100%;
-  align-items: center;
-  background-color: $black;
-
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
-    @media screen and (max-width: $footerTabletWidth) {
-      flex-direction: column;
-      gap: 20px;
-    }
-  }
-
-  .copyright {
-    @include font-base(#676767, 400, 16px, 18.4px);
-  }
-
-  .contractList {
-    display: flex;
-    gap: 20px;
-
-    a {
-      @include font-base(#cfcfcf, 400, 16px, 18.4px);
-      text-decoration: none;
-      transition: color 0.3s;
-
-      &:hover {
-        color: $red;
-      }
-    }
-
-    @media screen and (max-width: $footerTabletWidth) {
-      flex-direction: column;
-      gap: 10px;
-    }
-  }
-
-  .snsList {
-    display: flex;
-    gap: 20px;
-
-    @media screen and (max-width: $footerTabletWidth) {
-      margin-top: 20px;
-      gap: 16px;
-    }
   }
 }

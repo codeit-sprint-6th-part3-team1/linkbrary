@@ -79,7 +79,7 @@
 }
 
 .cardUpdateAt {
-  @include font-base(#666666, 400, 13px, 15.51px);
+  @include fontSetting(#666666, 400, 13px, 15.51px);
 }
 
 .cardSettingButton {
@@ -100,7 +100,7 @@
     align-items: center;
 
     box-shadow: 0px 2px 8px 0px #3332361a;
-    @include font-base(#333236, 400, 13px, 15.51px);
+    @include fontSetting(#333236, 400, 13px, 15.51px);
 
     .cardSettingMenu {
       width: 100%;
@@ -124,15 +124,15 @@
   width: 300px;
   height: 49px;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  box-orient: vertical;
+  line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  @include font-base(#000000, 400, 16px, 24px);
+  @include fontSetting(#000000, 400, 16px, 24px);
 }
 
 .cardCreatedAt {
-  @include font-base(#333333, 400, 14px, 16.71px);
+  @include fontSetting(#333333, 400, 14px, 16.71px);
 }
 
 @media screen and (max-width: 768px) {

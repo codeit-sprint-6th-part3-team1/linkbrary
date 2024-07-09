@@ -1,4 +1,4 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+import type { PagingOptions } from '@/types';
 
 export const ENDPOINTS = {
   // AUTH
@@ -38,3 +38,5 @@ export enum HttpMethod {
   DELETE = 'DELETE',
   PATCH = 'PATCH',
 }
+
+export const defaultPagingOptions: PagingOptions = { page: 1, pageSize: 10 };

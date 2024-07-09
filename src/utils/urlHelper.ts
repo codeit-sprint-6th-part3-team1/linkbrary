@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '@/constants';
+
 // url 경로 내 placeholder를 실제 값으로 변경
 export const replacePlaceholder = (url: string, placeholder: { [key: string]: string | number | undefined }) => {
   let updatedUrl = url;

@@ -16,12 +16,10 @@ export default function Footer() {
       <div className={s.container}>
         <div className={s.copyright}>©codeit - 2023</div>
         <div className={s.contractList}>
-          {/* TODO : 링크 연결 */}
-          <Link href={'/privacypolicy'} className={s.contract}>
+          <Link href="/privacy-policy" className={s.contract}>
             Privacy Policy
           </Link>
-          {/* TODO : 링크 연결 */}
-          <Link href={'/faq'} className={s.contract}>
+          <Link href="/faq" className={s.contract}>
             FAQ
           </Link>
         </div>

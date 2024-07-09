@@ -1,20 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import MainLogo from '@/../public/assets/gnb/MainLogo'; // 로고 임포트
-
-import Footer from '@/components/Footer';
-
 import s from './style.module.scss';
 
 export default function Page() {
-  <>
-    <header className={s.gnb}>
-      <Link href="/landing">
-        <div className={s.logoLink}>
-          <MainLogo />
-        </div>
-      </Link>
-    </header>
+  return (
     <div className={s.container}>
       <div className={s.header}>
         <h1>Privacy Policy</h1>
@@ -125,8 +112,5 @@ export default function Page() {
         </ul>
       </div>
     </div>
-    <footer className={s.footer}>
-      <Footer />
-    </footer>
-  </>;
+  );
 }

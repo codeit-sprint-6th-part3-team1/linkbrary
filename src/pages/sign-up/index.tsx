@@ -57,71 +57,71 @@ export default function Page() {
   /**
    * 각 인풋의 모든 값이 채워지고, 유효성 검사에 통과할시 회원가입 버튼 활성화
    */
-  useEffect(() => {
-    const allFieldsFilled = values.email !== '' && values.password !== '' && values.passwordRepeat !== '';
-    const noErrors = !emailError && !passwordError && !passwordRepeatError;
-    setIsDisabled(!(allFieldsFilled && noErrors));
-  }, [values, emailError, passwordError, passwordRepeatError]);
+  // useEffect(() => {
+  //   const allFieldsFilled = values.email !== '' && values.password !== '' && values.passwordRepeat !== '';
+  //   const noErrors = !emailError && !passwordError && !passwordRepeatError;
+  //   setIsDisabled(!(allFieldsFilled && noErrors));
+  // }, [values, emailError, passwordError, passwordRepeatError]);
 
-  const handleChange = (name: string, value: string) => {
-    setValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+  // const handleChange = (name: string, value: string) => {
+  //   setValues((prevValues) => ({
+  //     ...prevValues,
+  //     [name]: value,
+  //   }));
 
-    if (name === 'email') {
-      setEmailError(!validateEmail(value));
-      setEmailErrorMessage('이메일 형식으로 작성해 주세요.');
-      if (value === '') {
-        setEmailError(true);
-        setEmailErrorMessage('이메일을 입력해 주세요.');
-      }
-    } else if (name === 'password') {
-      setPasswordError(!validatePassword(value));
-      setPasswordErrorMessage('8자 이상 입력해주세요.');
-      if (value === '') {
-        setPasswordError(true);
-        setPasswordErrorMessage('비밀번호를 입력해 주세요.');
-      }
-    } else if (name === 'passwordRepeat') {
-      setPasswordRepeatError(value !== values.password);
-      setPasswordRepeatErrorMessage('비밀번호가 일치하지 않습니다.');
-      if (value === '') {
-        setPasswordRepeatError(true);
-        setPasswordRepeatErrorMessage('비밀번호가 일치하지 않습니다.');
-      }
-    }
-  };
+  //   if (name === 'email') {
+  //     setEmailError(!validateEmail(value));
+  //     setEmailErrorMessage('이메일 형식으로 작성해 주세요.');
+  //     if (value === '') {
+  //       setEmailError(true);
+  //       setEmailErrorMessage('이메일을 입력해 주세요.');
+  //     }
+  //   } else if (name === 'password') {
+  //     setPasswordError(!validatePassword(value));
+  //     setPasswordErrorMessage('8자 이상 입력해주세요.');
+  //     if (value === '') {
+  //       setPasswordError(true);
+  //       setPasswordErrorMessage('비밀번호를 입력해 주세요.');
+  //     }
+  //   } else if (name === 'passwordRepeat') {
+  //     setPasswordRepeatError(value !== values.password);
+  //     setPasswordRepeatErrorMessage('비밀번호가 일치하지 않습니다.');
+  //     if (value === '') {
+  //       setPasswordRepeatError(true);
+  //       setPasswordRepeatErrorMessage('비밀번호가 일치하지 않습니다.');
+  //     }
+  //   }
+  // };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    try {
-      const { email, password } = values;
+  //   try {
+  //     const { email, password } = values;
 
-      const response = await axiosInstance.post('/auth/sign-up', { email, password, name: email });
+  //     const response = await axiosInstance.post('/auth/sign-up', { email, password, name: email });
 
-      if (response.status === 200) {
-        const { accessToken } = response.data;
-        Cookies.set('accessToken', accessToken, { path: '/' });
-        alert('가입이 완료되었습니다');
-        await router.push('/login');
-      }
+  //     if (response.status === 200) {
+  //       const { accessToken } = response.data;
+  //       Cookies.set('accessToken', accessToken, { path: '/' });
+  //       alert('가입이 완료되었습니다');
+  //       await router.push('/login');
+  //     }
 
-      setValues({ email: '', password: '', passwordRepeat: '' });
-    } catch (error: any) {
-      console.error(error);
-      if (error.response && error.response.status === 400) {
-        const errorMessage: string = error.response.data.message;
-        setEmailError(true);
-        setEmailErrorMessage(errorMessage);
-      }
-    }
-  };
+  //     setValues({ email: '', password: '', passwordRepeat: '' });
+  //   } catch (error: any) {
+  //     console.error(error);
+  //     if (error.response && error.response.status === 400) {
+  //       const errorMessage: string = error.response.data.message;
+  //       setEmailError(true);
+  //       setEmailErrorMessage(errorMessage);
+  //     }
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
-      <main className={styles.signupContainer}>
+      <main className={styles.signUpContainer}>
         <div className={styles.formHeaderContainer}>
           <div className={styles.formHeaderWrap}>
             <Link className={styles.formLogo} href="/">

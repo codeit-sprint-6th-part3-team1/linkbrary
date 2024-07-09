@@ -1,0 +1,8 @@
+@import '@/styles';
+
+.container {
+  margin-top: $GNB_HEIGHT_PC_TABLET;
+  @media (max-width: $MOBILE_WIDTH) {
+    margin-top: $GNB_HEIGHT_MOBILE;
+  }
+}

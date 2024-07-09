@@ -3,23 +3,22 @@
 .container {
   width: 100vw;
   height: 100vh;
-  max-height: 982px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
-  // 백그라운드 컬러 변수 지정 예정
-  background-color: #f0f6ff;
+  background-color: $gray-100;
 }
 
-.signupContainer {
+.signUpContainer {
   width: 400px;
-  height: 529px;
-
   display: flex;
   flex-direction: column;
   gap: 30px;
+
+  @media screen and (max-width: $MOBILE_WIDTH) {
+    width: 325px;
+  }
 }
 
 .formHeaderContainer {
@@ -53,7 +52,7 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
-  @include font-base(#000000, 400, 16px, 24px);
+  @include fontSetting(#000000, 400, 16px, 24px);
 }
 
 .titleLinkWrap {
@@ -63,7 +62,7 @@
 .titleLink {
   text-decoration: none;
   border-bottom: 1px solid #6d6afe;
-  @include font-base(#6d6afe, 600, 16px, 19.09px);
+  @include fontSetting(#6d6afe, 600, 16px, 19.09px);
 }
 
 .signupForm {
@@ -92,7 +91,7 @@
 }
 
 .inputLabel {
-  @include font-base(#000000, 400, 14px, 16.71px);
+  @include fontSetting(#000000, 400, 14px, 16.71px);
 }
 
 // .inputBackground {
@@ -117,7 +116,7 @@
   border: none;
   border-radius: 8px;
   background: linear-gradient(90.99deg, #6d6afe 0.12%, #6ae3fe 101.84%);
-  @include font-base(#f5f5f5, 600, 18px, 21.48px);
+  @include fontSetting(#f5f5f5, 600, 18px, 21.48px);
 
   cursor: pointer;
 }

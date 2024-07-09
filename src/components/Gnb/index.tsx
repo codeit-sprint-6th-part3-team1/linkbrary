@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+import useLogin from '@/hooks/useLogin';
 import useWindowSize from '@/hooks/useWindowSize';
 
 import { DeviceType } from '@/constants/deviceSizes';
@@ -14,33 +15,32 @@ import s from './style.module.scss';
 
 interface GnbProps {
   isLogin: boolean;
-  userIcon?: string;
   userEmail?: string;
 }
 
 function UserProfile({ isLogin, userEmail }: { isLogin: boolean; userEmail: string }) {
+  const { logout } = useLogin();
   if (!isLogin) {
     return (
       <Link href="/login">
-        <Button variant="login" colorType="gradient" onClick={() => console.log('login button clicked')} text="로그인" />
+        <Button variant="login" colorType="gradient" text="로그인" />
       </Link>
     );
   }
   return (
     <div className={s.userSection}>
-      {/* FIXME: 즐겨찾기 버튼 교환 필요 */}
-      <Link href="http://www.naver.com">
-        <button type="button">⭐ 즐겨찾기</button>
-      </Link>
       <div className={s.UserProfile}>
         <ProfileIcon />
         <p className={s.email}>{userEmail}</p>
+        <button type="button" onClick={logout}>
+          logout
+        </button>
       </div>
     </div>
   );
 }
 
-export default function Gnb({ isLogin = false, userIcon = '', userEmail = 'test@codeit.co.kr' }: GnbProps) {
+export default function Gnb({ isLogin = false, userEmail = 'test@codeit.co.kr' }: GnbProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -56,7 +56,10 @@ export default function Gnb({ isLogin = false, userIcon = '', userEmail = 'test@
 
   return (
     <header className={s.gnb}>
-      <MainLogo width={logoSize.width} height={logoSize.height} />
+      <Link href="/">
+        <MainLogo width={logoSize.width} height={logoSize.height} />
+      </Link>
+
       <UserProfile isLogin={isLogin} userEmail={userEmail} />
     </header>
   );

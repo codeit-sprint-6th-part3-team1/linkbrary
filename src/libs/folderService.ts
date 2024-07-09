@@ -1,6 +1,6 @@
 import type { FolderProps } from '@/types';
 
-import { ENDPOINTS } from '@/constants/apiUrl';
+import { ENDPOINTS } from '@/constants';
 
 import { replacePlaceholder } from '@/utils/urlHelper';
 

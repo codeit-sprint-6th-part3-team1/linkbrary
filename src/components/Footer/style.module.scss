@@ -12,13 +12,13 @@ $snsWrapperMaxWidth: 116px;
 .footer {
   display: flex;
   background-color: $black;
-  padding: $footerPadding 104px;
-  height: calc($footerHeight - ($footerPadding * 2));
+  padding: 32px 104px;
+  height: $footerHeight;
   align-items: flex-start;
   white-space: nowrap;
 
   @media screen and (max-width: $footerTabletWidth) {
-    padding: $footerPadding;
+    padding: 32px;
   }
 }
 
@@ -42,7 +42,7 @@ $copyRightColor: #676767;
 $contractColor: #cfcfcf;
 
 .copyright {
-  @include font-base($copyRightColor, $fontWeight, $fontSize, $lineHeight);
+  @include fontSetting($copyRightColor, $fontWeight, $fontSize, $lineHeight);
 }
 
 .contractList {
@@ -59,7 +59,7 @@ $contractColor: #cfcfcf;
 
   .contract {
     text-decoration: none;
-    @include font-base($contractColor, $fontWeight, $fontSize, $lineHeight);
+    @include fontSetting($contractColor, $fontWeight, $fontSize, $lineHeight);
   }
 }
 

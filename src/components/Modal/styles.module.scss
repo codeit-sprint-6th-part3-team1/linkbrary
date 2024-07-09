@@ -55,10 +55,10 @@
 .title {
   margin: 0 auto;
   font-size: 20px;
-  @include font-base(#373740, 700, 20px, 23.87px);
+  @include fontSetting(#373740, 700, 20px, 23.87px);
 }
 
 .subTitle {
   margin-top: 8px;
-  @include font-base($gray-400, 400, 14px, 20px);
+  @include fontSetting($gray-400, 400, 14px, 20px);
 }

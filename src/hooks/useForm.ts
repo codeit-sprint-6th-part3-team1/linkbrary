@@ -1,53 +1,59 @@
 import { useState } from 'react';
+
+import type { validatorProps } from '@/types';
+
 import { checkValidator } from '@/utils/checkValidator';
-import { validatorProps } from '@/types';
 
-interface UseFormProps<T> {
-  inputValue: T;
-  onSubmit: (formData: T) => Promise<void>;
+interface UseFormProps {
+  initialValues: { [key: string]: string };
+  callback?: (data: any) => Promise<void> | void;
+  additionalData?: { [key: string]: string };
 }
 
-interface UseFormResult<T> {
-  formData: T;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (event: React.SyntheticEvent) => void;
-  resetForm: () => void;
-  errors: Partial<validatorProps>;
-  isLoading: boolean;
-}
-
-const useForm = <T extends object>({ inputValue, onSubmit }: UseFormProps<T>): UseFormResult<T> => {
-  const [formData, setFormData] = useState(inputValue);
-  const [isLoading, setIsLoading] = useState(false);
+const useForm = ({ initialValues = {}, callback, additionalData = {} }: UseFormProps) => {
+  const [formValues, setFormValues] = useState(initialValues);
   const [errors, setErrors] = useState<Partial<validatorProps>>({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormValues({
+      ...formValues,
       [name]: value,
     });
   };
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
+    event.preventDefault();
 
-    const validationErrors = checkValidator(formData);
+    const validationErrors = checkValidator(formValues);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      await onSubmit(formData);
+      if (callback) {
+        await callback({ ...formValues, ...additionalData });
+      }
+      setFormValues(initialValues);
+    } else {
+      setErrors(validationErrors);
     }
-
     setIsLoading(false);
   };
 
   const resetForm = () => {
-    setFormData(inputValue);
+    setFormValues(initialValues);
+    setErrors({});
   };
 
-  return { formData, handleChange, handleSubmit, resetForm, errors, isLoading };
+  return {
+    formValues,
+    errors,
+    isLoading,
+    handleChange,
+    handleSubmit,
+    resetForm,
+  };
 };
 
 export default useForm;

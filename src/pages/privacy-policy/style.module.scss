@@ -159,7 +159,7 @@ $bgColor: #f0f6ff;
   }
 
   .copyright {
-    @include font-base(#676767, 400, 16px, 18.4px);
+    @include fontSetting(#676767, 400, 16px, 18.4px);
   }
 
   .contractList {
@@ -167,7 +167,7 @@ $bgColor: #f0f6ff;
     gap: 20px;
 
     a {
-      @include font-base(#cfcfcf, 400, 16px, 18.4px);
+      @include fontSetting(#cfcfcf, 400, 16px, 18.4px);
       text-decoration: none;
       transition: color 0.3s;
 

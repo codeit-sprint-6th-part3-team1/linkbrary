@@ -14,9 +14,9 @@ const axiosInstance = axios.create(axiosConfig);
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = getCookie('accessToken');
-    console.log('token', token);
     if (token) {
-      config.headers.Authorization = `Bearer ${token.accessToken}`;
+      // eslint-disable-next-line no-param-reassign
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
